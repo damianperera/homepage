@@ -19,7 +19,7 @@ jobs:
           cd client/web/ && npm install && npm run build
           pwd
           ls
-          echo "REACT_PROD_BUILD_PATH=${pwd}/build" >> $GITHUB_ENV
+           echo "buildPath=${pwd}/build/" >> $GITHUB_ENV
         
       - name: Package
         shell: bash
@@ -32,7 +32,7 @@ jobs:
             --exclude=.github \
             .
         env:
-          INPUT_PATH: ${{ env.REACT_PROD_BUILD_PATH }}
+          INPUT_PATH: ${{ env.buildPath }}
       
       - name: Upload artifact
         uses: actions/upload-artifact@main
