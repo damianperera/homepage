@@ -17,6 +17,10 @@ function App() {
         >
           Learn React
         </a>
+        <form action="https://www.google.com/search" class="searchform" method="get" name="searchform">
+          <input autocomplete="on" class="form-control search" name="q" placeholder="Search Google or type a URL" required="required"  type="text" />
+          <button class="button" type="submit">Search</button>
+        </form>
       </header>
     </div>
   );
