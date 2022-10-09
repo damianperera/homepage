@@ -36,6 +36,12 @@ jobs:
         working-directory: client/web/
         run: npm run build
         
+      - name: Copy data
+        run: |
+          mkdir client/web/build/static/data/
+          cp backend/public/* client/web/build/static/data
+          cd client/web/build/ && ls -lR | more
+        
       - name: Package
         shell: bash
         working-directory: client/web/
