@@ -14,8 +14,9 @@ jobs:
         with:
           node-version: 16
 
-      - name: Build
+      - name: Build React
         run: |
+          cd client/web/
           npm run build
           echo "REACT_PROD_BUILD_PATH=${pwd}/build" >> $GITHUB_ENV
         
