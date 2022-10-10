@@ -5,7 +5,7 @@ import "@fontsource/roboto/700.css";
 import "./App.css";
 import * as React from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { Google, Code, PrivacyTip } from "@mui/icons-material";
+import { Google, Code, PrivacyTip, Newspaper } from "@mui/icons-material";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBaseline, MenuItem, InputAdornment, Select, Paper, Grid } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
@@ -25,7 +25,7 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await (await fetch(topStoriesURL)).json();
-        const storyURLS = response.slice(0, 20).map(id => itemStoryURL + id + ".json");
+        const storyURLS = response.slice(0, 30).map(id => itemStoryURL + id + ".json");
         const requests = storyURLS.map(id => async () => await (await fetch(id)).json());
         const stories = await Promise.all(requests.map(f => f()));
         const updatedStories = stories.map(story => {
@@ -66,12 +66,12 @@ function App() {
     {
       field: "title",
       headerName: "Title",
-      width: "800",
+      width: "600",
       editable: false
     }
   ];
 
-  const handleChange = (event) => {
+    const handleChange = (event) => {
     setSearchEngine(event.target.value);
   };
   
@@ -144,11 +144,13 @@ function App() {
           </Toolbar>
         </AppBar>
         <Box sx={{ flexGrow: 1, padding: 3 }}>
-          <Grid container spacing={2} columns={2}>
-            <Grid item xs={1}>
+          <Grid container spacing={2} columns={10}>
+            <Grid item xs={4}>
               <Item>
-                <h3>HackerNews Top Stories</h3>
-                <Box sx={{ height: 400, width: "100%" }}>
+                <Stack direction="row" alignItems="center" gap={1}>
+                  <Newspaper /> <h3>HackerNews Top Stories</h3>
+                </Stack>
+                <Box sx={{ height: 350, width: "100%" }}>
                   <StyledDataGrid
                     rows={topStories}
                     columns={columns}
@@ -158,7 +160,7 @@ function App() {
                 </Box>
               </Item>
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={6}>
               <Item>Coming Soon</Item>
             </Grid>
           </Grid>
