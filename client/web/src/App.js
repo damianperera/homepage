@@ -18,12 +18,12 @@ function App() {
             backgroundColor: 'white',
             padding: 2,
             display: 'flex',
-            borderRadius: '5px'
+            borderRadius: 1.5
           }}
         >
           <Stack direction="column" spacing={2}>
             <form action="https://www.google.com/search">
-              <FormControl>
+              <FormControl fullWidth>
                 <Stack direction="row" spacing={2}>
                   <TextField autoFocus name="q" required id="search" label="Search Google" variant="outlined" sx={{ width: 385 }} />
                   <Button variant="contained" type="submit" sx={{ width: 100 }} startIcon={<Google />}>Search</Button>
@@ -31,7 +31,7 @@ function App() {
               </FormControl>
             </form>
             <form action="https://stackoverflow.com/search">
-              <FormControl>
+              <FormControl fullWidth>
                 <Stack direction="row" spacing={2}>
                   <TextField name="q" required id="search" label="Search StackOverflow" variant="outlined" sx={{ width: 385 }} />
                   <Button variant="contained" type="submit" sx={{ width: 100 }} startIcon={<Code />}>Search</Button>
