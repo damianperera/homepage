@@ -5,7 +5,7 @@ import "@fontsource/roboto/700.css";
 import "./App.css";
 import * as React from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { Google, Code } from "@mui/icons-material";
+import { Google, Code, PrivacyTip } from "@mui/icons-material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBaseline, MenuItem, InputAdornment, Select } from "@mui/material";
 
@@ -19,6 +19,7 @@ function App() {
 
   const googleSearchURL = "https://www.google.com/search";
   const stackOverflowSearchURL = "https://stackoverflow.com/search";
+  const duckDuckGoSearchURL = "https://duckduckgo.com";
 
   const [searchEngine, setSearchEngine] = React.useState(googleSearchURL);
 
@@ -72,6 +73,11 @@ function App() {
                             <MenuItem value={stackOverflowSearchURL}>
                               <Stack direction="row" alignItems="center" gap={1}>
                                 <Code /> StackOverflow
+                              </Stack>    
+                            </MenuItem>
+                            <MenuItem value={duckDuckGoSearchURL}>
+                              <Stack direction="row" alignItems="center" gap={1}>
+                                <PrivacyTip /> DuckDuckGo
                               </Stack>    
                             </MenuItem>
                           </Select>
