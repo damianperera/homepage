@@ -148,7 +148,7 @@ function App() {
             <Grid item xs={4}>
               <Item>
                 <Stack direction="row" alignItems="center" gap={1}>
-                  <Newspaper /> <h3>HackerNews Top Stories</h3>
+                  <Newspaper /><h3>HackerNews Top Stories</h3>
                 </Stack>
                 <Box sx={{ height: 350, width: "100%" }}>
                   <StyledDataGrid
