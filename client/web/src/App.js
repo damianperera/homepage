@@ -24,6 +24,11 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
+  "& .MuiDataGrid-columnHeaders": { display: "none" },
+  "& .MuiDataGrid-virtualScroller": { marginTop: "0!important" },
+}));
+
 const handleTopStoryClick = (record) => {
   window.open(record.row.url, '_blank', 'noopener,noreferrer');
 }
@@ -33,12 +38,6 @@ const columns = [
     field: 'title',
     headerName: 'Title',
     width: "600",
-    editable: false
-  },
-  {
-    field: 'by',
-    headerName: 'Author',
-    width: "250",
     editable: false
   }
 ];
@@ -145,10 +144,11 @@ function App() {
               <Item>
                 <h3>HackerNews Top Stories</h3>
                 <Box sx={{ height: 400, width: '100%' }}>
-                  <DataGrid
+                  <StyledDataGrid
                     rows={topStories}
                     columns={columns}
-                    pageSize={5}
+                    autoHeight
+                    pageSize={6}
                     onRowClick={handleTopStoryClick}
                   />
                 </Box>
