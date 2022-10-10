@@ -10,39 +10,6 @@ import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBaseline, MenuItem, InputAdornment, Select, Paper, Grid } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-
-const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
-  "& .MuiDataGrid-columnHeaders": { display: "none" },
-  "& .MuiDataGrid-virtualScroller": { marginTop: "0!important" },
-  "& .MuiDataGrid-row:hover": { cursor: "pointer" }
-}));
-
-const columns = [
-  {
-    field: "title",
-    headerName: "Title",
-    width: "600",
-    editable: false
-  }
-];
-
-const handleTopStoryClick = (record) => {
-  window.open(record.row.url, "_blank", "noopener,noreferrer");
-}
-
 function App() {
   const googleSearchURL = "https://www.google.com/search";
   const stackOverflowSearchURL = "https://stackoverflow.com/search";
@@ -61,8 +28,12 @@ function App() {
         const storyURLS = response.slice(0, 20).map(id => itemStoryURL + id + ".json");
         const requests = storyURLS.map(id => async () => await (await fetch(id)).json());
         const stories = await Promise.all(requests.map(f => f()));
+        const updatedStories = stories.map(story => {
+          // story.title = `"${story.title}" by ${story.by}`;
+          return story;
+        })
 
-        setTopStories(stories);
+        setTopStories(updatedStories);
       } catch (error) {
         console.error("Network Error", error);
       }
@@ -71,9 +42,42 @@ function App() {
     fetchData();
   }, []);
 
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
+  
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  }));
+  
+  const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
+    "& .MuiDataGrid-columnHeaders": { display: "none" },
+    "& .MuiDataGrid-virtualScroller": { marginTop: "0!important" },
+    "& .MuiDataGrid-row:hover": { cursor: "pointer" }
+  }));
+  
+  const columns = [
+    {
+      field: "title",
+      headerName: "Title",
+      width: "800",
+      editable: false
+    }
+  ];
+
   const handleChange = (event) => {
     setSearchEngine(event.target.value);
   };
+  
+  const handleTopStoryClick = (record) => {
+    window.open(record.row.url, "_blank", "noopener,noreferrer");
+  }
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -148,9 +152,8 @@ function App() {
                   <StyledDataGrid
                     rows={topStories}
                     columns={columns}
-                    autoHeight
-                    pageSize={6}
                     onRowClick={handleTopStoryClick}
+                    hideFooter
                   />
                 </Box>
               </Item>
