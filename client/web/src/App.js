@@ -16,18 +16,6 @@ const darkTheme = createTheme({
   },
 });
 
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -37,35 +25,18 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
   {
-    field: 'firstName',
-    headerName: 'First name',
-    width: 150,
-    editable: true,
+    field: 'title',
+    headerName: 'Title',
+    width: "600",
+    editable: false,
   },
   {
-    field: 'lastName',
-    headerName: 'Last name',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 110,
-    editable: true,
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
+    field: 'by',
+    headerName: 'Author',
+    width: "250",
+    editable: false,
+  }
 ];
 
 function App() {
@@ -74,6 +45,32 @@ function App() {
   const duckDuckGoSearchURL = "https://duckduckgo.com";
 
   const [searchEngine, setSearchEngine] = React.useState(googleSearchURL);
+  const [topStories, setTopStories] = React.useState([]);
+
+  React.useEffect(() => {
+    const topStoriesURL = "https://hacker-news.firebaseio.com/v0/topstories.json";
+    const itemStoryURL = "https://hacker-news.firebaseio.com/v0/item/";
+  
+    const fetchData = async () => {
+      try {
+        const response = await (await fetch(topStoriesURL)).json();
+        var storyIds = response.slice(0, 20);
+
+        storyIds = storyIds.map(id => itemStoryURL + id + '.json');
+
+        const requests = storyIds.map(id => async () => await (await fetch(id)).json());
+        const stories = await Promise.all(requests.map(f => f()));
+        console.log(stories);
+
+        setTopStories(stories);
+        console.log(topStories);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+  
+    fetchData();
+  }, []);
 
   const handleChange = (event) => {
     setSearchEngine(event.target.value);
@@ -103,7 +100,7 @@ function App() {
                     }} 
                     InputProps={{
                       startAdornment: 
-                        <InputAdornment>
+                        <InputAdornment position="start">
                           <Select 
                             labelId="search-engine-label" 
                             id="search-engine" 
@@ -147,9 +144,10 @@ function App() {
           <Grid container spacing={2} columns={2}>
             <Grid item xs={1}>
               <Item>
+                <h3>HackerNews Top Stories</h3>
                 <Box sx={{ height: 400, width: '100%' }}>
                   <DataGrid
-                    rows={rows}
+                    rows={topStories}
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
