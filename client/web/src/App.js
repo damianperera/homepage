@@ -24,18 +24,22 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+const handleTopStoryClick = (record) => {
+  window.open(record.row.url, '_blank', 'noopener,noreferrer');
+}
+
 const columns = [
   {
     field: 'title',
     headerName: 'Title',
     width: "600",
-    editable: false,
+    editable: false
   },
   {
     field: 'by',
     headerName: 'Author',
     width: "250",
-    editable: false,
+    editable: false
   }
 ];
 
@@ -54,18 +58,13 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await (await fetch(topStoriesURL)).json();
-        var storyIds = response.slice(0, 20);
-
-        storyIds = storyIds.map(id => itemStoryURL + id + '.json');
-
-        const requests = storyIds.map(id => async () => await (await fetch(id)).json());
+        const storyURLS = response.slice(0, 20).map(id => itemStoryURL + id + '.json');
+        const requests = storyURLS.map(id => async () => await (await fetch(id)).json());
         const stories = await Promise.all(requests.map(f => f()));
-        console.log(stories);
 
         setTopStories(stories);
-        console.log(topStories);
       } catch (error) {
-        console.log("error", error);
+        console.error("Network Error", error);
       }
     };
   
@@ -150,7 +149,7 @@ function App() {
                     rows={topStories}
                     columns={columns}
                     pageSize={5}
-                    rowsPerPageOptions={[5]}
+                    onRowClick={handleTopStoryClick}
                   />
                 </Box>
               </Item>
