@@ -8,7 +8,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Google, Code, PrivacyTip } from "@mui/icons-material";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBaseline, MenuItem, InputAdornment, Select, Paper, Grid } from "@mui/material";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid } from "@mui/x-data-grid";
 
 const darkTheme = createTheme({
   palette: {
@@ -17,30 +17,31 @@ const darkTheme = createTheme({
 });
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  textAlign: 'center',
+  textAlign: "center",
   color: theme.palette.text.secondary,
 }));
 
 const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   "& .MuiDataGrid-columnHeaders": { display: "none" },
   "& .MuiDataGrid-virtualScroller": { marginTop: "0!important" },
+  "& .MuiDataGrid-row:hover": { cursor: "pointer" }
 }));
-
-const handleTopStoryClick = (record) => {
-  window.open(record.row.url, '_blank', 'noopener,noreferrer');
-}
 
 const columns = [
   {
-    field: 'title',
-    headerName: 'Title',
+    field: "title",
+    headerName: "Title",
     width: "600",
     editable: false
   }
 ];
+
+const handleTopStoryClick = (record) => {
+  window.open(record.row.url, "_blank", "noopener,noreferrer");
+}
 
 function App() {
   const googleSearchURL = "https://www.google.com/search";
@@ -57,7 +58,7 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await (await fetch(topStoriesURL)).json();
-        const storyURLS = response.slice(0, 20).map(id => itemStoryURL + id + '.json');
+        const storyURLS = response.slice(0, 20).map(id => itemStoryURL + id + ".json");
         const requests = storyURLS.map(id => async () => await (await fetch(id)).json());
         const stories = await Promise.all(requests.map(f => f()));
 
@@ -143,7 +144,7 @@ function App() {
             <Grid item xs={1}>
               <Item>
                 <h3>HackerNews Top Stories</h3>
-                <Box sx={{ height: 400, width: '100%' }}>
+                <Box sx={{ height: 400, width: "100%" }}>
                   <StyledDataGrid
                     rows={topStories}
                     columns={columns}
