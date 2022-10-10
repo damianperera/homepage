@@ -4,6 +4,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import './App.css';
 import * as React from 'react';
+import { Google, Code } from '@mui/icons-material';
 import { Button, Box, TextField, FormControl, Stack } from '@mui/material';
 
 function App() {
@@ -13,21 +14,31 @@ function App() {
         <Box
           sx={{
             width: 500,
-            height: 55,
+            height: 130,
             backgroundColor: 'white',
             padding: 2,
             display: 'flex',
             borderRadius: '5px'
           }}
         >
-          <form action="https://www.google.com/search">
-            <FormControl focused="true">
-              <Stack direction="row" spacing={2}>
-                <TextField autoFocus name="q" required id="search" label="Search Google or type a URL" variant="outlined" sx={{ width: 385 }} />
-                <Button variant="contained" type="submit" sx={{ width: 100 }}>Search</Button>
-              </Stack>
-            </FormControl>
-          </form>
+          <Stack direction="column" spacing={2}>
+            <form action="https://www.google.com/search">
+              <FormControl>
+                <Stack direction="row" spacing={2}>
+                  <TextField autoFocus name="q" required id="search" label="Search Google" variant="outlined" sx={{ width: 385 }} />
+                  <Button variant="contained" type="submit" sx={{ width: 100 }} startIcon={<Google />}>Search</Button>
+                </Stack>
+              </FormControl>
+            </form>
+            <form action="https://stackoverflow.com/search">
+              <FormControl>
+                <Stack direction="row" spacing={2}>
+                  <TextField name="q" required id="search" label="Search StackOverflow" variant="outlined" sx={{ width: 385 }} />
+                  <Button variant="contained" type="submit" sx={{ width: 100 }} startIcon={<Code />}>Search</Button>
+                </Stack>
+              </FormControl>
+            </form>
+          </Stack>
         </Box>
       </header>
     </div>
