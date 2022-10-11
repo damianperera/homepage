@@ -160,7 +160,11 @@ function App() {
             sx={{ flexGrow: 1 }}
           >
             <form action={searchEngine}>
-              <FormControl variant="standard">
+              <FormControl variant="standard" sx={{ "& .Mui-focused": {
+                      "& > fieldset": {
+                        border: 0
+                      }
+                    } }}>
                 <TextField autoFocus name="q" required id="search" placeholder="Enter search text" variant="outlined" 
                   sx={{ 
                     width: "70vh",
@@ -181,8 +185,7 @@ function App() {
                           sx={{
                             boxShadow: "none",
                             ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                            "& MuiOutlinedInput-notchedOutline.Mui-focused": { border: 0 },
-                            "& MuiOutlinedInput-notchedOutline.Mui-focus": { border: 0 },
+                            ".MuiOutlinedInput-notchedOutline.Mui-focused": { border: 0 },
                             marginLeft: -2,
                             marginRight: 2,
                             width: "19vh"
