@@ -4,8 +4,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "./App.css";
 import * as React from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import { Google, Code, PrivacyTip, Newspaper } from "@mui/icons-material";
+import { Google, Code, PrivacyTip, Newspaper, Search } from "@mui/icons-material";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBaseline, MenuItem, InputAdornment, Select, Paper, Grid } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
@@ -17,7 +16,9 @@ function App() {
 
   const [searchEngine, setSearchEngine] = React.useState(googleSearchURL);
   const [topStories, setTopStories] = React.useState([]);
+  const [topStoriesGridLoading, setTopStoriesGridLoading] = React.useState(true);
 
+  // Top Story Loader
   React.useEffect(() => {
     const topStoriesURL = "https://hacker-news.firebaseio.com/v0/topstories.json";
     const itemStoryURL = "https://hacker-news.firebaseio.com/v0/item/";
@@ -33,6 +34,7 @@ function App() {
           return story;
         })
 
+        setTopStoriesGridLoading(false);
         setTopStories(updatedStories);
       } catch (error) {
         console.error("Network Error", error);
@@ -62,7 +64,7 @@ function App() {
     "& .MuiDataGrid-row:hover": { cursor: "pointer" }
   }));
   
-  const columns = [
+  const topStoriesColumns = [
     {
       field: "title",
       headerName: "Title",
@@ -112,6 +114,8 @@ function App() {
                             sx={{
                               boxShadow: "none",
                               ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                              "& MuiOutlinedInput-notchedOutline.Mui-focused": { border: 0 },
+                              "& MuiOutlinedInput-notchedOutline.Mui-focus": { border: 0 },
                               marginLeft: -2,
                               marginRight: 2,
                               width: "19vh"
@@ -135,7 +139,7 @@ function App() {
                           </Select>
                         </InputAdornment>,
                       endAdornment: 
-                          <IconButton type="submit" aria-label="search" size="small"><SearchIcon /></IconButton>
+                          <IconButton type="submit" aria-label="search" size="small"><Search /></IconButton>
                     }}
                     />
                 </FormControl>
@@ -153,9 +157,10 @@ function App() {
                 <Box sx={{ height: 350, width: "100%" }}>
                   <StyledDataGrid
                     rows={topStories}
-                    columns={columns}
+                    columns={topStoriesColumns}
                     onRowClick={handleTopStoryClick}
                     hideFooter
+                    loading={topStoriesGridLoading}
                   />
                 </Box>
               </Item>
