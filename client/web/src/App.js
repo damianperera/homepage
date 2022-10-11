@@ -78,7 +78,7 @@ function App() {
     {
       field: "title",
       headerName: "Title",
-      width: "600",
+      width: "635",
       editable: false
     }
   ];
@@ -160,11 +160,7 @@ function App() {
             sx={{ flexGrow: 1 }}
           >
             <form action={searchEngine}>
-              <FormControl variant="standard" sx={{ "& .Mui-focused": {
-                      "& > fieldset": {
-                        border: 0
-                      }
-                    } }}>
+              <FormControl variant="standard">
                 <TextField autoFocus name="q" required id="search" placeholder="Enter search text" variant="outlined" 
                   sx={{ 
                     width: "70vh",
@@ -231,6 +227,12 @@ function App() {
                   onRowClick={handleTopStoryClick}
                   hideFooter
                   loading={topStoriesGridLoading}
+                  disableColumnSelector
+                  sx={{
+                    "& .MuiDataGrid-row.Mui-selected": {
+                      border: 0
+                    }
+                  }}
                 />
               </Box>
             </StyledItem>
