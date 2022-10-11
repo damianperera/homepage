@@ -126,22 +126,31 @@ function App() {
             >
               <ListItemText primary="Home" secondary="Dev Homepage" sx={{ marginLeft: 1, ".MuiListItemText-primary": { fontWeight: "bold" } }} />
               <Divider />
-              <ListItem key="repository" disablePadding>
-                <ListItemButton onClick={handleRepositoryClick}>
-                  <ListItemIcon>
-                    <GitHub />
-                  </ListItemIcon>
-                  <ListItemText primary="Repository" />
-                </ListItemButton>
-              </ListItem>
-              <ListItem key="license" disablePadding>
-                <ListItemButton onClick={handleLicenseClick}>
-                  <ListItemIcon>
-                    <KeyRounded />
-                  </ListItemIcon>
-                  <ListItemText primary="License" />
-                </ListItemButton>
-              </ListItem>
+              <Box 
+                sx={{
+                  position: 'fixed',
+                  bottom: 0,
+                  width: 200
+                }}
+              >
+                <Divider />
+                <ListItem key="repository" disablePadding>
+                  <ListItemButton onClick={handleRepositoryClick}>
+                    <ListItemIcon>
+                      <GitHub />
+                    </ListItemIcon>
+                    <ListItemText primary="Repository" />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem key="license" disablePadding>
+                  <ListItemButton onClick={handleLicenseClick}>
+                    <ListItemIcon>
+                      <KeyRounded />
+                    </ListItemIcon>
+                    <ListItemText primary="License" />
+                  </ListItemButton>
+                </ListItem>
+              </Box>
             </Box>
           </Drawer>
           <Box 
