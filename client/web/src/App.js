@@ -181,7 +181,11 @@ function App() {
                           sx={{
                             boxShadow: "none",
                             ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                            ".MuiOutlinedInput-notchedOutline.Mui-focused": { border: 0 },
+                            "& .MuiOutlinedInput-notchedOutline.Mui-focused": {
+                              "& > fieldset": {
+                                border: 0
+                              }
+                            },
                             marginLeft: -2,
                             marginRight: 2,
                             width: "19vh"
@@ -205,7 +209,7 @@ function App() {
                         </Select>
                       </InputAdornment>,
                     endAdornment: 
-                        <IconButton type="submit" aria-label="search" size="small"><Search /></IconButton>
+                      <IconButton type="submit" aria-label="search" size="small"><Search /></IconButton>
                   }}
                   />
               </FormControl>
@@ -228,23 +232,15 @@ function App() {
                   hideFooter
                   loading={topStoriesGridLoading}
                   disableColumnSelector
-                  sx={{
-                    "& .MuiDataGrid-row.Mui-selected": {
-                      border: 0
-                    }
-                  }}
                 />
               </Box>
             </StyledItem>
           </Grid>
           <Grid item xs={6}>
-            {/* <StyledItem>
+            <StyledItem>
               <Box sx={{ height: 405, width: "100%" }}>
-                <Stack direction="column" alignItems="center" gap={1}>
-                  Coming Soon
-                </Stack>
-                </Box>
-            </StyledItem> */}
+              </Box>
+            </StyledItem>
           </Grid>
         </Grid>
       </Box>
