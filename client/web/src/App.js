@@ -128,7 +128,7 @@ function App() {
               <Divider />
               <Box 
                 sx={{
-                  position: 'fixed',
+                  position: "fixed",
                   bottom: 0,
                   width: 200
                 }}
