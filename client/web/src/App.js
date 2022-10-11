@@ -60,7 +60,7 @@ function App() {
     },
   });
   
-  const Item = styled(Paper)(({ theme }) => ({
+  const StyledItem = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
     padding: theme.spacing(1),
@@ -208,7 +208,7 @@ function App() {
       <Box sx={{ flexGrow: 1, padding: 3 }}>
         <Grid container spacing={2} columns={10}>
           <Grid item xs={4}>
-            <Item>
+            <StyledItem>
               <Stack direction="row" alignItems="center" gap={1}>
                 <Newspaper /><h3>HackerNews Top Stories</h3>
               </Stack>
@@ -221,10 +221,10 @@ function App() {
                   loading={topStoriesGridLoading}
                 />
               </Box>
-            </Item>
+            </StyledItem>
           </Grid>
           <Grid item xs={6}>
-            <Item>Coming Soon</Item>
+            <StyledItem>Coming Soon</StyledItem>
           </Grid>
         </Grid>
       </Box>
