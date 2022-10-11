@@ -84,92 +84,102 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-        <AppBar position="static">
-          <Toolbar sx={{ height: "10vh" }}>
-            <Box 
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              sx={{ flexGrow: 1 }}
-            >
-              <form action={searchEngine}>
-                <FormControl variant="standard">
-                  <TextField autoFocus name="q" required id="search" placeholder="Enter search text" variant="outlined" 
-                    sx={{ 
-                      width: "70vh",
-                      "& .MuiOutlinedInput-root.Mui-focused": {
-                        "& > fieldset": {
-                          border: 0
-                        }
+      <AppBar position="static">
+        <Toolbar sx={{ height: "10vh" }}>
+          <Box 
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            sx={{ flexGrow: 1 }}
+          >
+            <form action={searchEngine}>
+              <FormControl variant="standard">
+                <TextField autoFocus name="q" required id="search" placeholder="Enter search text" variant="outlined" 
+                  sx={{ 
+                    width: "70vh",
+                    "& .MuiOutlinedInput-root.Mui-focused": {
+                      "& > fieldset": {
+                        border: 0
                       }
-                    }} 
-                    InputProps={{
-                      startAdornment: 
-                        <InputAdornment position="start">
-                          <Select 
-                            labelId="search-engine-label" 
-                            id="search-engine" 
-                            value={searchEngine} 
-                            onChange={handleChange}
-                            sx={{
-                              boxShadow: "none",
-                              ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                              "& MuiOutlinedInput-notchedOutline.Mui-focused": { border: 0 },
-                              "& MuiOutlinedInput-notchedOutline.Mui-focus": { border: 0 },
-                              marginLeft: -2,
-                              marginRight: 2,
-                              width: "19vh"
-                            }}
-                          >
-                            <MenuItem value={googleSearchURL}>
-                              <Stack direction="row" alignItems="center" gap={1}>
-                                <Google /> Google
-                              </Stack>
-                            </MenuItem>
-                            <MenuItem value={stackOverflowSearchURL}>
-                              <Stack direction="row" alignItems="center" gap={1}>
-                                <Code /> StackOverflow
-                              </Stack>    
-                            </MenuItem>
-                            <MenuItem value={duckDuckGoSearchURL}>
-                              <Stack direction="row" alignItems="center" gap={1}>
-                                <PrivacyTip /> DuckDuckGo
-                              </Stack>    
-                            </MenuItem>
-                          </Select>
-                        </InputAdornment>,
-                      endAdornment: 
-                          <IconButton type="submit" aria-label="search" size="small"><Search /></IconButton>
-                    }}
-                    />
-                </FormControl>
-              </form>
-            </Box>
-          </Toolbar>
-        </AppBar>
-        <Box sx={{ flexGrow: 1, padding: 3 }}>
-          <Grid container spacing={2} columns={10}>
-            <Grid item xs={4}>
-              <Item>
-                <Stack direction="row" alignItems="center" gap={1}>
-                  <Newspaper /><h3>HackerNews Top Stories</h3>
-                </Stack>
-                <Box sx={{ height: 350, width: "100%" }}>
-                  <StyledDataGrid
-                    rows={topStories}
-                    columns={topStoriesColumns}
-                    onRowClick={handleTopStoryClick}
-                    hideFooter
-                    loading={topStoriesGridLoading}
+                    }
+                  }} 
+                  InputProps={{
+                    startAdornment: 
+                      <InputAdornment position="start">
+                        <Select 
+                          labelId="search-engine-label" 
+                          id="search-engine" 
+                          value={searchEngine} 
+                          onChange={handleChange}
+                          sx={{
+                            boxShadow: "none",
+                            ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                            "& MuiOutlinedInput-notchedOutline.Mui-focused": { border: 0 },
+                            "& MuiOutlinedInput-notchedOutline.Mui-focus": { border: 0 },
+                            marginLeft: -2,
+                            marginRight: 2,
+                            width: "19vh"
+                          }}
+                        >
+                          <MenuItem value={googleSearchURL}>
+                            <Stack direction="row" alignItems="center" gap={1}>
+                              <Google /> Google
+                            </Stack>
+                          </MenuItem>
+                          <MenuItem value={stackOverflowSearchURL}>
+                            <Stack direction="row" alignItems="center" gap={1}>
+                              <Code /> StackOverflow
+                            </Stack>    
+                          </MenuItem>
+                          <MenuItem value={duckDuckGoSearchURL}>
+                            <Stack direction="row" alignItems="center" gap={1}>
+                              <PrivacyTip /> DuckDuckGo
+                            </Stack>    
+                          </MenuItem>
+                        </Select>
+                      </InputAdornment>,
+                    endAdornment: 
+                        <IconButton type="submit" aria-label="search" size="small"><Search /></IconButton>
+                  }}
                   />
-                </Box>
-              </Item>
-            </Grid>
-            <Grid item xs={6}>
-              <Item>Coming Soon</Item>
-            </Grid>
+              </FormControl>
+            </form>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      <Box sx={{ flexGrow: 1, padding: 3 }}>
+        <Grid container spacing={2} columns={10}>
+          <Grid item xs={4}>
+            <Item>
+              <Stack direction="row" alignItems="center" gap={1}>
+                <Newspaper /><h3>HackerNews Top Stories</h3>
+              </Stack>
+              <Box sx={{ height: 350, width: "100%" }}>
+                <StyledDataGrid
+                  rows={topStories}
+                  columns={topStoriesColumns}
+                  onRowClick={handleTopStoryClick}
+                  hideFooter
+                  loading={topStoriesGridLoading}
+                />
+              </Box>
+            </Item>
           </Grid>
+          <Grid item xs={6}>
+            <Item>Coming Soon</Item>
+          </Grid>
+        </Grid>
+      </Box>
+      <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
+        <Box 
+          display="flex"
+          justifyContent="left"
+          alignItems="center"
+          sx={{ flexGrow: 1, height: "3vh" }}
+        >
+          <h5><a style={{ textDecoration: 'none', color: 'white', opacity: "50%", paddingLeft: "15%" }} target="_blank" href="https://github.com/damianperera/homepage/blob/main/LICENSE.md">License</a></h5>
         </Box>
+      </AppBar>
     </ThemeProvider>
   );
 }
