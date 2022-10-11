@@ -4,19 +4,29 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "./App.css";
 import * as React from "react";
-import { Google, Code, PrivacyTip, Newspaper, Search } from "@mui/icons-material";
+import { Google, Code, PrivacyTip, Newspaper, Search, Menu, KeyRounded, GitHub } from "@mui/icons-material";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
-import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBaseline, MenuItem, InputAdornment, Select, Paper, Grid } from "@mui/material";
+import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBaseline, MenuItem, InputAdornment, Select, Paper, Grid, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
 function App() {
   const googleSearchURL = "https://www.google.com/search";
   const stackOverflowSearchURL = "https://stackoverflow.com/search";
   const duckDuckGoSearchURL = "https://duckduckgo.com";
+  const licenseURL = "https://github.com/damianperera/homepage/blob/main/LICENSE.md";
+  const repositoryURL = "https://github.com/damianperera/homepage";
 
   const [searchEngine, setSearchEngine] = React.useState(googleSearchURL);
   const [topStories, setTopStories] = React.useState([]);
   const [topStoriesGridLoading, setTopStoriesGridLoading] = React.useState(true);
+  const [menuToggle, setMenuToggle] = React.useState(false);
+
+  const toggleMenu = (open) => (event) => {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+      return;
+    }
+    setMenuToggle(open);
+  };
 
   // Top Story Loader
   React.useEffect(() => {
@@ -73,7 +83,7 @@ function App() {
     }
   ];
 
-    const handleChange = (event) => {
+  const handleChange = (event) => {
     setSearchEngine(event.target.value);
   };
   
@@ -81,11 +91,59 @@ function App() {
     window.open(record.row.url, "_blank", "noopener,noreferrer");
   }
 
+  const handleLicenseClick = () => {
+    window.open(licenseURL, "_blank", "noopener,noreferrer");
+  }
+
+  const handleRepositoryClick = () => {
+    window.open(repositoryURL, "_blank", "noopener,noreferrer");
+  }
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <AppBar position="static">
         <Toolbar sx={{ height: "10vh" }}>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+            onClick={toggleMenu(true)}
+          >
+            <Menu />
+          </IconButton>
+          <Drawer
+            open={menuToggle}
+            onClose={toggleMenu(false)}
+          >
+            <Box 
+              sx={{ width: 200 }}
+              role="presentation"
+              onClick={toggleMenu(false)}
+              onKeyDown={toggleMenu(false)}
+            >
+              <ListItemText primary="Home" secondary="Dev Homepage" sx={{ marginLeft: 1, ".MuiListItemText-primary": { fontWeight: "bold" } }} />
+              <Divider />
+              <ListItem key="repository" disablePadding>
+                <ListItemButton onClick={handleRepositoryClick}>
+                  <ListItemIcon>
+                    <GitHub />
+                  </ListItemIcon>
+                  <ListItemText primary="Repository" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem key="license" disablePadding>
+                <ListItemButton onClick={handleLicenseClick}>
+                  <ListItemIcon>
+                    <KeyRounded />
+                  </ListItemIcon>
+                  <ListItemText primary="License" />
+                </ListItemButton>
+              </ListItem>
+            </Box>
+          </Drawer>
           <Box 
             display="flex"
             justifyContent="center"
@@ -170,16 +228,6 @@ function App() {
           </Grid>
         </Grid>
       </Box>
-      <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
-        <Box 
-          display="flex"
-          justifyContent="left"
-          alignItems="center"
-          sx={{ flexGrow: 1, height: "3vh" }}
-        >
-          <h5><a style={{ textDecoration: 'none', color: 'white', opacity: "50%", paddingLeft: "15%" }} target="_blank" href="https://github.com/damianperera/homepage/blob/main/LICENSE.md">License</a></h5>
-        </Box>
-      </AppBar>
     </ThemeProvider>
   );
 }
