@@ -233,7 +233,13 @@ function App() {
             </StyledItem>
           </Grid>
           <Grid item xs={6}>
-            <StyledItem>Coming Soon</StyledItem>
+            {/* <StyledItem>
+              <Box sx={{ height: 405, width: "100%" }}>
+                <Stack direction="column" alignItems="center" gap={1}>
+                  Coming Soon
+                </Stack>
+                </Box>
+            </StyledItem> */}
           </Grid>
         </Grid>
       </Box>
