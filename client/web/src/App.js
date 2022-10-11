@@ -83,7 +83,7 @@ function App() {
     }
   ];
 
-  const handleChange = (event) => {
+  const handleSearchEngineChange = (event) => {
     setSearchEngine(event.target.value);
   };
   
@@ -177,7 +177,7 @@ function App() {
                           labelId="search-engine-label" 
                           id="search-engine" 
                           value={searchEngine} 
-                          onChange={handleChange}
+                          onChange={handleSearchEngineChange}
                           sx={{
                             boxShadow: "none",
                             ".MuiOutlinedInput-notchedOutline": { border: 0 },
