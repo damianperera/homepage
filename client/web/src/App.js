@@ -31,12 +31,12 @@ function App() {
   // Top Story Loader
   React.useEffect(() => {
     const topStoriesURL = "https://hacker-news.firebaseio.com/v0/topstories.json";
-    const itemStoryURL = "https://hacker-news.firebaseio.com/v0/item/";
+    const itemStoryURL = "https://hacker-news.firebaseio.com/v0/item";
   
     const fetchData = async () => {
       try {
         const response = await (await fetch(topStoriesURL)).json();
-        const storyURLS = response.slice(0, 30).map(id => itemStoryURL + id + ".json");
+        const storyURLS = response.slice(0, 30).map(id => `${itemStoryURL}/${id}.json`);
         const requests = storyURLS.map(id => async () => await (await fetch(id)).json());
         const stories = await Promise.all(requests.map(f => f()));
         const updatedStories = stories.map(story => {
@@ -181,7 +181,7 @@ function App() {
                           sx={{
                             boxShadow: "none",
                             ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                            "& .MuiOutlinedInput-notchedOutline.Mui-focused": {
+                            "& .MuiOutlinedInput-root.Mui-focused": {
                               "& > fieldset": {
                                 border: 0
                               }
