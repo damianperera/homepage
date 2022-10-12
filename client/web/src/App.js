@@ -6,7 +6,7 @@ import "./App.css";
 import * as React from "react";
 import { Google, Code, PrivacyTip, Newspaper, Search, Menu, KeyRounded, GitHub, Twitter } from "@mui/icons-material";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
-import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBaseline, MenuItem, InputAdornment, Select, Paper, Grid, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, CircularProgress, Backdrop } from "@mui/material";
+import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBaseline, MenuItem, InputAdornment, Select, Paper, Grid, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, CircularProgress } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
@@ -103,6 +103,7 @@ function App() {
   }
 
   const handleOnTwitterListLoadComplete = () => {
+    console.log("LOADED!!!!!");
     setTwitterListLoading(false);
   }
 
@@ -249,9 +250,9 @@ function App() {
                 <Twitter /><h3>Development & Tech Tweets</h3>
               </Stack>
               <Box sx={{ height: 400, width: "100%" }}>
-                {/* <Backdrop sx={{ position: "relative", height: 405 }} open={twitterListLoading}>
-                  <CircularProgress />
-                </Backdrop>  */}
+                { twitterListLoading 
+                    && <CircularProgress sx={{ marginTop: "30%" }} />
+                }
                 <TwitterTimelineEmbed 
                   sourceType="list" 
                   id={twitterListId}
