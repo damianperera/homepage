@@ -230,7 +230,11 @@ function App() {
       </AppBar>
       <Box sx={{ flexGrow: 1, padding: 3 }}>
         <Grid container spacing={2} columns={12}>
+          <Grid item xs={12}>
+          <a class="weatherwidget-io" href="https://forecast7.com/en/48d1411d58/munich/" data-label_1="MUNICH" data-label_2="WEATHER" data-theme="dark"></a>
+          </Grid>
           <Grid item xs={4}>
+            
             <StyledItem>
               <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
                 <Newspaper /><h3>HackerNews Top Stories</h3>
