@@ -4,10 +4,11 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "./App.css";
 import * as React from "react";
-import { Google, Code, PrivacyTip, Newspaper, Search, Menu, KeyRounded, GitHub } from "@mui/icons-material";
+import { Google, Code, PrivacyTip, Newspaper, Search, Menu, KeyRounded, GitHub, Twitter } from "@mui/icons-material";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
-import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBaseline, MenuItem, InputAdornment, Select, Paper, Grid, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider } from "@mui/material";
+import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBaseline, MenuItem, InputAdornment, Select, Paper, Grid, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, CircularProgress, Backdrop } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
 function App() {
   const googleSearchURL = "https://www.google.com/search";
@@ -15,11 +16,13 @@ function App() {
   const duckDuckGoSearchURL = "https://duckduckgo.com";
   const licenseURL = "https://github.com/damianperera/homepage/blob/main/LICENSE.md";
   const repositoryURL = "https://github.com/damianperera/homepage";
+  const twitterListId = "1579994115697041409";
 
   const [searchEngine, setSearchEngine] = React.useState(googleSearchURL);
   const [topStories, setTopStories] = React.useState([]);
   const [topStoriesGridLoading, setTopStoriesGridLoading] = React.useState(true);
   const [menuToggle, setMenuToggle] = React.useState(false);
+  const [twitterListLoading, setTwitterListLoading] = React.useState(true);
 
   const toggleMenu = (open) => (event) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -78,7 +81,7 @@ function App() {
     {
       field: "title",
       headerName: "Title",
-      width: "635",
+      width: "525",
       editable: false
     }
   ];
@@ -97,6 +100,10 @@ function App() {
 
   const handleRepositoryClick = () => {
     window.open(repositoryURL, "_blank", "noopener,noreferrer");
+  }
+
+  const handleOnTwitterListLoadComplete = () => {
+    setTwitterListLoading(false);
   }
 
   return (
@@ -218,13 +225,13 @@ function App() {
         </Toolbar>
       </AppBar>
       <Box sx={{ flexGrow: 1, padding: 3 }}>
-        <Grid container spacing={2} columns={10}>
+        <Grid container spacing={2} columns={12}>
           <Grid item xs={4}>
             <StyledItem>
-              <Stack direction="row" alignItems="center" gap={1}>
+              <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
                 <Newspaper /><h3>HackerNews Top Stories</h3>
               </Stack>
-              <Box sx={{ height: 350, width: "100%" }}>
+              <Box sx={{ height: 400, width: "100%" }}>
                 <StyledDataGrid
                   rows={topStories}
                   columns={topStoriesColumns}
@@ -236,9 +243,26 @@ function App() {
               </Box>
             </StyledItem>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <StyledItem>
-              <Box sx={{ height: 405, width: "100%" }}>
+              <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
+                <Twitter /><h3>Development & Tech Tweets</h3>
+              </Stack>
+              <Box sx={{ height: 400, width: "100%" }}>
+                {/* <Backdrop sx={{ position: "relative", height: 405 }} open={twitterListLoading}>
+                  <CircularProgress />
+                </Backdrop>  */}
+                <TwitterTimelineEmbed 
+                  sourceType="list" 
+                  id={twitterListId}
+                  theme="dark"
+                  autoHeight
+                  noHeader
+                  noFooter
+                  noBorders
+                  tweetLimit={20}
+                  onLoad={handleOnTwitterListLoadComplete}
+                />
               </Box>
             </StyledItem>
           </Grid>
