@@ -231,7 +231,20 @@ function App() {
       <Box sx={{ flexGrow: 1, padding: 3 }}>
         <Grid container spacing={2} columns={12}>
           <Grid item xs={12}>
-          <a class="weatherwidget-io" href="https://forecast7.com/en/48d1411d58/munich/" data-label_1="MÜNCHEN" data-label_2="WEATHER" data-theme="dark" data-basecolor="#121212" data-icons="Climacons Animated" sx={{ textDecoration: "none", color: "white" }}> Loading Weather</a>
+            <a 
+              class="weatherwidget-io" 
+              href="https://forecast7.com/en/48d1411d58/munich/"
+              data-label_1="MÜNCHEN"
+              data-label_2="BAYERN DE"
+              data-theme="dark"
+              data-basecolor="#121212"
+              data-icons="Climacons Animated"
+              sx={{ 
+                textDecoration: "none",
+                color: "white" }}
+              >
+              Loading Weather
+            </a>
           </Grid>
           <Grid item xs={4}>
             
