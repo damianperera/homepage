@@ -228,7 +228,7 @@ function App() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Box sx={{ flexGrow: 1, padding: 3 }}>
+      <Box sx={{ flexGrow: 1, padding: 2 }}>
         <Grid container spacing={2} columns={12}>
           <Grid item xs={12}>
             <a 
@@ -252,26 +252,9 @@ function App() {
           <Grid item xs={4}>
             <StyledItem>
               <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
-                <Newspaper /><h3>HackerNews Top Stories</h3>
-              </Stack>
-              <Box sx={{ height: 400, width: "100%" }}>
-                <StyledDataGrid
-                  rows={topStories}
-                  columns={topStoriesColumns}
-                  onRowClick={handleTopStoryClick}
-                  hideFooter
-                  loading={topStoriesGridLoading}
-                  disableColumnSelector
-                />
-              </Box>
-            </StyledItem>
-          </Grid>
-          <Grid item xs={4}>
-            <StyledItem>
-              <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
                 <Twitter /><h3>Development & Tech Tweets</h3>
               </Stack>
-              <Box sx={{ height: 400, width: "100%" }}>
+              <Box sx={{ height: 650, width: "100%" }}>
                 { twitterListLoading 
                     && <CircularProgress sx={{ marginTop: "30%" }} />
                 }
@@ -291,6 +274,23 @@ function App() {
                   noBorders
                   tweetLimit={20}
                   onLoad={handleOnTwitterListLoadComplete}
+                />
+              </Box>
+            </StyledItem>
+          </Grid>
+          <Grid item xs={4}>
+            <StyledItem>
+              <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
+                <Newspaper /><h3>HackerNews Top Stories</h3>
+              </Stack>
+              <Box sx={{ height: 650, width: "100%" }}>
+                <StyledDataGrid
+                  rows={topStories}
+                  columns={topStoriesColumns}
+                  onRowClick={handleTopStoryClick}
+                  hideFooter
+                  loading={topStoriesGridLoading}
+                  disableColumnSelector
                 />
               </Box>
             </StyledItem>
