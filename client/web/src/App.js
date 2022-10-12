@@ -232,22 +232,24 @@ function App() {
         <Grid container spacing={2} columns={12}>
           <Grid item xs={12}>
             <a 
-              class="weatherwidget-io" 
+              className="weatherwidget-io" 
               href="https://forecast7.com/en/48d1411d58/munich/"
               data-label_1="MÜNCHEN"
               data-label_2="BAYERN DE"
               data-theme="dark"
               data-basecolor="#121212"
               data-icons="Climacons Animated"
-              sx={{ 
+              style={{ 
                 textDecoration: "none",
-                color: "white" }}
+                color: "white" 
+              }}
               >
-              Loading Weather
+              <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
+                <CircularProgress sx={{ width: "5%" }} /> Loading Weather
+              </Stack>
             </a>
           </Grid>
           <Grid item xs={4}>
-            
             <StyledItem>
               <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
                 <Newspaper /><h3>HackerNews Top Stories</h3>
