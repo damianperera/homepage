@@ -231,7 +231,7 @@ function App() {
       <Box sx={{ flexGrow: 1, padding: 3 }}>
         <Grid container spacing={2} columns={12}>
           <Grid item xs={12}>
-          <a class="weatherwidget-io" href="https://forecast7.com/en/48d1411d58/munich/" data-label_1="MUNICH" data-label_2="WEATHER" data-theme="dark" data-basecolor="#121212"></a>
+          <a class="weatherwidget-io" href="https://forecast7.com/en/48d1411d58/munich/" data-label_1="MUNICH" data-label_2="WEATHER" data-theme="dark" data-basecolor="#121212">Loading Weather</a>
           </Grid>
           <Grid item xs={4}>
             
