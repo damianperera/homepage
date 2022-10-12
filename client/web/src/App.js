@@ -4,7 +4,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "./App.css";
 import * as React from "react";
-import { Google, Code, PrivacyTip, Newspaper, Search, Menu, KeyRounded, GitHub, Twitter } from "@mui/icons-material";
+import { Google, Code, PrivacyTip, Newspaper, Search, Menu, KeyRounded, GitHub, Twitter, Error } from "@mui/icons-material";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBaseline, MenuItem, InputAdornment, Select, Paper, Grid, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, CircularProgress } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
@@ -23,6 +23,7 @@ function App() {
   const [topStoriesGridLoading, setTopStoriesGridLoading] = React.useState(true);
   const [menuToggle, setMenuToggle] = React.useState(false);
   const [twitterListLoading, setTwitterListLoading] = React.useState(true);
+  const [twitterListLoadingFailed, setTwitterListLoadingFailed] = React.useState(false);
 
   const toggleMenu = (open) => (event) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -102,8 +103,10 @@ function App() {
     window.open(repositoryURL, "_blank", "noopener,noreferrer");
   }
 
-  const handleOnTwitterListLoadComplete = () => {
-    console.log("LOADED!!!!!");
+  const handleOnTwitterListLoadComplete = (e) => {
+    if (e === undefined) {
+      setTwitterListLoadingFailed(true);
+    }
     setTwitterListLoading(false);
   }
 
@@ -252,6 +255,12 @@ function App() {
               <Box sx={{ height: 400, width: "100%" }}>
                 { twitterListLoading 
                     && <CircularProgress sx={{ marginTop: "30%" }} />
+                }
+                { twitterListLoadingFailed 
+                    && 
+                      <Stack direction="row" alignItems="center" justifyContent="center" gap={1} sx={{ paddingTop: "30%" }}>
+                        <Error /> Something went wrong, are you logged into Twitter?
+                      </Stack>
                 }
                 <TwitterTimelineEmbed 
                   sourceType="list" 
