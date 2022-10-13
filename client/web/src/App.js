@@ -286,7 +286,7 @@ function App() {
               <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
                 <Newspaper /><h3>HackerNews Top Stories</h3>
               </Stack>
-              <Box sx={{ height: 650, width: "100%" }}>
+              <Box sx={{ height: 650, width: "100%", flex: 1, display: "flex" }}>
                 <StyledDataGrid
                   rows={topStories}
                   columns={topStoriesColumns}
@@ -294,6 +294,11 @@ function App() {
                   hideFooter
                   loading={topStoriesGridLoading}
                   disableColumnSelector
+                  sx={{
+                    "& .MuiDataGrid-virtualScroller": {
+                      height: 650
+                    }
+                  }}
                 />
               </Box>
             </StyledItem>
@@ -301,6 +306,14 @@ function App() {
         </Grid>
       </Box>
     </ThemeProvider>
+  );
+}
+
+export function CustomFooterComponent() {
+  return (
+    <Box sx={{ display: 'flex' }}>
+      Status  asd
+    </Box>
   );
 }
 
