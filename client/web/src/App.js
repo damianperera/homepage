@@ -231,23 +231,26 @@ function App() {
       <Box sx={{ flexGrow: 1, padding: 2 }}>
         <Grid container spacing={2} columns={12}>
           <Grid item xs={12}>
-            <a 
-              className="weatherwidget-io" 
-              href="https://forecast7.com/en/48d1411d58/munich/"
-              data-label_1="MÜNCHEN"
-              data-label_2="BAYERN DE"
-              data-theme="dark"
-              data-basecolor="#121212"
-              data-icons="Climacons Animated"
-              style={{ 
-                textDecoration: "none",
-                color: "white" 
-              }}
+            <Box sx={{ height: 100 }}>
+              <a 
+                className="weatherwidget-io" 
+                href="https://forecast7.com/en/48d1411d58/munich/"
+                data-label_1="MÜNCHEN"
+                data-label_2="BAYERN DE"
+                data-theme="dark"
+                data-basecolor="#121212"
+                data-icons="Climacons Animated"
+                style={{ 
+                  textDecoration: "none",
+                  color: "white",
+                  pointerEvents: "none"
+                }}
               >
-              <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
-                <CircularProgress sx={{ width: "5%" }} /> Loading Weather
-              </Stack>
-            </a>
+                <Stack direction="row" alignItems="center" justifyContent="center" gap={1} sx={{ paddingTop: "2%" }}>
+                  <CircularProgress size={25} /> Loading Weather
+                </Stack>
+              </a>
+            </Box>
           </Grid>
           <Grid item xs={4}>
             <StyledItem>
