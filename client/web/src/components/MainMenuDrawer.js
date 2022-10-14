@@ -1,4 +1,3 @@
-import * as React from "react";
 import { KeyRounded, GitHub } from "@mui/icons-material";
 import { Box, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider } from "@mui/material";
 
@@ -13,7 +12,7 @@ function MainMenuDrawer({ isOpen, onChange }) {
     const handleRepositoryClick = () => {
         window.open(repositoryURL, "_blank", "noopener,noreferrer");
     }
-    
+
     return (
         <Drawer
         open={isOpen}
