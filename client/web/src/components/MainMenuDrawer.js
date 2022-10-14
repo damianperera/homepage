@@ -1,5 +1,5 @@
 import { KeyRounded, GitHub } from "@mui/icons-material";
-import { Box, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, Icon } from "@mui/material";
+import { Box, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider } from "@mui/material";
 
 function MainMenuDrawer({ isOpen, onChange }) {
     const licenseURL = "https://github.com/damianperera/homepage/blob/main/LICENSE.md";
@@ -26,7 +26,7 @@ function MainMenuDrawer({ isOpen, onChange }) {
             onKeyDown={onChange(false)}
         >
             <ListItemText primary="Home" secondary="Dev Homepage" sx={{ marginLeft: 1, ".MuiListItemText-primary": { fontWeight: "bold" } }} />
-            <img src={deployStatus} width={100} style={{ paddingLeft: "4%", paddingBottom: "2%" }}/>
+            <img src={deployStatus} width={100} style={{ paddingLeft: "4%", paddingBottom: "2%" }} alt=""/>
             <Divider />
             <Box 
             sx={{
