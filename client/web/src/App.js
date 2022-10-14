@@ -64,13 +64,79 @@ function MainMenuDrawer({ isOpen, onChange }) {
   );
 }
 
-function App() {
+function SearchEngineBar() {
   const googleSearchURL = "https://www.google.com/search";
   const stackOverflowSearchURL = "https://stackoverflow.com/search";
   const duckDuckGoSearchURL = "https://duckduckgo.com";
-  const twitterListId = "1579994115697041409";
 
   const [searchEngine, setSearchEngine] = React.useState(googleSearchURL);
+
+  const handleSearchEngineChange = (event) => {
+    setSearchEngine(event.target.value);
+  };
+
+  return (
+    <form action={searchEngine}>
+      <FormControl variant="standard">
+        <TextField autoFocus name="q" required id="search" placeholder="Enter search text" variant="outlined" 
+          sx={{ 
+            width: "70vh",
+            "& .MuiOutlinedInput-root.Mui-focused": {
+              "& > fieldset": {
+                border: 0
+              }
+            }
+          }} 
+          InputProps={{
+            startAdornment: 
+              <InputAdornment position="start">
+                <Select 
+                  labelId="search-engine-label" 
+                  id="search-engine" 
+                  value={searchEngine} 
+                  onChange={handleSearchEngineChange}
+                  sx={{
+                    boxShadow: "none",
+                    ".MuiOutlinedInput-notchedOutline": { border: 0 },
+                    "& .MuiOutlinedInput-root.Mui-focused": {
+                      "& > fieldset": {
+                        border: 0
+                      }
+                    },
+                    marginLeft: -2,
+                    marginRight: 2,
+                    width: "19vh"
+                  }}
+                >
+                  <MenuItem value={googleSearchURL}>
+                    <Stack direction="row" alignItems="center" gap={1}>
+                      <Google /> Google
+                    </Stack>
+                  </MenuItem>
+                  <MenuItem value={stackOverflowSearchURL}>
+                    <Stack direction="row" alignItems="center" gap={1}>
+                      <Code /> StackOverflow
+                    </Stack>    
+                  </MenuItem>
+                  <MenuItem value={duckDuckGoSearchURL}>
+                    <Stack direction="row" alignItems="center" gap={1}>
+                      <PrivacyTip /> DuckDuckGo
+                    </Stack>    
+                  </MenuItem>
+                </Select>
+              </InputAdornment>,
+            endAdornment: 
+              <IconButton type="submit" aria-label="search" size="small"><Search /></IconButton>
+          }}
+          />
+      </FormControl>
+    </form>
+  );
+}
+
+function App() {
+  const twitterListId = "1579994115697041409";
+
   const [topStories, setTopStories] = React.useState([]);
   const [topStoriesGridLoading, setTopStoriesGridLoading] = React.useState(true);
   const [menuToggle, setMenuToggle] = React.useState(false);
@@ -138,10 +204,6 @@ function App() {
       editable: false
     }
   ];
-
-  const handleSearchEngineChange = (event) => {
-    setSearchEngine(event.target.value);
-  };
   
   const handleTopStoryClick = (record) => {
     window.open(record.row.url, "_blank", "noopener,noreferrer");
@@ -179,61 +241,7 @@ function App() {
             alignItems="center"
             sx={{ flexGrow: 1 }}
           >
-            <form action={searchEngine}>
-              <FormControl variant="standard">
-                <TextField autoFocus name="q" required id="search" placeholder="Enter search text" variant="outlined" 
-                  sx={{ 
-                    width: "70vh",
-                    "& .MuiOutlinedInput-root.Mui-focused": {
-                      "& > fieldset": {
-                        border: 0
-                      }
-                    }
-                  }} 
-                  InputProps={{
-                    startAdornment: 
-                      <InputAdornment position="start">
-                        <Select 
-                          labelId="search-engine-label" 
-                          id="search-engine" 
-                          value={searchEngine} 
-                          onChange={handleSearchEngineChange}
-                          sx={{
-                            boxShadow: "none",
-                            ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                            "& .MuiOutlinedInput-root.Mui-focused": {
-                              "& > fieldset": {
-                                border: 0
-                              }
-                            },
-                            marginLeft: -2,
-                            marginRight: 2,
-                            width: "19vh"
-                          }}
-                        >
-                          <MenuItem value={googleSearchURL}>
-                            <Stack direction="row" alignItems="center" gap={1}>
-                              <Google /> Google
-                            </Stack>
-                          </MenuItem>
-                          <MenuItem value={stackOverflowSearchURL}>
-                            <Stack direction="row" alignItems="center" gap={1}>
-                              <Code /> StackOverflow
-                            </Stack>    
-                          </MenuItem>
-                          <MenuItem value={duckDuckGoSearchURL}>
-                            <Stack direction="row" alignItems="center" gap={1}>
-                              <PrivacyTip /> DuckDuckGo
-                            </Stack>    
-                          </MenuItem>
-                        </Select>
-                      </InputAdornment>,
-                    endAdornment: 
-                      <IconButton type="submit" aria-label="search" size="small"><Search /></IconButton>
-                  }}
-                  />
-              </FormControl>
-            </form>
+            <SearchEngineBar />
           </Box>
         </Toolbar>
       </AppBar>
