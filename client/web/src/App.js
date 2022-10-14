@@ -5,7 +5,7 @@ import "@fontsource/roboto/700.css";
 import "./App.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Box, CssBaseline, Grid } from "@mui/material";
-import { Header, Weather, TwitterList, HackerNewsTopStories } from "./components";
+import { Header, Weather, TwitterList, HackerNewsTopStories, LocalNews } from "./components";
 
 function App() {
   const darkTheme = createTheme({
@@ -30,6 +30,9 @@ function App() {
           </Grid>
           <Grid item xs={4}>
             <HackerNewsTopStories />
+          </Grid>
+          <Grid item xs={4}>
+            <LocalNews />
           </Grid>
         </Grid>
       </Box>
