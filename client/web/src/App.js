@@ -5,24 +5,11 @@ import "@fontsource/roboto/700.css";
 import "./App.css";
 import * as React from "react";
 import { Google, Code, PrivacyTip, Newspaper, Search, Menu, KeyRounded, GitHub, Twitter, Error } from "@mui/icons-material";
-import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
-import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBaseline, MenuItem, InputAdornment, Select, Paper, Grid, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, CircularProgress } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBaseline, MenuItem, InputAdornment, Select, Grid, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, CircularProgress } from "@mui/material";
+import { StyledItem, StyledDataGrid } from "./common/StyledComponents";
+
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
-
-const StyledItem = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-
-const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
-  "& .MuiDataGrid-columnHeaders": { display: "none" },
-  "& .MuiDataGrid-virtualScroller": { marginTop: "0!important" },
-  "& .MuiDataGrid-row:hover": { cursor: "pointer" }
-}));
 
 function MainMenuDrawer({ isOpen, onChange }) {
   const licenseURL = "https://github.com/damianperera/homepage/blob/main/LICENSE.md";
@@ -323,8 +310,6 @@ function HackerNewsTopStories() {
 }
 
 function App() {
-
-
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
