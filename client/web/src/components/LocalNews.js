@@ -2,6 +2,7 @@ import * as React from "react";
 import { Newspaper } from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
 import { Item, DataGrid, Modal } from "../common";
+import parse from 'html-react-parser';
 
 function LocalNews() {
     const [latestPosts, setLatestPosts] = React.useState([]);
@@ -17,8 +18,8 @@ function LocalNews() {
         try {
           const response = await (await fetch(topStoriesURL)).json();
           const formattedResponse = response.map((record) => {
-            record.title = record.title.rendered;
-            record.description = record.content.rendered;
+            record.title = parse(record.title.rendered);
+            record.description = parse(record.content.rendered);
             return record;
           })
 

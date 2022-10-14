@@ -16,6 +16,18 @@ export function StyledModal({ title, description, open, setOpen}) {
         px: 4,
         pb: 3,
         overflowY: "scroll",
+        "& a": {
+            textDecoration: "none",
+            color: "white"
+        },
+        ".ml-manual-widget-container": {
+            display: "none",
+            visibility: "hidden"
+        },
+        ".thelocal-here-be-magic": {
+            display: "none",
+            visibility: "hidden"
+        }
     };
 
     const handleClose = () => {
