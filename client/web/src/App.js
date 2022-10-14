@@ -10,12 +10,64 @@ import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBa
 import { DataGrid } from "@mui/x-data-grid";
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
+function MainMenuDrawer({ isOpen, onChange }) {
+  const licenseURL = "https://github.com/damianperera/homepage/blob/main/LICENSE.md";
+  const repositoryURL = "https://github.com/damianperera/homepage";
+
+  const handleLicenseClick = () => {
+    window.open(licenseURL, "_blank", "noopener,noreferrer");
+  }
+
+  const handleRepositoryClick = () => {
+    window.open(repositoryURL, "_blank", "noopener,noreferrer");
+  }
+  return (
+    <Drawer
+      open={isOpen}
+      onClose={onChange(false)}
+    >
+      <Box 
+        sx={{ width: 200 }}
+        role="presentation"
+        onClick={onChange(false)}
+        onKeyDown={onChange(false)}
+      >
+        <ListItemText primary="Home" secondary="Dev Homepage" sx={{ marginLeft: 1, ".MuiListItemText-primary": { fontWeight: "bold" } }} />
+        <Divider />
+        <Box 
+          sx={{
+            position: "fixed",
+            bottom: 0,
+            width: 200
+          }}
+        >
+          <Divider />
+          <ListItem key="repository" disablePadding>
+            <ListItemButton onClick={handleRepositoryClick}>
+              <ListItemIcon>
+                <GitHub />
+              </ListItemIcon>
+              <ListItemText primary="Repository" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem key="license" disablePadding>
+            <ListItemButton onClick={handleLicenseClick}>
+              <ListItemIcon>
+                <KeyRounded />
+              </ListItemIcon>
+              <ListItemText primary="License" />
+            </ListItemButton>
+          </ListItem>
+        </Box>
+      </Box>
+    </Drawer>
+  );
+}
+
 function App() {
   const googleSearchURL = "https://www.google.com/search";
   const stackOverflowSearchURL = "https://stackoverflow.com/search";
   const duckDuckGoSearchURL = "https://duckduckgo.com";
-  const licenseURL = "https://github.com/damianperera/homepage/blob/main/LICENSE.md";
-  const repositoryURL = "https://github.com/damianperera/homepage";
   const twitterListId = "1579994115697041409";
 
   const [searchEngine, setSearchEngine] = React.useState(googleSearchURL);
@@ -95,14 +147,6 @@ function App() {
     window.open(record.row.url, "_blank", "noopener,noreferrer");
   }
 
-  const handleLicenseClick = () => {
-    window.open(licenseURL, "_blank", "noopener,noreferrer");
-  }
-
-  const handleRepositoryClick = () => {
-    window.open(repositoryURL, "_blank", "noopener,noreferrer");
-  }
-
   const handleOnTwitterListLoadComplete = (e) => {
     if (e === undefined) {
       setTwitterListLoadingFailed(true);
@@ -125,45 +169,10 @@ function App() {
           >
             <Menu />
           </IconButton>
-          <Drawer
-            open={menuToggle}
-            onClose={toggleMenu(false)}
-          >
-            <Box 
-              sx={{ width: 200 }}
-              role="presentation"
-              onClick={toggleMenu(false)}
-              onKeyDown={toggleMenu(false)}
-            >
-              <ListItemText primary="Home" secondary="Dev Homepage" sx={{ marginLeft: 1, ".MuiListItemText-primary": { fontWeight: "bold" } }} />
-              <Divider />
-              <Box 
-                sx={{
-                  position: "fixed",
-                  bottom: 0,
-                  width: 200
-                }}
-              >
-                <Divider />
-                <ListItem key="repository" disablePadding>
-                  <ListItemButton onClick={handleRepositoryClick}>
-                    <ListItemIcon>
-                      <GitHub />
-                    </ListItemIcon>
-                    <ListItemText primary="Repository" />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem key="license" disablePadding>
-                  <ListItemButton onClick={handleLicenseClick}>
-                    <ListItemIcon>
-                      <KeyRounded />
-                    </ListItemIcon>
-                    <ListItemText primary="License" />
-                  </ListItemButton>
-                </ListItem>
-              </Box>
-            </Box>
-          </Drawer>
+          <MainMenuDrawer 
+            isOpen={menuToggle}
+            onChange={toggleMenu}
+          />
           <Box 
             display="flex"
             justifyContent="center"
