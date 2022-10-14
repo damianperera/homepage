@@ -255,21 +255,15 @@ function TwitterList() {
   );
 }
 
-function App() {
+function HackerNewsTopStories() {
   const [topStories, setTopStories] = React.useState([]);
   const [topStoriesGridLoading, setTopStoriesGridLoading] = React.useState(true);
-
-  const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-    },
-  });
 
   // Top Story Loader
   React.useEffect(() => {
     const topStoriesURL = "https://hacker-news.firebaseio.com/v0/topstories.json";
     const itemStoryURL = "https://hacker-news.firebaseio.com/v0/item";
-  
+
     const fetchData = async () => {
       try {
         const response = await (await fetch(topStoriesURL)).json();
@@ -287,10 +281,10 @@ function App() {
         console.error("Network Error", error);
       }
     };
-  
+
     fetchData();
   }, []);
-  
+
   const topStoriesColumns = [
     {
       field: "title",
@@ -299,10 +293,43 @@ function App() {
       editable: false
     }
   ];
-  
+
   const handleTopStoryClick = (record) => {
     window.open(record.row.url, "_blank", "noopener,noreferrer");
   }
+
+  return (
+    <StyledItem>
+      <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
+        <Newspaper /><h3>HackerNews Top Stories</h3>
+      </Stack>
+      <Box sx={{ height: 650, width: "100%", flex: 1, display: "flex" }}>
+        <StyledDataGrid
+          rows={topStories}
+          columns={topStoriesColumns}
+          onRowClick={handleTopStoryClick}
+          hideFooter
+          loading={topStoriesGridLoading}
+          disableColumnSelector
+          sx={{
+            "& .MuiDataGrid-virtualScroller": {
+              height: 650
+            }
+          }}
+        />
+      </Box>
+    </StyledItem>
+  );
+}
+
+function App() {
+
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -319,38 +346,11 @@ function App() {
             <TwitterList />
           </Grid>
           <Grid item xs={4}>
-            <StyledItem>
-              <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
-                <Newspaper /><h3>HackerNews Top Stories</h3>
-              </Stack>
-              <Box sx={{ height: 650, width: "100%", flex: 1, display: "flex" }}>
-                <StyledDataGrid
-                  rows={topStories}
-                  columns={topStoriesColumns}
-                  onRowClick={handleTopStoryClick}
-                  hideFooter
-                  loading={topStoriesGridLoading}
-                  disableColumnSelector
-                  sx={{
-                    "& .MuiDataGrid-virtualScroller": {
-                      height: 650
-                    }
-                  }}
-                />
-              </Box>
-            </StyledItem>
+            <HackerNewsTopStories />
           </Grid>
         </Grid>
       </Box>
     </ThemeProvider>
-  );
-}
-
-export function CustomFooterComponent() {
-  return (
-    <Box sx={{ display: 'flex' }}>
-      Status  asd
-    </Box>
   );
 }
 
