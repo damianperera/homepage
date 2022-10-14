@@ -1,13 +1,12 @@
 import * as React from "react";
 import { Newspaper } from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
-import { StyledItem, StyledDataGrid } from "../common/StyledComponents";
+import { Item, DataGrid } from "../common";
 
 function HackerNewsTopStories() {
     const [topStories, setTopStories] = React.useState([]);
     const [topStoriesGridLoading, setTopStoriesGridLoading] = React.useState(true);
   
-    // Top Story Loader
     React.useEffect(() => {
       const topStoriesURL = "https://hacker-news.firebaseio.com/v0/topstories.json";
       const itemStoryURL = "https://hacker-news.firebaseio.com/v0/item";
@@ -47,12 +46,12 @@ function HackerNewsTopStories() {
     }
   
     return (
-      <StyledItem>
+      <Item>
         <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
           <Newspaper /><h3>HackerNews Top Stories</h3>
         </Stack>
         <Box sx={{ height: 650, width: "100%", flex: 1, display: "flex" }}>
-          <StyledDataGrid
+          <DataGrid
             rows={topStories}
             columns={topStoriesColumns}
             onRowClick={handleTopStoryClick}
@@ -66,7 +65,7 @@ function HackerNewsTopStories() {
             }}
           />
         </Box>
-      </StyledItem>
+      </Item>
     );
 }
 

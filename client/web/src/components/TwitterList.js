@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Twitter, Error } from "@mui/icons-material";
-import { StyledItem } from "../common/StyledComponents";
+import { Item } from "../common";
 import { Box, Stack, CircularProgress } from "@mui/material";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
 
@@ -18,7 +18,7 @@ function TwitterList() {
     }
     
     return (
-      <StyledItem>
+      <Item>
         <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
           <Twitter /><h3>Development & Tech Tweets</h3>
         </Stack>
@@ -44,7 +44,7 @@ function TwitterList() {
             onLoad={handleOnTwitterListLoadComplete}
           />
         </Box>
-      </StyledItem>
+      </Item>
     );
 }
 
