@@ -1,9 +1,10 @@
 import { KeyRounded, GitHub } from "@mui/icons-material";
-import { Box, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider } from "@mui/material";
+import { Box, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, Icon } from "@mui/material";
 
 function MainMenuDrawer({ isOpen, onChange }) {
     const licenseURL = "https://github.com/damianperera/homepage/blob/main/LICENSE.md";
     const repositoryURL = "https://github.com/damianperera/homepage";
+    const deployStatus = "https://img.shields.io/github/workflow/status/damianperera/homepage/deploy?style=flat-square";
 
     const handleLicenseClick = () => {
         window.open(licenseURL, "_blank", "noopener,noreferrer");
@@ -25,6 +26,7 @@ function MainMenuDrawer({ isOpen, onChange }) {
             onKeyDown={onChange(false)}
         >
             <ListItemText primary="Home" secondary="Dev Homepage" sx={{ marginLeft: 1, ".MuiListItemText-primary": { fontWeight: "bold" } }} />
+            <img src={deployStatus} width={100} style={{ paddingLeft: "4%", paddingBottom: "2%" }}/>
             <Divider />
             <Box 
             sx={{
@@ -36,18 +38,18 @@ function MainMenuDrawer({ isOpen, onChange }) {
             <Divider />
             <ListItem key="repository" disablePadding>
                 <ListItemButton onClick={handleRepositoryClick}>
-                <ListItemIcon>
-                    <GitHub />
-                </ListItemIcon>
-                <ListItemText primary="Repository" />
+                    <ListItemIcon>
+                        <GitHub />
+                    </ListItemIcon>
+                    <ListItemText primary="Repository" />
                 </ListItemButton>
             </ListItem>
             <ListItem key="license" disablePadding>
                 <ListItemButton onClick={handleLicenseClick}>
-                <ListItemIcon>
-                    <KeyRounded />
-                </ListItemIcon>
-                <ListItemText primary="License" />
+                    <ListItemIcon>
+                        <KeyRounded />
+                    </ListItemIcon>
+                    <ListItemText primary="License" />
                 </ListItemButton>
             </ListItem>
             </Box>
