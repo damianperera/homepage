@@ -1,11 +1,14 @@
 import * as React from "react";
 import { Newspaper } from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
-import { Item, DataGrid } from "../common";
+import { Item, DataGrid, Modal } from "../common";
 
 function LocalNews() {
     const [latestPosts, setLatestPosts] = React.useState([]);
     const [latestPostsGridLoading, setLatestPostsGridLoading] = React.useState(true);
+    const [modalOpen, setModalOpen] = React.useState(false);
+    const [modalTitle, setModalTitle] = React.useState();
+    const [modalDescription, setModalDescription] = React.useState();
   
     React.useEffect(() => {
       const topStoriesURL = "https://www.thelocal.de/wp-json/wp/v2/posts?per_page=50";
@@ -15,6 +18,7 @@ function LocalNews() {
           const response = await (await fetch(topStoriesURL)).json();
           const formattedResponse = response.map((record) => {
             record.title = record.title.rendered;
+            record.description = record.content.rendered;
             return record;
           })
 
@@ -38,7 +42,9 @@ function LocalNews() {
     ];
   
     const handleTopStoryClick = (record) => {
-        window.open(record.row.guid.rendered, "_blank", "noopener,noreferrer");
+        setModalTitle(record.row.title);
+        setModalDescription(record.row.description);
+        setModalOpen(true);
     }
   
     return (
@@ -47,19 +53,25 @@ function LocalNews() {
           <Newspaper /><h3>The Local DE</h3>
         </Stack>
         <Box sx={{ height: 650, width: "100%", flex: 1, display: "flex" }}>
-          <DataGrid
-            rows={latestPosts}
-            columns={topStoriesColumns}
-            onRowClick={handleTopStoryClick}
-            hideFooter
-            loading={latestPostsGridLoading}
-            disableColumnSelector
-            sx={{
-              "& .MuiDataGrid-virtualScroller": {
-                height: 650
-              }
-            }}
-          />
+            <Modal
+                open={modalOpen}
+                setOpen={setModalOpen}
+                title={modalTitle}
+                description={modalDescription}
+            />
+            <DataGrid
+                rows={latestPosts}
+                columns={topStoriesColumns}
+                onRowClick={handleTopStoryClick}
+                hideFooter
+                loading={latestPostsGridLoading}
+                disableColumnSelector
+                sx={{
+                "& .MuiDataGrid-virtualScroller": {
+                    height: 650
+                }
+                }}
+            />
         </Box>
       </Item>
     );
