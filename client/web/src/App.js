@@ -134,14 +134,8 @@ function SearchEngineBar() {
   );
 }
 
-function App() {
-  const twitterListId = "1579994115697041409";
-
-  const [topStories, setTopStories] = React.useState([]);
-  const [topStoriesGridLoading, setTopStoriesGridLoading] = React.useState(true);
+function Header() {
   const [menuToggle, setMenuToggle] = React.useState(false);
-  const [twitterListLoading, setTwitterListLoading] = React.useState(true);
-  const [twitterListLoadingFailed, setTwitterListLoadingFailed] = React.useState(false);
 
   const toggleMenu = (open) => (event) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -149,6 +143,44 @@ function App() {
     }
     setMenuToggle(open);
   };
+
+  return (
+    <AppBar position="static">
+      <Toolbar sx={{ height: "10vh" }}>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ mr: 2 }}
+          onClick={toggleMenu(true)}
+        >
+          <Menu />
+        </IconButton>
+        <MainMenuDrawer 
+          isOpen={menuToggle}
+          onChange={toggleMenu}
+        />
+        <Box 
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          sx={{ flexGrow: 1 }}
+        >
+          <SearchEngineBar />
+        </Box>
+      </Toolbar>
+    </AppBar>
+  );
+}
+
+function App() {
+  const twitterListId = "1579994115697041409";
+
+  const [topStories, setTopStories] = React.useState([]);
+  const [topStoriesGridLoading, setTopStoriesGridLoading] = React.useState(true);
+  const [twitterListLoading, setTwitterListLoading] = React.useState(true);
+  const [twitterListLoadingFailed, setTwitterListLoadingFailed] = React.useState(false);
 
   // Top Story Loader
   React.useEffect(() => {
@@ -219,32 +251,7 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <AppBar position="static">
-        <Toolbar sx={{ height: "10vh" }}>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={toggleMenu(true)}
-          >
-            <Menu />
-          </IconButton>
-          <MainMenuDrawer 
-            isOpen={menuToggle}
-            onChange={toggleMenu}
-          />
-          <Box 
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            sx={{ flexGrow: 1 }}
-          >
-            <SearchEngineBar />
-          </Box>
-        </Toolbar>
-      </AppBar>
+      <Header />
       <Box sx={{ flexGrow: 1, padding: 2 }}>
         <Grid container spacing={2} columns={12}>
           <Grid item xs={12}>
