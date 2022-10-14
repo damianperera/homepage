@@ -10,6 +10,20 @@ import { Box, TextField, FormControl, Stack , AppBar, Toolbar, IconButton, CssBa
 import { DataGrid } from "@mui/x-data-grid";
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
+const StyledItem = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+
+const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
+  "& .MuiDataGrid-columnHeaders": { display: "none" },
+  "& .MuiDataGrid-virtualScroller": { marginTop: "0!important" },
+  "& .MuiDataGrid-row:hover": { cursor: "pointer" }
+}));
+
 function MainMenuDrawer({ isOpen, onChange }) {
   const licenseURL = "https://github.com/damianperera/homepage/blob/main/LICENSE.md";
   const repositoryURL = "https://github.com/damianperera/homepage";
@@ -197,13 +211,59 @@ function Weather() {
   );
 }
 
-function App() {
+function TwitterList() {
   const twitterListId = "1579994115697041409";
 
-  const [topStories, setTopStories] = React.useState([]);
-  const [topStoriesGridLoading, setTopStoriesGridLoading] = React.useState(true);
   const [twitterListLoading, setTwitterListLoading] = React.useState(true);
   const [twitterListLoadingFailed, setTwitterListLoadingFailed] = React.useState(false);
+
+  const handleOnTwitterListLoadComplete = (e) => {
+    if (e === undefined) {
+      setTwitterListLoadingFailed(true);
+    }
+    setTwitterListLoading(false);
+  }
+  
+  return (
+    <StyledItem>
+      <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
+        <Twitter /><h3>Development & Tech Tweets</h3>
+      </Stack>
+      <Box sx={{ height: 650, width: "100%" }}>
+        { twitterListLoading 
+            && <CircularProgress sx={{ marginTop: "30%" }} />
+        }
+        { twitterListLoadingFailed 
+            && 
+              <Stack direction="row" alignItems="center" justifyContent="center" gap={1} sx={{ paddingTop: "30%" }}>
+                <Error /> Something went wrong, are you logged into Twitter?
+              </Stack>
+        }
+        <TwitterTimelineEmbed 
+          sourceType="list" 
+          id={twitterListId}
+          theme="dark"
+          autoHeight
+          noHeader
+          noFooter
+          noBorders
+          tweetLimit={20}
+          onLoad={handleOnTwitterListLoadComplete}
+        />
+      </Box>
+    </StyledItem>
+  );
+}
+
+function App() {
+  const [topStories, setTopStories] = React.useState([]);
+  const [topStoriesGridLoading, setTopStoriesGridLoading] = React.useState(true);
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
 
   // Top Story Loader
   React.useEffect(() => {
@@ -230,26 +290,6 @@ function App() {
   
     fetchData();
   }, []);
-
-  const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-    },
-  });
-  
-  const StyledItem = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-  
-  const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
-    "& .MuiDataGrid-columnHeaders": { display: "none" },
-    "& .MuiDataGrid-virtualScroller": { marginTop: "0!important" },
-    "& .MuiDataGrid-row:hover": { cursor: "pointer" }
-  }));
   
   const topStoriesColumns = [
     {
@@ -264,13 +304,6 @@ function App() {
     window.open(record.row.url, "_blank", "noopener,noreferrer");
   }
 
-  const handleOnTwitterListLoadComplete = (e) => {
-    if (e === undefined) {
-      setTwitterListLoadingFailed(true);
-    }
-    setTwitterListLoading(false);
-  }
-
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -283,33 +316,7 @@ function App() {
             </Box>
           </Grid>
           <Grid item xs={4}>
-            <StyledItem>
-              <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
-                <Twitter /><h3>Development & Tech Tweets</h3>
-              </Stack>
-              <Box sx={{ height: 650, width: "100%" }}>
-                { twitterListLoading 
-                    && <CircularProgress sx={{ marginTop: "30%" }} />
-                }
-                { twitterListLoadingFailed 
-                    && 
-                      <Stack direction="row" alignItems="center" justifyContent="center" gap={1} sx={{ paddingTop: "30%" }}>
-                        <Error /> Something went wrong, are you logged into Twitter?
-                      </Stack>
-                }
-                <TwitterTimelineEmbed 
-                  sourceType="list" 
-                  id={twitterListId}
-                  theme="dark"
-                  autoHeight
-                  noHeader
-                  noFooter
-                  noBorders
-                  tweetLimit={20}
-                  onLoad={handleOnTwitterListLoadComplete}
-                />
-              </Box>
-            </StyledItem>
+            <TwitterList />
           </Grid>
           <Grid item xs={4}>
             <StyledItem>
