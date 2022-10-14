@@ -13,6 +13,7 @@ function MainMenuDrawer({ isOpen, onChange }) {
     const handleRepositoryClick = () => {
         window.open(repositoryURL, "_blank", "noopener,noreferrer");
     }
+    
     return (
         <Drawer
         open={isOpen}
