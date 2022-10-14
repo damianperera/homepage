@@ -9,30 +9,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Box, Stack , CssBaseline, Grid, CircularProgress } from "@mui/material";
 import { StyledItem, StyledDataGrid } from "./common/StyledComponents";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
-import { Header } from "./components";
-
-function Weather() {
-  return (
-    <a 
-      className="weatherwidget-io" 
-      href="https://forecast7.com/en/48d1411d58/munich/"
-      data-label_1="MÜNCHEN"
-      data-label_2="BAYERN DE"
-      data-theme="dark"
-      data-basecolor="#121212"
-      data-icons="Climacons Animated"
-      style={{ 
-        textDecoration: "none",
-        color: "white",
-        pointerEvents: "none"
-      }}
-    >
-      <Stack direction="row" alignItems="center" justifyContent="center" gap={1} sx={{ paddingTop: "2%" }}>
-        <CircularProgress size={25} /> Loading Weather
-      </Stack>
-    </a>
-  );
-}
+import { Header, Weather } from "./components";
 
 function TwitterList() {
   const twitterListId = "1579994115697041409";
