@@ -174,6 +174,29 @@ function Header() {
   );
 }
 
+function Weather() {
+  return (
+    <a 
+      className="weatherwidget-io" 
+      href="https://forecast7.com/en/48d1411d58/munich/"
+      data-label_1="MÜNCHEN"
+      data-label_2="BAYERN DE"
+      data-theme="dark"
+      data-basecolor="#121212"
+      data-icons="Climacons Animated"
+      style={{ 
+        textDecoration: "none",
+        color: "white",
+        pointerEvents: "none"
+      }}
+    >
+      <Stack direction="row" alignItems="center" justifyContent="center" gap={1} sx={{ paddingTop: "2%" }}>
+        <CircularProgress size={25} /> Loading Weather
+      </Stack>
+    </a>
+  );
+}
+
 function App() {
   const twitterListId = "1579994115697041409";
 
@@ -256,24 +279,7 @@ function App() {
         <Grid container spacing={2} columns={12}>
           <Grid item xs={12}>
             <Box sx={{ height: 100 }}>
-              <a 
-                className="weatherwidget-io" 
-                href="https://forecast7.com/en/48d1411d58/munich/"
-                data-label_1="MÜNCHEN"
-                data-label_2="BAYERN DE"
-                data-theme="dark"
-                data-basecolor="#121212"
-                data-icons="Climacons Animated"
-                style={{ 
-                  textDecoration: "none",
-                  color: "white",
-                  pointerEvents: "none"
-                }}
-              >
-                <Stack direction="row" alignItems="center" justifyContent="center" gap={1} sx={{ paddingTop: "2%" }}>
-                  <CircularProgress size={25} /> Loading Weather
-                </Stack>
-              </a>
+              <Weather />
             </Box>
           </Grid>
           <Grid item xs={4}>
