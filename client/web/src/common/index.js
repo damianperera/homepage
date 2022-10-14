@@ -1,1 +1,1 @@
-export { StyledDataGrid as DataGrid, StyledItem as Item } from "./StyledComponents";
+export * from "./styled-components";
