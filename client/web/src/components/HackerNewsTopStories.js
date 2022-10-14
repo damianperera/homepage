@@ -18,7 +18,6 @@ function HackerNewsTopStories() {
           const requests = storyURLS.map(id => async () => await (await fetch(id)).json());
           const stories = await Promise.all(requests.map(f => f()));
           const updatedStories = stories.map(story => {
-            // story.title = `"${story.title}" by ${story.by}`;
             return story;
           })
   

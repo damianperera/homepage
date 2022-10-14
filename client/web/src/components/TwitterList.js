@@ -28,7 +28,7 @@ function TwitterList() {
           }
           { twitterListLoadingFailed 
               && 
-                <Stack direction="row" alignItems="center" justifyContent="center" gap={1} sx={{ paddingTop: "30%" }}>
+                <Stack direction="row" alignItems="center" justifyContent="center" gap={1} sx={{ paddingTop: "50%" }}>
                   <Error /> Something went wrong, are you logged into Twitter?
                 </Stack>
           }
