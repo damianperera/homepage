@@ -4,52 +4,12 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "./App.css";
 import * as React from "react";
-import { Newspaper, Menu, Twitter, Error } from "@mui/icons-material";
+import { Newspaper, Twitter, Error } from "@mui/icons-material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Box, Stack , AppBar, Toolbar, IconButton, CssBaseline, Grid, CircularProgress } from "@mui/material";
+import { Box, Stack , CssBaseline, Grid, CircularProgress } from "@mui/material";
 import { StyledItem, StyledDataGrid } from "./common/StyledComponents";
-import { TwitterTimelineEmbed } from 'react-twitter-embed';
-import { MainMenuDrawer, SearchEngineBar } from "./components";
-
-function Header() {
-  const [menuToggle, setMenuToggle] = React.useState(false);
-
-  const toggleMenu = (open) => (event) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
-      return;
-    }
-    setMenuToggle(open);
-  };
-
-  return (
-    <AppBar position="static">
-      <Toolbar sx={{ height: "10vh" }}>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-          onClick={toggleMenu(true)}
-        >
-          <Menu />
-        </IconButton>
-        <MainMenuDrawer 
-          isOpen={menuToggle}
-          onChange={toggleMenu}
-        />
-        <Box 
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          sx={{ flexGrow: 1 }}
-        >
-          <SearchEngineBar />
-        </Box>
-      </Toolbar>
-    </AppBar>
-  );
-}
+import { TwitterTimelineEmbed } from "react-twitter-embed";
+import { Header } from "./components";
 
 function Weather() {
   return (
