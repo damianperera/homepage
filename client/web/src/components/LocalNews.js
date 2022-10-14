@@ -14,7 +14,7 @@ function LocalNews() {
         try {
           const response = await (await fetch(topStoriesURL)).json();
           const formattedResponse = response.map((record) => {
-            record.title = decodeURI(record.title.rendered);
+            record.title = record.title.rendered;
             return record;
           })
 
