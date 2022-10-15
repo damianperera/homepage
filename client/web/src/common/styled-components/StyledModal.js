@@ -1,8 +1,8 @@
 import * as React from "react"
 import { ContentCopy, OpenInNew, Close } from "@mui/icons-material"
-import { AppBar, Box, Modal, IconButton, Toolbar } from "@mui/material"
+import { AppBar, Box, Modal, IconButton, Toolbar, Tooltip } from "@mui/material"
 
-export function StyledModal({ title, description, open, setOpen, copyLink }) {
+export function StyledModal({ title, description, open, setOpen, sourceUrl }) {
 	const style = {
 		position: "absolute",
 		top: "50%",
@@ -34,11 +34,11 @@ export function StyledModal({ title, description, open, setOpen, copyLink }) {
 	}
 
 	const handleCopyToClipboard = () => {
-		navigator.clipboard.writeText(copyLink)
+		navigator.clipboard.writeText(sourceUrl)
 	}
 
 	const handleOpenLink = () => {
-		window.open(copyLink, "_blank", "noopener,noreferrer")
+		window.open(sourceUrl, "_blank", "noopener,noreferrer")
 	}
 
 	return (
@@ -50,36 +50,42 @@ export function StyledModal({ title, description, open, setOpen, copyLink }) {
 							<Box display="flex" justifyContent="left" alignItems="center" sx={{ flexGrow: 1 }}>
 								<h2>{title}</h2>
 							</Box>
-							<IconButton
-								size="large"
-								edge="start"
-								color="inherit"
-								aria-label="menu"
-								sx={{ mr: 2 }}
-								onClick={handleCopyToClipboard}
-							>
-								<ContentCopy />
-							</IconButton>
-							<IconButton
-								size="large"
-								edge="start"
-								color="inherit"
-								aria-label="menu"
-								sx={{ mr: 2 }}
-								onClick={handleOpenLink}
-							>
-								<OpenInNew />
-							</IconButton>
-							<IconButton
-								size="large"
-								edge="start"
-								color="inherit"
-								aria-label="menu"
-								sx={{ mr: 2 }}
-								onClick={handleClose}
-							>
-								<Close />
-							</IconButton>
+							<Tooltip title="Copy Link">
+								<IconButton
+									size="large"
+									edge="start"
+									color="inherit"
+									aria-label="menu"
+									sx={{ mr: 2 }}
+									onClick={handleCopyToClipboard}
+								>
+									<ContentCopy />
+								</IconButton>
+							</Tooltip>
+							<Tooltip title="View in Source">
+								<IconButton
+									size="large"
+									edge="start"
+									color="inherit"
+									aria-label="menu"
+									sx={{ mr: 2 }}
+									onClick={handleOpenLink}
+								>
+									<OpenInNew />
+								</IconButton>
+							</Tooltip>
+							<Tooltip title="Close">
+								<IconButton
+									size="large"
+									edge="start"
+									color="inherit"
+									aria-label="menu"
+									sx={{ mr: 2 }}
+									onClick={handleClose}
+								>
+									<Close />
+								</IconButton>
+							</Tooltip>
 						</Toolbar>
 					</AppBar>
 					<Box

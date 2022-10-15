@@ -61,7 +61,7 @@ function LocalNews() {
 					setOpen={setModalOpen}
 					title={modalTitle}
 					description={modalDescription}
-					copyLink={modalLink}
+					sourceUrl={modalLink}
 				/>
 				<DataGrid
 					rows={latestPosts}
