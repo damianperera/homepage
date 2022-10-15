@@ -38,6 +38,11 @@ function SearchEngineBar() {
 								border: 0,
 							},
 						},
+						"& .MuiInputBase-root": {
+							"& > fieldset": {
+								border: "0 !important",
+							},
+						},
 					}}
 					InputProps={{
 						startAdornment: (
