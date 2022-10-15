@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ContentCopy, OpenInNew } from "@mui/icons-material"
+import { ContentCopy, OpenInNew, Close } from "@mui/icons-material"
 import { AppBar, Box, Modal, IconButton, Toolbar } from "@mui/material"
 
 export function StyledModal({ title, description, open, setOpen, copyLink }) {
@@ -69,6 +69,16 @@ export function StyledModal({ title, description, open, setOpen, copyLink }) {
 								onClick={handleOpenLink}
 							>
 								<OpenInNew />
+							</IconButton>
+							<IconButton
+								size="large"
+								edge="start"
+								color="inherit"
+								aria-label="menu"
+								sx={{ mr: 2 }}
+								onClick={handleClose}
+							>
+								<Close />
 							</IconButton>
 						</Toolbar>
 					</AppBar>
