@@ -8,6 +8,7 @@ import {
 	CardContent,
 	CardActions,
 	Typography,
+	Tooltip,
 } from "@mui/material"
 import { Stack } from "@mui/system"
 
@@ -68,15 +69,21 @@ export function StyledModal({ title, description, open, setOpen, sourceUrl, feat
 								sx={{ position: "absolute", top: 0, right: 0 }}
 							>
 								<CardActions sx={{ paddingLeft: "2%", paddingBottom: "1.5%" }}>
-									<IconButton size="small" onClick={handleCopyToClipboard}>
-										<ContentCopy />
-									</IconButton>
-									<IconButton size="small" onClick={handleOpenLink}>
-										<OpenInNew />
-									</IconButton>
-									<IconButton size="small" onClick={handleClose}>
-										<Close />
-									</IconButton>
+									<Tooltip title="Copy Link">
+										<IconButton size="small" onClick={handleCopyToClipboard}>
+											<ContentCopy />
+										</IconButton>
+									</Tooltip>
+									<Tooltip title="Open in Source">
+										<IconButton size="small" onClick={handleOpenLink}>
+											<OpenInNew />
+										</IconButton>
+									</Tooltip>
+									<Tooltip title="Close">
+										<IconButton size="small" onClick={handleClose}>
+											<Close />
+										</IconButton>
+									</Tooltip>
 								</CardActions>
 							</Stack>
 						</div>
@@ -84,15 +91,21 @@ export function StyledModal({ title, description, open, setOpen, sourceUrl, feat
 					{!featuredImageUrl && (
 						<Stack direction="row" alignItems="right" justifyContent="right" gap={1}>
 							<CardActions sx={{ paddingLeft: "2%", paddingBottom: "1.5%" }}>
-								<IconButton size="small" onClick={handleCopyToClipboard}>
-									<ContentCopy color="secondary" />
-								</IconButton>
-								<IconButton size="small" onClick={handleOpenLink}>
-									<OpenInNew color="secondary" />
-								</IconButton>
-								<IconButton size="small" onClick={handleClose}>
-									<Close color="secondary" />
-								</IconButton>
+								<Tooltip title="Copy Link">
+									<IconButton size="small" onClick={handleCopyToClipboard}>
+										<ContentCopy color="secondary" />
+									</IconButton>
+								</Tooltip>
+								<Tooltip title="Open in Source">
+									<IconButton size="small" onClick={handleOpenLink}>
+										<OpenInNew color="secondary" />
+									</IconButton>
+								</Tooltip>
+								<Tooltip title="Close">
+									<IconButton size="small" onClick={handleClose}>
+										<Close color="secondary" />
+									</IconButton>
+								</Tooltip>
 							</CardActions>
 						</Stack>
 					)}
