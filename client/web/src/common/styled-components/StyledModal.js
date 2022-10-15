@@ -1,8 +1,7 @@
-import * as React from "react"
-import Box from "@mui/material/Box"
-import Modal from "@mui/material/Modal"
+import { ContentCopy, OpenInNew } from "@mui/icons-material"
+import { AppBar, Box, Modal, IconButton, Toolbar } from "@mui/material"
 
-export function StyledModal({ title, description, open, setOpen }) {
+export function StyledModal({ title, description, open, setOpen, copyLink }) {
 	const style = {
 		position: "absolute",
 		top: "50%",
@@ -15,7 +14,6 @@ export function StyledModal({ title, description, open, setOpen }) {
 		pt: 2,
 		px: 4,
 		pb: 3,
-		overflowY: "scroll",
 		"& a": {
 			textDecoration: "none",
 			color: "white",
@@ -34,12 +32,58 @@ export function StyledModal({ title, description, open, setOpen }) {
 		setOpen(false)
 	}
 
+	const handleCopyToClipboard = () => {
+		navigator.clipboard.writeText(copyLink)
+	}
+
+	const handleOpenLink = () => {
+		window.open(copyLink, "_blank", "noopener,noreferrer")
+	}
+
 	return (
 		<div>
 			<Modal open={open} onClose={handleClose}>
 				<Box sx={{ ...style, width: "90%", height: "90%" }}>
-					<h2>{title}</h2>
-					{description}
+					<AppBar>
+						<Toolbar sx={{ height: "10vh" }}>
+							<Box display="flex" justifyContent="left" alignItems="center" sx={{ flexGrow: 1 }}>
+								<h2>{title}</h2>
+							</Box>
+							<IconButton
+								size="large"
+								edge="start"
+								color="inherit"
+								aria-label="menu"
+								sx={{ mr: 2 }}
+								onClick={handleCopyToClipboard}
+							>
+								<ContentCopy />
+							</IconButton>
+							<IconButton
+								size="large"
+								edge="start"
+								color="inherit"
+								aria-label="menu"
+								sx={{ mr: 2 }}
+								onClick={handleOpenLink}
+							>
+								<OpenInNew />
+							</IconButton>
+						</Toolbar>
+					</AppBar>
+					<Box
+						sx={{
+							paddingTop: "7%",
+							overflowY: "scroll",
+							display: "flex",
+							flexGrow: 1,
+							flexDirection: "column",
+							maxHeight: "100%",
+							position: "relative",
+						}}
+					>
+						{description}
+					</Box>
 				</Box>
 			</Modal>
 		</div>

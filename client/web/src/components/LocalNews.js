@@ -10,6 +10,7 @@ function LocalNews() {
 	const [modalOpen, setModalOpen] = React.useState(false)
 	const [modalTitle, setModalTitle] = React.useState()
 	const [modalDescription, setModalDescription] = React.useState()
+	const [modalLink, setModalLink] = React.useState()
 
 	React.useEffect(() => {
 		const topStoriesURL = "https://www.thelocal.de/wp-json/wp/v2/posts?per_page=50"
@@ -22,7 +23,7 @@ function LocalNews() {
 					record.description = parse(record.content.rendered)
 					return record
 				})
-
+				console.log(formattedResponse)
 				setLatestPostsGridLoading(false)
 				setLatestPosts(formattedResponse)
 			} catch (error) {
@@ -45,6 +46,7 @@ function LocalNews() {
 	const handlePostClick = (record) => {
 		setModalTitle(record.row.title)
 		setModalDescription(record.row.description)
+		setModalLink(record.row.guid.rendered)
 		setModalOpen(true)
 	}
 
@@ -60,6 +62,7 @@ function LocalNews() {
 					setOpen={setModalOpen}
 					title={modalTitle}
 					description={modalDescription}
+					copyLink={modalLink}
 				/>
 				<DataGrid
 					rows={latestPosts}
