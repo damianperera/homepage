@@ -21,7 +21,7 @@ export function StyledModal({ title, description, open, setOpen, sourceUrl, feat
 		boxShadow: 24,
 		"& a": {
 			textDecoration: "none",
-			color: "white",
+			color: "#ce93d8",
 		},
 		".ml-manual-widget-container": {
 			display: "none",
@@ -30,6 +30,14 @@ export function StyledModal({ title, description, open, setOpen, sourceUrl, feat
 		".thelocal-here-be-magic": {
 			display: "none",
 			visibility: "hidden",
+		},
+		".MuiTypography-root img": {
+			width: "100%",
+			objectFit: "cover",
+		},
+		".post-thumbnail-credit": {
+			fontStyle: "italic",
+			fontSize: 12,
 		},
 	}
 
