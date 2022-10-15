@@ -49,28 +49,53 @@ export function StyledModal({ title, description, open, setOpen, sourceUrl, feat
 		<div>
 			<Modal open={open} onClose={handleClose}>
 				<Card sx={{ maxWidth: "70%", maxHeight: "90%", ...style }}>
-					{featuredImageUrl && <CardMedia component="img" height="200" image={featuredImageUrl} />}
-					<Stack direction="row" alignItems="left" justifyContent="left" gap={1}>
-						<CardActions sx={{ paddingLeft: "2%", paddingBottom: "1.5%" }}>
-							<IconButton size="small" onClick={handleCopyToClipboard}>
-								<ContentCopy color="secondary" />
-							</IconButton>
-							<IconButton size="small" onClick={handleOpenLink}>
-								<OpenInNew color="secondary" />
-							</IconButton>
-							<IconButton size="small" onClick={handleClose}>
-								<Close color="secondary" />
-							</IconButton>
-						</CardActions>
-					</Stack>
-					<CardContent sx={{ marginTop: "-3%" }}>
+					{featuredImageUrl && (
+						<div>
+							<CardMedia component="img" height="200" image={featuredImageUrl} />
+							<Stack
+								direction="row"
+								alignItems="left"
+								justifyContent="left"
+								gap={1}
+								sx={{ position: "absolute", top: 0, right: 0 }}
+							>
+								<CardActions sx={{ paddingLeft: "2%", paddingBottom: "1.5%" }}>
+									<IconButton size="small" onClick={handleCopyToClipboard}>
+										<ContentCopy />
+									</IconButton>
+									<IconButton size="small" onClick={handleOpenLink}>
+										<OpenInNew />
+									</IconButton>
+									<IconButton size="small" onClick={handleClose}>
+										<Close />
+									</IconButton>
+								</CardActions>
+							</Stack>
+						</div>
+					)}
+					{!featuredImageUrl && (
+						<Stack direction="row" alignItems="right" justifyContent="right" gap={1}>
+							<CardActions sx={{ paddingLeft: "2%", paddingBottom: "1.5%" }}>
+								<IconButton size="small" onClick={handleCopyToClipboard}>
+									<ContentCopy color="secondary" />
+								</IconButton>
+								<IconButton size="small" onClick={handleOpenLink}>
+									<OpenInNew color="secondary" />
+								</IconButton>
+								<IconButton size="small" onClick={handleClose}>
+									<Close color="secondary" />
+								</IconButton>
+							</CardActions>
+						</Stack>
+					)}
+					<CardContent>
 						<Typography gutterBottom variant="h5" component="div">
 							{title}
 						</Typography>
 						<Typography
 							variant="body1"
 							color="text.secondary"
-							sx={{ position: "static", overflowY: "scroll", height: 500 }}
+							sx={{ position: "static", overflowY: "scroll", maxHeight: 600 }}
 						>
 							{description}
 						</Typography>
