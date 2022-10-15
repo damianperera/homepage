@@ -2,7 +2,7 @@ import * as React from "react"
 import { ContentCopy, OpenInNew, Close } from "@mui/icons-material"
 import { AppBar, Box, Modal, IconButton, Toolbar, Tooltip } from "@mui/material"
 
-export function StyledModal({ title, description, open, setOpen, sourceUrl }) {
+export function StyledModal({ title, description, open, setOpen, sourceUrl, featuredImageUrl }) {
 	const style = {
 		position: "absolute",
 		top: "50%",
@@ -99,6 +99,7 @@ export function StyledModal({ title, description, open, setOpen, sourceUrl }) {
 							position: "relative",
 						}}
 					>
+						{featuredImageUrl && <img src={featuredImageUrl} alt="" loading="lazy"></img>}
 						{description}
 					</Box>
 				</Box>

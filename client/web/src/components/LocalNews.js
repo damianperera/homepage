@@ -11,6 +11,7 @@ function LocalNews() {
 	const [modalTitle, setModalTitle] = React.useState()
 	const [modalDescription, setModalDescription] = React.useState()
 	const [modalLink, setModalLink] = React.useState()
+	const [modalImage, setModalImage] = React.useState()
 
 	React.useEffect(() => {
 		const topStoriesURL = "https://www.thelocal.de/wp-json/wp/v2/posts?per_page=50"
@@ -42,10 +43,21 @@ function LocalNews() {
 		},
 	]
 
-	const handlePostClick = (record) => {
+	const handlePostClick = async (record) => {
+		const mediaUrl = record.row["_links"]["wp:attachment"][0].href
+		const media = await (await fetch(mediaUrl)).json()
+
+		if (Array.isArray(media) && media.length > 0) {
+			const imageUrl = media[0].guid.rendered
+			setModalImage(imageUrl)
+		} else {
+			setModalImage(null)
+		}
+
 		setModalTitle(record.row.title)
 		setModalDescription(record.row.description)
 		setModalLink(record.row.guid.rendered)
+
 		setModalOpen(true)
 	}
 
@@ -62,6 +74,7 @@ function LocalNews() {
 					title={modalTitle}
 					description={modalDescription}
 					sourceUrl={modalLink}
+					featuredImageUrl={modalImage}
 				/>
 				<DataGrid
 					rows={latestPosts}
