@@ -1,3 +1,4 @@
+import * as React from "react"
 import { Stack, CircularProgress } from "@mui/material"
 
 function Weather() {
