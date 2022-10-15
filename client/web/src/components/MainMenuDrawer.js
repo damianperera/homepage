@@ -10,7 +10,7 @@ import {
 } from "@mui/material"
 
 function MainMenuDrawer({ isOpen, onChange }) {
-	const licenseURL = "https://github.com/damianperera/homepage/blob/main/LICENSE.md"
+	const licenseURL = "https://github.com/damianperera/homepage/blob/main/LICENSE"
 	const repositoryURL = "https://github.com/damianperera/homepage"
 	const deployStatus =
 		"https://img.shields.io/github/workflow/status/damianperera/homepage/deploy?style=flat-square"
