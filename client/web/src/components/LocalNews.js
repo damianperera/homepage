@@ -23,7 +23,6 @@ function LocalNews() {
 					record.description = parse(record.content.rendered)
 					return record
 				})
-				console.log(formattedResponse)
 				setLatestPostsGridLoading(false)
 				setLatestPosts(formattedResponse)
 			} catch (error) {
