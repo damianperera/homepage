@@ -58,11 +58,6 @@ function HackerNewsTopStories() {
 					hideFooter
 					loading={topStoriesGridLoading}
 					disableColumnSelector
-					sx={{
-						"& .MuiDataGrid-virtualScroller": {
-							height: 650,
-						},
-					}}
 				/>
 			</Box>
 		</Item>
