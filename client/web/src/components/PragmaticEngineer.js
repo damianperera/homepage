@@ -31,7 +31,9 @@ function PragmaticEngineer() {
 				setLatestPostsGridLoading(false)
 				setLatestPosts(formattedResponse)
 			} catch (error) {
-				console.error("Network Error", error)
+				console.error(
+					"Network error trying to load Local News - please refresh the page to try again"
+				)
 			}
 		}
 

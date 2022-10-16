@@ -27,7 +27,9 @@ function HackerNewsTopStories() {
 				setTopStoriesGridLoading(false)
 				setTopStories(updatedStories)
 			} catch (error) {
-				console.error("Network Error", error)
+				console.error(
+					"Network error trying to load Hacker News - please refresh the page to try again"
+				)
 			}
 		}
 
@@ -51,7 +53,7 @@ function HackerNewsTopStories() {
 		<Item>
 			<Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
 				<Public />
-				<h3>HackerNews Top Stories</h3>
+				<h3>Hacker News</h3>
 			</Stack>
 			<Box sx={{ height: 670, width: "100%", flex: 1, display: "flex" }}>
 				<DataGrid
