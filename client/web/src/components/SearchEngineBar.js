@@ -23,7 +23,10 @@ function SearchEngineBar() {
 
 	return (
 		<form action={searchEngine}>
-			<FormControl variant="standard">
+			<FormControl
+				variant="standard"
+				sx={{ border: "1px solid rgba(81, 81, 81, 1)", borderRadius: "4px" }}
+			>
 				<TextField
 					autoFocus
 					name="q"
