@@ -19,7 +19,6 @@ function PragmaticEngineer() {
 		const fetchData = async () => {
 			try {
 				const response = await (await fetch(topStoriesURL)).json()
-				console.log(response)
 				const formattedResponse = response.items.map((record) => {
 					record.id = crypto.randomUUID()
 					record.content = parse(record.content_html)
