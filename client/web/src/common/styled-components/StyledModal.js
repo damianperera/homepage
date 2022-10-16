@@ -138,7 +138,14 @@ export function StyledModal({
 						<Typography
 							variant="body1"
 							color="text.secondary"
-							sx={{ position: "static", overflowY: "scroll", ...contentHeight }}
+							sx={{
+								position: "static",
+								overflowY: "scroll",
+								...contentHeight,
+								"::-webkit-scrollbar": { display: "none" },
+								"-ms-overflow-style": "none",
+								scrollbarWidth: "none",
+							}}
 							paragraph={false}
 							children={description}
 							align="justify"
