@@ -22,17 +22,23 @@ function LocalNews() {
 		const defaultCountryCode = "com"
 
 		const fetchData = async () => {
+			var geoData = {}
+
 			try {
-				const geoData = await (await fetch(geolocationUrl)).json()
+				geoData = await (await fetch(geolocationUrl)).json()
 				geoData.countryCode = geoData.countryCode.toLowerCase()
+			} catch (error) {
+				console.error("Network Error trying to fetch GeoIP", error)
+			}
 
-				var countryCode = defaultCountryCode
+			var countryCode = defaultCountryCode
 
-				if (supportedCountryCodes.includes(geoData.countryCode)) {
-					countryCode = geoData.countryCode
-					setCountry(geoData.country)
-				}
+			if (supportedCountryCodes.includes(geoData.countryCode)) {
+				countryCode = geoData.countryCode
+				setCountry(geoData.country)
+			}
 
+			try {
 				const response = await (await fetch(getStoriesUrl(countryCode))).json()
 				const formattedResponse = response.map((record) => {
 					record.description = parse(record.content.rendered)
@@ -45,7 +51,7 @@ function LocalNews() {
 				setLatestPostsGridLoading(false)
 				setLatestPosts(formattedResponse)
 			} catch (error) {
-				console.error("Network Error", error)
+				console.error("Network Error trying to load Local News", error)
 			}
 		}
 
