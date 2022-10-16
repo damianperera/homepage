@@ -5,7 +5,7 @@ export const StyledDataGrid = styled(DataGrid)(() => ({
 	"& .MuiDataGrid-columnHeaders": { display: "none" },
 	"& .MuiDataGrid-virtualScroller": {
 		marginTop: "0 !important",
-		height: "650px !important",
+		height: "670px !important",
 		msOverflowStyle: "none",
 		scrollbarWidth: "none",
 	},

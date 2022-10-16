@@ -63,7 +63,7 @@ function PragmaticEngineer() {
 				<Engineering />
 				<h3>The Pragmatic Engineer</h3>
 			</Stack>
-			<Box sx={{ height: 650, width: "100%", flex: 1, display: "flex" }}>
+			<Box sx={{ height: 670, width: "100%", flex: 1, display: "flex" }}>
 				<Modal
 					open={modalOpen}
 					setOpen={setModalOpen}
@@ -79,11 +79,6 @@ function PragmaticEngineer() {
 					hideFooter
 					loading={latestPostsGridLoading}
 					disableColumnSelector
-					sx={{
-						"& .MuiDataGrid-virtualScroller": {
-							height: 650,
-						},
-					}}
 				/>
 			</Box>
 		</Item>

@@ -75,7 +75,7 @@ function LocalNews() {
 				<Newspaper />
 				<h3>The Local DE</h3>
 			</Stack>
-			<Box sx={{ height: 650, width: "100%", flex: 1, display: "flex" }}>
+			<Box sx={{ height: 670, width: "100%", flex: 1, display: "flex" }}>
 				<Modal
 					open={modalOpen}
 					setOpen={setModalOpen}
@@ -91,11 +91,6 @@ function LocalNews() {
 					hideFooter
 					loading={latestPostsGridLoading}
 					disableColumnSelector
-					sx={{
-						"& .MuiDataGrid-virtualScroller": {
-							height: 650,
-						},
-					}}
 				/>
 			</Box>
 		</Item>

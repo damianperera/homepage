@@ -50,7 +50,7 @@ function HackerNewsTopStories() {
 				<Public />
 				<h3>HackerNews Top Stories</h3>
 			</Stack>
-			<Box sx={{ height: 650, width: "100%", flex: 1, display: "flex" }}>
+			<Box sx={{ height: 670, width: "100%", flex: 1, display: "flex" }}>
 				<DataGrid
 					rows={topStories}
 					columns={topStoriesColumns}
