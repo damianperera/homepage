@@ -63,8 +63,6 @@ function SearchEngineBar() {
 												border: 0,
 											},
 										},
-										marginLeft: -2,
-										marginRight: 2,
 										width: "19vh",
 									}}
 								>
