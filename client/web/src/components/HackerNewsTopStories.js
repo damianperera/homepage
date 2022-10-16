@@ -1,11 +1,12 @@
 import * as React from "react"
 import { Public } from "@mui/icons-material"
 import { Box, Stack } from "@mui/material"
-import { Item, DataGrid } from "../common"
+import { Item, DataGrid, AppContext } from "../common"
 
 function HackerNewsTopStories() {
 	const [topStories, setTopStories] = React.useState([])
 	const [topStoriesGridLoading, setTopStoriesGridLoading] = React.useState(true)
+	const [dataLoad] = React.useContext(AppContext)
 
 	React.useEffect(() => {
 		const topStoriesURL = "https://hacker-news.firebaseio.com/v0/topstories.json"
@@ -31,7 +32,7 @@ function HackerNewsTopStories() {
 		}
 
 		fetchData()
-	}, [])
+	}, [dataLoad])
 
 	const topStoriesColumns = [
 		{

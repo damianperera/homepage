@@ -32,6 +32,7 @@ import * as React from "react"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
 import { Box, CssBaseline, Grid } from "@mui/material"
 import { Header, Weather, PragmaticEngineer, HackerNewsTopStories, LocalNews } from "./components"
+import { AppContext } from "./common"
 
 function App() {
 	const darkTheme = createTheme({
@@ -40,29 +41,33 @@ function App() {
 		},
 	})
 
+	const [dataLoad, setDataLoad] = React.useState(false)
+
 	return (
-		<ThemeProvider theme={darkTheme}>
-			<CssBaseline />
-			<Header />
-			<Box sx={{ flexGrow: 1, padding: 2 }}>
-				<Grid container spacing={2} columns={12}>
-					<Grid item xs={12}>
-						<Box sx={{ height: 100 }}>
-							<Weather />
-						</Box>
+		<AppContext.Provider value={[dataLoad, setDataLoad]}>
+			<ThemeProvider theme={darkTheme}>
+				<CssBaseline />
+				<Header />
+				<Box sx={{ flexGrow: 1, padding: 2 }}>
+					<Grid container spacing={2} columns={12}>
+						<Grid item xs={12}>
+							<Box sx={{ height: 100 }}>
+								<Weather />
+							</Box>
+						</Grid>
+						<Grid item xs={4}>
+							<PragmaticEngineer />
+						</Grid>
+						<Grid item xs={4}>
+							<HackerNewsTopStories />
+						</Grid>
+						<Grid item xs={4}>
+							<LocalNews />
+						</Grid>
 					</Grid>
-					<Grid item xs={4}>
-						<PragmaticEngineer />
-					</Grid>
-					<Grid item xs={4}>
-						<HackerNewsTopStories />
-					</Grid>
-					<Grid item xs={4}>
-						<LocalNews />
-					</Grid>
-				</Grid>
-			</Box>
-		</ThemeProvider>
+				</Box>
+			</ThemeProvider>
+		</AppContext.Provider>
 	)
 }
 

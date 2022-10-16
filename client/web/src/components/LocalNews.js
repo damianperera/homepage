@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Newspaper } from "@mui/icons-material"
 import { Box, Stack, Tooltip } from "@mui/material"
-import { Item, DataGrid, Modal } from "../common"
+import { Item, DataGrid, Modal, AppContext } from "../common"
 import parse from "html-react-parser"
 
 function LocalNews() {
@@ -15,6 +15,8 @@ function LocalNews() {
 	const [modalLink, setModalLink] = React.useState()
 	const [modalImage, setModalImage] = React.useState()
 	const [country, setCountry] = React.useState(defaultCountry)
+
+	const [dataLoad] = React.useContext(AppContext)
 
 	React.useEffect(() => {
 		const geolocationUrl = "http://ip-api.com/json/?fields=country,countryCode"
@@ -60,7 +62,7 @@ function LocalNews() {
 		}
 
 		fetchData()
-	}, [])
+	}, [dataLoad])
 
 	const getStoriesUrl = (domainCode) => {
 		return `https://www.thelocal.${domainCode}/wp-json/wp/v2/posts?per_page=50&orderby=date&order=desc`
@@ -101,7 +103,9 @@ function LocalNews() {
 		<Item>
 			<Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
 				<Newspaper />
-				<h3>Local News - {country}</h3>
+				<h3>
+					Local News - {country} - {dataLoad.toString()}
+				</h3>
 			</Stack>
 			<Box sx={{ height: 670, width: "100%", flex: 1, display: "flex" }}>
 				<Modal

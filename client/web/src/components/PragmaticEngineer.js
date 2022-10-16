@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Engineering } from "@mui/icons-material"
 import { Box, Stack, Tooltip } from "@mui/material"
-import { Item, DataGrid, Modal } from "../common"
+import { Item, DataGrid, Modal, AppContext } from "../common"
 import parse from "html-react-parser"
 
 function PragmaticEngineer() {
@@ -11,6 +11,7 @@ function PragmaticEngineer() {
 	const [modalTitle, setModalTitle] = React.useState()
 	const [modalDescription, setModalDescription] = React.useState()
 	const [modalLink, setModalLink] = React.useState()
+	const [dataLoad] = React.useContext(AppContext)
 
 	React.useEffect(() => {
 		const topStoriesURL =
@@ -35,7 +36,7 @@ function PragmaticEngineer() {
 		}
 
 		fetchData()
-	}, [])
+	}, [dataLoad])
 
 	const topStoriesColumns = [
 		{
