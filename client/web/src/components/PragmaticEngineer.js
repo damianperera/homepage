@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Newspaper } from "@mui/icons-material"
+import { Engineering } from "@mui/icons-material"
 import { Box, Stack } from "@mui/material"
 import { Item, DataGrid, Modal } from "../common"
 import parse from "html-react-parser"
@@ -56,7 +56,7 @@ function PragmaticEngineer() {
 	return (
 		<Item>
 			<Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
-				<Newspaper />
+				<Engineering />
 				<h3>The Pragmatic Engineer</h3>
 			</Stack>
 			<Box sx={{ height: 650, width: "100%", flex: 1, display: "flex" }}>
