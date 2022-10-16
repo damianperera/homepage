@@ -61,7 +61,7 @@ function LocalNews() {
 	}, [])
 
 	const getStoriesUrl = (domainCode) => {
-		return `https://www.thelocal.${domainCode}/wp-json/wp/v2/posts?per_page=50`
+		return `https://www.thelocal.${domainCode}/wp-json/wp/v2/posts?per_page=50&orderby=date&order=desc`
 	}
 
 	const topStoriesColumns = [
