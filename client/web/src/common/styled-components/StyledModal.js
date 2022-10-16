@@ -111,7 +111,12 @@ export function StyledModal({
 						</div>
 					)}
 					<CardContent>
-						<Typography gutterBottom variant="h5" component="div">
+						<Typography
+							gutterBottom
+							variant="h5"
+							component="div"
+							sx={{ borderBottom: "1px solid rgba(81, 81, 81, 1)", paddingBottom: 1 }}
+						>
 							{featuredImageUrl && title}
 							{!featuredImageUrl && (
 								<Stack direction="row" alignItems="center" justifyContent="space-between">
