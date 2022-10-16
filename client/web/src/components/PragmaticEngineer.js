@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Engineering } from "@mui/icons-material"
-import { Box, Stack } from "@mui/material"
+import { Box, Stack, Tooltip } from "@mui/material"
 import { Item, DataGrid, Modal } from "../common"
 import parse from "html-react-parser"
 
@@ -23,6 +23,7 @@ function PragmaticEngineer() {
 				const formattedResponse = response.items.map((record) => {
 					record.id = crypto.randomUUID()
 					record.content = parse(record.content_html)
+					record.gridRow = { title: record.title, summary: parse(record.summary) }
 					return record
 				})
 				setLatestPostsGridLoading(false)
@@ -37,10 +38,15 @@ function PragmaticEngineer() {
 
 	const topStoriesColumns = [
 		{
-			field: "title",
+			field: "gridRow",
 			headerName: "Title",
 			width: "530",
 			editable: false,
+			renderCell: (params) => (
+				<Tooltip title={params.row.summary}>
+					<span className="table-cell-trucate">{params.row.title}</span>
+				</Tooltip>
+			),
 		},
 	]
 
