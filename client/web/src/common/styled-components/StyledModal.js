@@ -12,7 +12,15 @@ import {
 } from "@mui/material"
 import { Stack } from "@mui/system"
 
-export function StyledModal({ title, description, open, setOpen, sourceUrl, featuredImageUrl }) {
+export function StyledModal({
+	title,
+	description,
+	open,
+	setOpen,
+	sourceUrl,
+	featuredImageUrl,
+	actionButtonColor,
+}) {
 	const style = {
 		position: "absolute",
 		top: "50%",
@@ -72,17 +80,21 @@ export function StyledModal({ title, description, open, setOpen, sourceUrl, feat
 								<CardActions sx={{ paddingLeft: "2%", paddingBottom: "1.5%" }}>
 									<Tooltip title="Copy Link">
 										<IconButton size="small" onClick={handleCopyToClipboard}>
-											<ContentCopy />
+											{actionButtonColor ? (
+												<ContentCopy color={actionButtonColor} />
+											) : (
+												<ContentCopy />
+											)}
 										</IconButton>
 									</Tooltip>
 									<Tooltip title="Open in Source">
 										<IconButton size="small" onClick={handleOpenLink}>
-											<OpenInNew />
+											{actionButtonColor ? <OpenInNew color={actionButtonColor} /> : <OpenInNew />}
 										</IconButton>
 									</Tooltip>
 									<Tooltip title="Close">
 										<IconButton size="small" onClick={handleClose}>
-											<Close />
+											{actionButtonColor ? <Close color={actionButtonColor} /> : <Close />}
 										</IconButton>
 									</Tooltip>
 								</CardActions>

@@ -67,7 +67,7 @@ function PragmaticEngineer() {
 					description={modalDescription}
 					sourceUrl={modalLink}
 					featuredImageUrl={modalImage}
-					actionButtonColor="disabled"
+					actionButtonColor="success"
 				/>
 				<DataGrid
 					rows={latestPosts}
