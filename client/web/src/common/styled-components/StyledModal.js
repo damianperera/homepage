@@ -131,16 +131,13 @@ export function StyledModal({
 						<Typography gutterBottom variant="h5" component="div">
 							{title}
 						</Typography>
-						<div
-							style={{
-								color: "rgba(255, 255, 255, 0.7)",
-								position: "static",
-								overflowY: "scroll",
-								...contentHeight,
-							}}
+						<Typography
+							variant="body1"
+							color="text.secondary"
+							sx={{ position: "static", overflowY: "scroll", ...contentHeight }}
 						>
 							{description}
-						</div>
+						</Typography>
 					</CardContent>
 				</Card>
 			</Modal>
