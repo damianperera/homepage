@@ -5,9 +5,6 @@ import { Item, DataGrid, Modal } from "../common"
 import parse from "html-react-parser"
 
 function LocalNews() {
-	const geolocationUrl = "http://ip-api.com/json/?fields=country,countryCode"
-	const supportedCountryCodes = ["de", "at", "dk", "fr", "it", "no", "es", "se", "ch"]
-	const defaultCountryCode = "com"
 	const defaultCountry = "Europe"
 
 	const [latestPosts, setLatestPosts] = React.useState([])
@@ -20,6 +17,10 @@ function LocalNews() {
 	const [country, setCountry] = React.useState(defaultCountry)
 
 	React.useEffect(() => {
+		const geolocationUrl = "http://ip-api.com/json/?fields=country,countryCode"
+		const supportedCountryCodes = ["de", "at", "dk", "fr", "it", "no", "es", "se", "ch"]
+		const defaultCountryCode = "com"
+
 		const fetchData = async () => {
 			try {
 				const geoData = await (await fetch(geolocationUrl)).json()
