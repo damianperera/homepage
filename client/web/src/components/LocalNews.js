@@ -21,6 +21,8 @@ function LocalNews() {
 		const supportedCountryCodes = ["de", "at", "dk", "fr", "it", "no", "es", "se", "ch"]
 		const defaultCountryCode = "com"
 
+		setLatestPostsGridLoading(true)
+
 		const fetchData = async () => {
 			var geoData = {}
 

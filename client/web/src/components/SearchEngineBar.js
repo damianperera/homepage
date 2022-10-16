@@ -9,6 +9,7 @@ import {
 	InputAdornment,
 	Select,
 } from "@mui/material"
+import Mousetrap from "mousetrap"
 
 function SearchEngineBar() {
 	const googleSearchURL = "https://www.google.com/search"
@@ -20,6 +21,10 @@ function SearchEngineBar() {
 	const handleSearchEngineChange = (event) => {
 		setSearchEngine(event.target.value)
 	}
+
+	Mousetrap.bind("shift+g", () => setSearchEngine(googleSearchURL))
+	Mousetrap.bind("shift+s", () => setSearchEngine(stackOverflowSearchURL))
+	Mousetrap.bind("shift+d", () => setSearchEngine(duckDuckGoSearchURL))
 
 	return (
 		<form action={searchEngine}>

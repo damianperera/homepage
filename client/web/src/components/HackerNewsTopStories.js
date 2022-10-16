@@ -11,6 +11,8 @@ function HackerNewsTopStories() {
 		const topStoriesURL = "https://hacker-news.firebaseio.com/v0/topstories.json"
 		const itemStoryURL = "https://hacker-news.firebaseio.com/v0/item"
 
+		setTopStoriesGridLoading(true)
+
 		const fetchData = async () => {
 			try {
 				const response = await (await fetch(topStoriesURL)).json()

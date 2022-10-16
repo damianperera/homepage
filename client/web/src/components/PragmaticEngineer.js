@@ -16,6 +16,8 @@ function PragmaticEngineer() {
 		const topStoriesURL =
 			"https://damianperera.github.io/homepage/static/data/pragmaticEngineer.json"
 
+		setLatestPostsGridLoading(true)
+
 		const fetchData = async () => {
 			try {
 				const response = await (await fetch(topStoriesURL)).json()
