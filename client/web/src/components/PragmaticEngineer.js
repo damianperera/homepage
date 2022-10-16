@@ -15,7 +15,7 @@ function PragmaticEngineer() {
 
 	React.useEffect(() => {
 		const topStoriesURL =
-			"https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnewsletter.pragmaticengineer.com%2Ffeed"
+			"https://www.toptal.com/developers/feed2json/convert?url=https://newsletter.pragmaticengineer.com/feed"
 
 		const fetchData = async () => {
 			try {
