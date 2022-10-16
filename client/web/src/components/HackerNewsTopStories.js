@@ -35,7 +35,7 @@ function HackerNewsTopStories() {
 		{
 			field: "title",
 			headerName: "Title",
-			width: "530",
+			flex: 1,
 			editable: false,
 		},
 	]

@@ -41,7 +41,7 @@ function LocalNews() {
 		{
 			field: "gridRow",
 			headerName: "Title",
-			width: "530",
+			flex: 1,
 			editable: false,
 			renderCell: (params) => (
 				<Tooltip title={params.row.gridRow.summary}>
