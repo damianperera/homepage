@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Newspaper } from "@mui/icons-material"
-import { Box, Stack } from "@mui/material"
+import { Box, Stack, Tooltip } from "@mui/material"
 import { Item, DataGrid, Modal } from "../common"
 import parse from "html-react-parser"
 
@@ -20,8 +20,11 @@ function LocalNews() {
 			try {
 				const response = await (await fetch(topStoriesURL)).json()
 				const formattedResponse = response.map((record) => {
-					record.title = parse(record.title.rendered)
 					record.description = parse(record.content.rendered)
+					record.gridRow = {
+						title: parse(record.title.rendered),
+						summary: parse(record.excerpt.rendered),
+					}
 					return record
 				})
 				setLatestPostsGridLoading(false)
@@ -36,14 +39,20 @@ function LocalNews() {
 
 	const topStoriesColumns = [
 		{
-			field: "title",
+			field: "gridRow",
 			headerName: "Title",
 			width: "530",
 			editable: false,
+			renderCell: (params) => (
+				<Tooltip title={params.row.gridRow.summary}>
+					<span className="table-cell-trucate">{params.row.gridRow.title}</span>
+				</Tooltip>
+			),
 		},
 	]
 
 	const handlePostClick = async (record) => {
+		console.log(record)
 		const mediaUrl = record.row["_links"]["wp:attachment"][0].href
 		const media = await (await fetch(mediaUrl)).json()
 
@@ -54,7 +63,7 @@ function LocalNews() {
 			setModalImage(null)
 		}
 
-		setModalTitle(record.row.title)
+		setModalTitle(record.row.gridRow.title)
 		setModalDescription(record.row.description)
 		setModalLink(record.row.guid.rendered)
 
