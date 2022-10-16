@@ -43,7 +43,7 @@ function PragmaticEngineer() {
 			editable: false,
 			renderCell: (params) => (
 				<Tooltip title={params.row.summary}>
-					<span className="table-cell-trucate">{params.row.title}</span>
+					<div className="MuiDataGrid-cellContent">{params.row.title}</div>
 				</Tooltip>
 			),
 		},

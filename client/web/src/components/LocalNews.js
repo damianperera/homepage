@@ -45,7 +45,7 @@ function LocalNews() {
 			editable: false,
 			renderCell: (params) => (
 				<Tooltip title={params.row.gridRow.summary}>
-					<span className="table-cell-trucate">{params.row.gridRow.title}</span>
+					<div className="MuiDataGrid-cellContent">{params.row.gridRow.title}</div>
 				</Tooltip>
 			),
 		},
