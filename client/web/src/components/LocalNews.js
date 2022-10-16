@@ -52,7 +52,6 @@ function LocalNews() {
 	]
 
 	const handlePostClick = async (record) => {
-		console.log(record)
 		const mediaUrl = record.row["_links"]["wp:attachment"][0].href
 		const media = await (await fetch(mediaUrl)).json()
 

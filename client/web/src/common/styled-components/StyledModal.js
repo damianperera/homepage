@@ -54,6 +54,10 @@ export function StyledModal({
 			fontStyle: "italic",
 			fontSize: 12,
 		},
+		figcaption: {
+			fontStyle: "italic",
+			fontSize: 12,
+		},
 	}
 
 	const handleClose = () => {
@@ -135,9 +139,11 @@ export function StyledModal({
 							variant="body1"
 							color="text.secondary"
 							sx={{ position: "static", overflowY: "scroll", ...contentHeight }}
-						>
-							{description}
-						</Typography>
+							paragraph={false}
+							children={description}
+							align="justify"
+							component={"div"}
+						/>
 					</CardContent>
 				</Card>
 			</Modal>
