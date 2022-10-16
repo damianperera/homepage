@@ -15,7 +15,6 @@ function LocalNews() {
 	const [modalLink, setModalLink] = React.useState()
 	const [modalImage, setModalImage] = React.useState()
 	const [country, setCountry] = React.useState(defaultCountry)
-
 	const [dataLoad] = React.useContext(AppContext)
 
 	React.useEffect(() => {
@@ -103,9 +102,7 @@ function LocalNews() {
 		<Item>
 			<Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
 				<Newspaper />
-				<h3>
-					Local News - {country} - {dataLoad.toString()}
-				</h3>
+				<h3>Local News - {country}</h3>
 			</Stack>
 			<Box sx={{ height: 670, width: "100%", flex: 1, display: "flex" }}>
 				<Modal
