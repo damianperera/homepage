@@ -34,6 +34,7 @@ export function StyledModal({ title, description, open, setOpen, sourceUrl, feat
 		},
 		".MuiTypography-root img": {
 			width: "100%",
+			height: "auto",
 			objectFit: "cover",
 		},
 		".post-thumbnail-credit": {

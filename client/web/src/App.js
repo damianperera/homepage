@@ -31,7 +31,7 @@ import "./App.css"
 import * as React from "react"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
 import { Box, CssBaseline, Grid } from "@mui/material"
-import { Header, Weather, TwitterList, HackerNewsTopStories, LocalNews } from "./components"
+import { Header, Weather, PragmaticEngineer, HackerNewsTopStories, LocalNews } from "./components"
 
 function App() {
 	const darkTheme = createTheme({
@@ -52,7 +52,7 @@ function App() {
 						</Box>
 					</Grid>
 					<Grid item xs={4}>
-						<TwitterList />
+						<PragmaticEngineer />
 					</Grid>
 					<Grid item xs={4}>
 						<HackerNewsTopStories />
