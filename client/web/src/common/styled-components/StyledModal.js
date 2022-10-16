@@ -110,30 +110,31 @@ export function StyledModal({
 							</Stack>
 						</div>
 					)}
-					{!featuredImageUrl && (
-						<Stack direction="row" alignItems="right" justifyContent="right" gap={1}>
-							<CardActions sx={{ paddingLeft: "2%", paddingBottom: "1.5%" }}>
-								<Tooltip title="Copy Link">
-									<IconButton size="small" onClick={handleCopyToClipboard}>
-										<ContentCopy color="secondary" />
-									</IconButton>
-								</Tooltip>
-								<Tooltip title="Open in Source">
-									<IconButton size="small" onClick={handleOpenLink}>
-										<OpenInNew color="secondary" />
-									</IconButton>
-								</Tooltip>
-								<Tooltip title="Close">
-									<IconButton size="small" onClick={handleClose}>
-										<Close color="secondary" />
-									</IconButton>
-								</Tooltip>
-							</CardActions>
-						</Stack>
-					)}
 					<CardContent>
 						<Typography gutterBottom variant="h5" component="div">
-							{title}
+							{featuredImageUrl && title}
+							{!featuredImageUrl && (
+								<Stack direction="row" alignItems="center" justifyContent="space-between">
+									{title}
+									<CardActions>
+										<Tooltip title="Copy Link">
+											<IconButton size="small" onClick={handleCopyToClipboard}>
+												<ContentCopy color="secondary" />
+											</IconButton>
+										</Tooltip>
+										<Tooltip title="Open in Source">
+											<IconButton size="small" onClick={handleOpenLink}>
+												<OpenInNew color="secondary" />
+											</IconButton>
+										</Tooltip>
+										<Tooltip title="Close">
+											<IconButton size="small" onClick={handleClose}>
+												<Close color="secondary" />
+											</IconButton>
+										</Tooltip>
+									</CardActions>
+								</Stack>
+							)}
 						</Typography>
 						<Typography
 							variant="body1"
