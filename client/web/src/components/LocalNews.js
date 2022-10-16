@@ -28,7 +28,7 @@ function LocalNews() {
 				geoData = await (await fetch(geolocationUrl)).json()
 				geoData.countryCode = geoData.countryCode.toLowerCase()
 			} catch (error) {
-				console.error("Network Error trying to fetch GeoIP - skipping")
+				console.error(`Network Error trying to fetch GeoIP - defaulting to ${defaultCountry}`)
 			}
 
 			var countryCode = defaultCountryCode
@@ -51,7 +51,9 @@ function LocalNews() {
 				setLatestPostsGridLoading(false)
 				setLatestPosts(formattedResponse)
 			} catch (error) {
-				console.error("Network Error trying to load Local News - please try again")
+				console.error(
+					"Network Error trying to load Local News - please refresh the page to try again"
+				)
 			}
 		}
 
