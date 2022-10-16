@@ -22,7 +22,7 @@ function PragmaticEngineer() {
 				const formattedResponse = response.items.map((record) => {
 					record.id = crypto.randomUUID()
 					record.content = parse(record.content_html)
-					record.gridRow = { title: record.title, summary: parse(record.summary) }
+					record.gridRow = { title: parse(record.title), summary: parse(record.summary) }
 					return record
 				})
 				setLatestPostsGridLoading(false)
@@ -38,12 +38,11 @@ function PragmaticEngineer() {
 	const topStoriesColumns = [
 		{
 			field: "gridRow",
-			headerName: "Title",
 			flex: 1,
 			editable: false,
 			renderCell: (params) => (
-				<Tooltip title={params.row.summary}>
-					<div className="MuiDataGrid-cellContent">{params.row.title}</div>
+				<Tooltip title={params.row.gridRow.summary}>
+					<div className="MuiDataGrid-cellContent">{params.row.gridRow.title}</div>
 				</Tooltip>
 			),
 		},

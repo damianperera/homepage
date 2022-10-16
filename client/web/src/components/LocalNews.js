@@ -40,7 +40,6 @@ function LocalNews() {
 	const topStoriesColumns = [
 		{
 			field: "gridRow",
-			headerName: "Title",
 			flex: 1,
 			editable: false,
 			renderCell: (params) => (
