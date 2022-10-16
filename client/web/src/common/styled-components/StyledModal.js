@@ -21,12 +21,17 @@ export function StyledModal({
 	featuredImageUrl,
 	actionButtonColor,
 }) {
+	const cardHeight = featuredImageUrl ? { maxHeight: "90%" } : { maxHeight: 900 }
+	const contentHeight = featuredImageUrl ? { maxHeight: 600 } : { maxHeight: 770 }
+
 	const style = {
 		position: "absolute",
 		top: "50%",
 		left: "50%",
 		transform: "translate(-50%, -50%)",
 		bgcolor: "background.paper",
+		maxWidth: "70%",
+		...cardHeight,
 		boxShadow: 24,
 		"& a": {
 			textDecoration: "none",
@@ -66,7 +71,7 @@ export function StyledModal({
 	return (
 		<div>
 			<Modal open={open} onClose={handleClose}>
-				<Card sx={{ maxWidth: "70%", maxHeight: "90%", ...style }}>
+				<Card sx={{ ...style }}>
 					{featuredImageUrl && (
 						<div>
 							<CardMedia component="img" height="200" image={featuredImageUrl} />
@@ -129,7 +134,7 @@ export function StyledModal({
 						<Typography
 							variant="body1"
 							color="text.secondary"
-							sx={{ position: "static", overflowY: "scroll", maxHeight: 600 }}
+							sx={{ position: "static", overflowY: "scroll", ...contentHeight }}
 						>
 							{description}
 						</Typography>

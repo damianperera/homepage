@@ -11,18 +11,18 @@ function PragmaticEngineer() {
 	const [modalTitle, setModalTitle] = React.useState()
 	const [modalDescription, setModalDescription] = React.useState()
 	const [modalLink, setModalLink] = React.useState()
-	const [modalImage, setModalImage] = React.useState(null)
 
 	React.useEffect(() => {
 		const topStoriesURL =
-			"https://www.toptal.com/developers/feed2json/convert?url=https://newsletter.pragmaticengineer.com/feed"
+			"https://damianperera.github.io/homepage/static/data/pragmaticEngineer.json"
 
 		const fetchData = async () => {
 			try {
 				const response = await (await fetch(topStoriesURL)).json()
+				console.log(response)
 				const formattedResponse = response.items.map((record) => {
 					record.id = crypto.randomUUID()
-					record.content = parse(record.content)
+					record.content = parse(record.content_html)
 					return record
 				})
 				setLatestPostsGridLoading(false)
@@ -47,8 +47,7 @@ function PragmaticEngineer() {
 	const handlePostClick = async (record) => {
 		setModalTitle(record.row.title)
 		setModalDescription(record.row.content)
-		setModalLink(record.row.link)
-		setModalImage(record.row.enclosure.link)
+		setModalLink(record.row.url)
 
 		setModalOpen(true)
 	}
@@ -66,8 +65,7 @@ function PragmaticEngineer() {
 					title={modalTitle}
 					description={modalDescription}
 					sourceUrl={modalLink}
-					featuredImageUrl={modalImage}
-					actionButtonColor="success"
+					featuredImageUrl={null}
 				/>
 				<DataGrid
 					rows={latestPosts}
