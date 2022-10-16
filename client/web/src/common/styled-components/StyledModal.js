@@ -119,17 +119,17 @@ export function StyledModal({
 									<CardActions>
 										<Tooltip title="Copy Link">
 											<IconButton size="small" onClick={handleCopyToClipboard}>
-												<ContentCopy color="secondary" />
+												<ContentCopy color="disabled" />
 											</IconButton>
 										</Tooltip>
 										<Tooltip title="Open in Source">
 											<IconButton size="small" onClick={handleOpenLink}>
-												<OpenInNew color="secondary" />
+												<OpenInNew color="disabled" />
 											</IconButton>
 										</Tooltip>
 										<Tooltip title="Close">
 											<IconButton size="small" onClick={handleClose}>
-												<Close color="secondary" />
+												<Close color="disabled" />
 											</IconButton>
 										</Tooltip>
 									</CardActions>
