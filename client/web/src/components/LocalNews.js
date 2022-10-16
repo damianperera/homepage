@@ -5,6 +5,11 @@ import { Item, DataGrid, Modal } from "../common"
 import parse from "html-react-parser"
 
 function LocalNews() {
+	const geolocationUrl = "http://ip-api.com/json/?fields=country,countryCode"
+	const supportedCountryCodes = ["de", "at", "dk", "fr", "it", "no", "es", "se", "ch"]
+	const defaultCountryCode = "com"
+	const defaultCountry = "Europe"
+
 	const [latestPosts, setLatestPosts] = React.useState([])
 	const [latestPostsGridLoading, setLatestPostsGridLoading] = React.useState(true)
 	const [modalOpen, setModalOpen] = React.useState(false)
@@ -12,13 +17,22 @@ function LocalNews() {
 	const [modalDescription, setModalDescription] = React.useState()
 	const [modalLink, setModalLink] = React.useState()
 	const [modalImage, setModalImage] = React.useState()
+	const [country, setCountry] = React.useState(defaultCountry)
 
 	React.useEffect(() => {
-		const topStoriesURL = "https://www.thelocal.de/wp-json/wp/v2/posts?per_page=50"
-
 		const fetchData = async () => {
 			try {
-				const response = await (await fetch(topStoriesURL)).json()
+				const geoData = await (await fetch(geolocationUrl)).json()
+				geoData.countryCode = geoData.countryCode.toLowerCase()
+
+				var countryCode = defaultCountryCode
+
+				if (supportedCountryCodes.includes(geoData.countryCode)) {
+					countryCode = geoData.countryCode
+					setCountry(geoData.country)
+				}
+
+				const response = await (await fetch(getStoriesUrl(countryCode))).json()
 				const formattedResponse = response.map((record) => {
 					record.description = parse(record.content.rendered)
 					record.gridRow = {
@@ -36,6 +50,10 @@ function LocalNews() {
 
 		fetchData()
 	}, [])
+
+	const getStoriesUrl = (domainCode) => {
+		return `https://www.thelocal.${domainCode}/wp-json/wp/v2/posts?per_page=50`
+	}
 
 	const topStoriesColumns = [
 		{
@@ -72,7 +90,7 @@ function LocalNews() {
 		<Item>
 			<Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
 				<Newspaper />
-				<h3>The Local DE</h3>
+				<h3>Local News - {country}</h3>
 			</Stack>
 			<Box sx={{ height: 670, width: "100%", flex: 1, display: "flex" }}>
 				<Modal
