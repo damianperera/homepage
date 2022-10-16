@@ -8,6 +8,7 @@ import {
 	ListItemIcon,
 	ListItemText,
 	Divider,
+	Tooltip,
 } from "@mui/material"
 
 function MainMenuDrawer({ isOpen, onChange }) {
@@ -55,22 +56,26 @@ function MainMenuDrawer({ isOpen, onChange }) {
 					}}
 				>
 					<Divider />
-					<ListItem key="repository" disablePadding>
-						<ListItemButton onClick={handleRepositoryClick}>
-							<ListItemIcon>
-								<GitHub />
-							</ListItemIcon>
-							<ListItemText primary="Repository" />
-						</ListItemButton>
-					</ListItem>
-					<ListItem key="license" disablePadding>
-						<ListItemButton onClick={handleLicenseClick}>
-							<ListItemIcon>
-								<KeyRounded />
-							</ListItemIcon>
-							<ListItemText primary="License" />
-						</ListItemButton>
-					</ListItem>
+					<Tooltip title="GitHub">
+						<ListItem key="repository" disablePadding>
+							<ListItemButton onClick={handleRepositoryClick}>
+								<ListItemIcon>
+									<GitHub />
+								</ListItemIcon>
+								<ListItemText primary="Repository" />
+							</ListItemButton>
+						</ListItem>
+					</Tooltip>
+					<Tooltip title="MIT License">
+						<ListItem key="license" disablePadding>
+							<ListItemButton onClick={handleLicenseClick}>
+								<ListItemIcon>
+									<KeyRounded />
+								</ListItemIcon>
+								<ListItemText primary="License" />
+							</ListItemButton>
+						</ListItem>
+					</Tooltip>
 				</Box>
 			</Box>
 		</Drawer>
