@@ -6,7 +6,7 @@ export const StyledDataGrid = styled(DataGrid)(() => ({
 	"& .MuiDataGrid-virtualScroller": {
 		marginTop: "0 !important",
 		height: "650px !important",
-		"-ms-overflow-style": "none",
+		msOverflowStyle: "none",
 		scrollbarWidth: "none",
 	},
 	"& .MuiDataGrid-row:hover": { cursor: "pointer" },

@@ -143,7 +143,7 @@ export function StyledModal({
 								overflowY: "scroll",
 								...contentHeight,
 								"::-webkit-scrollbar": { display: "none" },
-								"-ms-overflow-style": "none",
+								msOverflowStyle: "none",
 								scrollbarWidth: "none",
 							}}
 							paragraph={false}
