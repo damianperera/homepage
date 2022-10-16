@@ -149,7 +149,7 @@ export function StyledModal({
 							paragraph={false}
 							children={description}
 							align="justify"
-							component={"div"}
+							component="div"
 						/>
 					</CardContent>
 				</Card>
