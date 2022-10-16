@@ -11,4 +11,5 @@ export const StyledDataGrid = styled(DataGrid)(() => ({
 	},
 	"& .MuiDataGrid-row:hover": { cursor: "pointer" },
 	"& .MuiDataGrid-virtualScroller::-webkit-scrollbar": { display: "none" },
+	"& .MuiDataGrid-cell:focus": { outline: "unset !important" },
 }))
