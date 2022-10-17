@@ -35,16 +35,50 @@ import { Header, Weather, PragmaticEngineer, HackerNewsTopStories, LocalNews } f
 import { AppContext } from "./common"
 
 function App() {
+	const [context, setContext] = React.useState({
+		geoData: {
+			city: "Munich",
+			country: "Germany",
+			countryTld: ".de",
+			countryCode: "DE",
+		},
+		dataLoad: true,
+	})
+
 	const darkTheme = createTheme({
 		palette: {
 			mode: "dark",
 		},
 	})
 
-	const [dataLoad, setDataLoad] = React.useState(false)
+	React.useEffect(() => {
+		const geolocationUrl = "https://ipapi.co/json"
+
+		const fetchData = async () => {
+			try {
+				const res = await (await fetch(geolocationUrl)).json()
+
+				const geoData = {
+					city: res["city"],
+					country: res["country_name"],
+					countryTld: res["country_tld"].toLowerCase(),
+					countryCode: res["country_code"],
+				}
+
+				setContext({ geoData, ...context })
+			} catch (error) {
+				console.error(
+					`Network error trying to fetch GeoIP - defaulting to ${context.geoData.country}`,
+					error
+				)
+			}
+		}
+
+		fetchData()
+	})
 
 	return (
-		<AppContext.Provider value={[dataLoad, setDataLoad]}>
+		<AppContext.Provider value={[context, setContext]}>
 			<ThemeProvider theme={darkTheme}>
 				<CssBaseline />
 				<Header />

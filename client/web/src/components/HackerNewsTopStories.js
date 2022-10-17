@@ -6,7 +6,7 @@ import { Item, DataGrid, AppContext } from "../common"
 function HackerNewsTopStories() {
 	const [topStories, setTopStories] = React.useState([])
 	const [topStoriesGridLoading, setTopStoriesGridLoading] = React.useState(true)
-	const [dataLoad] = React.useContext(AppContext)
+	const [context] = React.useContext(AppContext)
 
 	React.useEffect(() => {
 		const topStoriesURL = "https://hacker-news.firebaseio.com/v0/topstories.json"
@@ -34,7 +34,7 @@ function HackerNewsTopStories() {
 		}
 
 		fetchData()
-	}, [dataLoad])
+	}, [context.dataLoad])
 
 	const topStoriesColumns = [
 		{

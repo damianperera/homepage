@@ -17,7 +17,7 @@ function SearchEngineBar() {
 	const stackOverflowSearchURL = "https://stackoverflow.com/search"
 	const duckDuckGoSearchURL = "https://duckduckgo.com"
 
-	const [dataLoad, setDataLoad] = React.useContext(AppContext)
+	const [context, setContext] = React.useContext(AppContext)
 	const [searchEngine, setSearchEngine] = React.useState(googleSearchURL)
 
 	const handleSearchEngineChange = (event) => {
@@ -27,7 +27,12 @@ function SearchEngineBar() {
 	Mousetrap.bind("shift+g", () => setSearchEngine(googleSearchURL))
 	Mousetrap.bind("shift+s", () => setSearchEngine(stackOverflowSearchURL))
 	Mousetrap.bind("shift+d", () => setSearchEngine(duckDuckGoSearchURL))
-	Mousetrap.bind("shift+r", () => setDataLoad(!dataLoad))
+	Mousetrap.bind("shift+r", () =>
+		setContext({
+			...context,
+			dataLoad: !context.dataLoad,
+		})
+	)
 
 	return (
 		<form action={searchEngine}>
@@ -40,7 +45,7 @@ function SearchEngineBar() {
 					name="q"
 					required
 					id="search"
-					placeholder={`Enter search text ${dataLoad}`}
+					placeholder={`Enter search text`}
 					variant="outlined"
 					sx={{
 						width: "70vh",

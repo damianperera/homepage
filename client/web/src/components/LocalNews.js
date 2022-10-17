@@ -15,30 +15,20 @@ function LocalNews() {
 	const [modalDescription, setModalDescription] = React.useState()
 	const [modalLink, setModalLink] = React.useState()
 	const [modalImage, setModalImage] = React.useState()
+	const [context] = React.useContext(AppContext)
 	const [country, setCountry] = React.useState(defaultCountry)
-	const [dataLoad] = React.useContext(AppContext)
 
 	React.useEffect(() => {
-		const geolocationUrl = "https://ipapi.co/json"
 		const supportedCountryTlds = [".de", ".at", ".dk", ".fr", ".it", ".no", ".es", ".se", ".ch"]
 
 		setLatestPostsGridLoading(true)
 
 		const fetchData = async () => {
-			var geoData = {}
-
-			try {
-				geoData = await (await fetch(geolocationUrl)).json()
-				geoData.countryTld = geoData["country_tld"].toLowerCase()
-			} catch (error) {
-				console.error(`Network error trying to fetch GeoIP - defaulting to ${defaultCountry}`)
-			}
-
 			var countryTld = defaultCountryTld
 
-			if (supportedCountryTlds.includes(geoData.countryTld)) {
-				countryTld = geoData.countryTld
-				setCountry(geoData["country_name"])
+			if (supportedCountryTlds.includes(context.geoData.countryTld)) {
+				countryTld = context.geoData.countryTld
+				setCountry(context.geoData.country)
 			}
 
 			try {
@@ -61,7 +51,7 @@ function LocalNews() {
 		}
 
 		fetchData()
-	}, [dataLoad])
+	}, [context])
 
 	const getStoriesUrl = (countryTld) => {
 		return `https://www.thelocal${countryTld}/wp-json/wp/v2/posts?per_page=50&orderby=date&order=desc`

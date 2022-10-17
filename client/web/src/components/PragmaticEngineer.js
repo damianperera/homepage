@@ -11,7 +11,7 @@ function PragmaticEngineer() {
 	const [modalTitle, setModalTitle] = React.useState()
 	const [modalDescription, setModalDescription] = React.useState()
 	const [modalLink, setModalLink] = React.useState()
-	const [dataLoad] = React.useContext(AppContext)
+	const [context] = React.useContext(AppContext)
 
 	React.useEffect(() => {
 		const topStoriesURL =
@@ -38,7 +38,7 @@ function PragmaticEngineer() {
 		}
 
 		fetchData()
-	}, [dataLoad])
+	}, [context.dataLoad])
 
 	const topStoriesColumns = [
 		{
