@@ -58,6 +58,11 @@ export function StyledModal({
 			fontStyle: "italic",
 			fontSize: 12,
 		},
+		"& .elementor *": {
+			// fix for thelocal.de in-line style overrides for the elementor widget
+			color: "inherit !important",
+			font: "inherit !important",
+		},
 	}
 
 	const handleClose = () => {
@@ -151,11 +156,6 @@ export function StyledModal({
 								"::-webkit-scrollbar": { display: "none" },
 								msOverflowStyle: "none",
 								scrollbarWidth: "none",
-								"& .elementor *": {
-									// fix for thelocal.de in-line style overrides
-									color: "inherit !important",
-									font: "inherit !important",
-								},
 							}}
 							paragraph={false}
 							children={description}
