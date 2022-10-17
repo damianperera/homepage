@@ -30,7 +30,7 @@ export function StyledModal({
 		left: "50%",
 		transform: "translate(-50%, -50%)",
 		bgcolor: "background.paper",
-		maxWidth: "70%",
+		width: "70%",
 		...cardHeight,
 		boxShadow: 24,
 		"& a": {
