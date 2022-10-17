@@ -1,13 +1,16 @@
 import * as React from "react"
 import { Stack, CircularProgress } from "@mui/material"
+import { AppContext } from "../common"
 
 function Weather() {
+	const [context] = React.useContext(AppContext)
+
 	return (
 		<a
 			className="weatherwidget-io"
 			href="https://forecast7.com/en/48d1411d58/munich/"
-			data-label_1="MÜNCHEN"
-			data-label_2="BAYERN DE"
+			data-label_1={context.geoData.city}
+			data-label_2={context.geoData.country}
 			data-theme="dark"
 			data-basecolor="#121212"
 			data-icons="Climacons Animated"

@@ -37,8 +37,8 @@ import { AppContext } from "./common"
 function App() {
 	const [context, setContext] = React.useState({
 		geoData: {
-			city: "Munich",
-			country: "Germany",
+			city: "München",
+			country: "Deutschland",
 			countryTld: ".de",
 			countryCode: "DE",
 		},
@@ -65,7 +65,7 @@ function App() {
 					countryCode: res["country_code"],
 				}
 
-				setContext({ geoData, ...context })
+				setContext({ ...context, geoData })
 			} catch (error) {
 				console.error(
 					`Network error trying to fetch GeoIP - defaulting to ${context.geoData.country}`,
