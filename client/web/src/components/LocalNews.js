@@ -29,6 +29,8 @@ function LocalNews() {
 			if (supportedCountryTlds.includes(context.geoData.countryTld)) {
 				countryTld = context.geoData.countryTld
 				setCountry(context.geoData.country)
+			} else {
+				setCountry(defaultCountry)
 			}
 
 			try {
