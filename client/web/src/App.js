@@ -75,7 +75,8 @@ function App() {
 		}
 
 		fetchData()
-	})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	return (
 		<AppContext.Provider value={[context, setContext]}>
