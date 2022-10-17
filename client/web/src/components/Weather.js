@@ -27,7 +27,7 @@ function Weather() {
 				gap={1}
 				sx={{ paddingTop: "2%" }}
 			>
-				<CircularProgress size={25} /> Loading Weather
+				<CircularProgress size={25} /> Loading Weather for {context.geoData.city}
 			</Stack>
 		</a>
 	)

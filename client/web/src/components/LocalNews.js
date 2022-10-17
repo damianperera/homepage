@@ -24,7 +24,6 @@ function LocalNews() {
 		setLatestPostsGridLoading(true)
 
 		const fetchData = async () => {
-			console.log(context)
 			var countryTld = defaultCountryTld
 
 			if (supportedCountryTlds.includes(context.geoData.countryTld)) {
