@@ -9,8 +9,8 @@ function Weather() {
 		<a
 			className="weatherwidget-io"
 			href="https://forecast7.com/en/48d1411d58/munich/"
-			data-label_1={context.geoData.city}
-			data-label_2={context.geoData.country}
+			data-label_1="München"
+			data-label_2="Deutschland"
 			data-theme="dark"
 			data-basecolor="#121212"
 			data-icons="Climacons Animated"
