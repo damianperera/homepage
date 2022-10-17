@@ -6,6 +6,7 @@ import parse from "html-react-parser"
 
 function LocalNews() {
 	const defaultCountry = "Europe"
+	const defaultCountryTld = ".com"
 
 	const [latestPosts, setLatestPosts] = React.useState([])
 	const [latestPostsGridLoading, setLatestPostsGridLoading] = React.useState(true)
@@ -18,9 +19,8 @@ function LocalNews() {
 	const [dataLoad] = React.useContext(AppContext)
 
 	React.useEffect(() => {
-		const geolocationUrl = "http://ip-api.com/json/?fields=country,countryCode"
-		const supportedCountryCodes = ["de", "at", "dk", "fr", "it", "no", "es", "se", "ch"]
-		const defaultCountryCode = "com"
+		const geolocationUrl = "https://ipapi.co/json"
+		const supportedCountryTlds = [".de", ".at", ".dk", ".fr", ".it", ".no", ".es", ".se", ".ch"]
 
 		setLatestPostsGridLoading(true)
 
@@ -29,20 +29,20 @@ function LocalNews() {
 
 			try {
 				geoData = await (await fetch(geolocationUrl)).json()
-				geoData.countryCode = geoData.countryCode.toLowerCase()
+				geoData.countryTld = geoData["country_tld"].toLowerCase()
 			} catch (error) {
 				console.error(`Network error trying to fetch GeoIP - defaulting to ${defaultCountry}`)
 			}
 
-			var countryCode = defaultCountryCode
+			var countryTld = defaultCountryTld
 
-			if (supportedCountryCodes.includes(geoData.countryCode)) {
-				countryCode = geoData.countryCode
-				setCountry(geoData.country)
+			if (supportedCountryTlds.includes(geoData.countryTld)) {
+				countryTld = geoData.countryTld
+				setCountry(geoData["country_name"])
 			}
 
 			try {
-				const response = await (await fetch(getStoriesUrl(countryCode))).json()
+				const response = await (await fetch(getStoriesUrl(countryTld))).json()
 				const formattedResponse = response.map((record) => {
 					record.description = parse(record.content.rendered)
 					record.gridRow = {
@@ -63,8 +63,8 @@ function LocalNews() {
 		fetchData()
 	}, [dataLoad])
 
-	const getStoriesUrl = (domainCode) => {
-		return `https://www.thelocal.${domainCode}/wp-json/wp/v2/posts?per_page=50&orderby=date&order=desc`
+	const getStoriesUrl = (countryTld) => {
+		return `https://www.thelocal${countryTld}/wp-json/wp/v2/posts?per_page=50&orderby=date&order=desc`
 	}
 
 	const topStoriesColumns = [
