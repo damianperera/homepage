@@ -12,13 +12,14 @@ function Weather() {
 				const geoLocation = encodeURIComponent(
 					`${context.geoData.city}, ${context.geoData.country}`
 				)
+
 				const geoResults = await (
 					await fetch(
 						`https://api.opencagedata.com/geocode/v1/json?q=${geoLocation}&key=3af9a6c5867846eb9eb04549821d92a7`
 					)
 				).json()
+
 				const coordinates = geoResults.results[0].geometry
-				console.log(coordinates)
 
 				const formattedPath = (() => {
 					const lat = coordinates.lat.toFixed(2).toString().replace(".", "d").replace("-", "n")
@@ -30,7 +31,7 @@ function Weather() {
 
 				setWidgetUrl(formattedUrl)
 			} catch (error) {
-				console.error(`Error fetching weather information, hiding weather widget`, error)
+				console.error("Error fetching weather information, hiding weather widget")
 				setWidgetUrl(null)
 			}
 		}
@@ -38,10 +39,8 @@ function Weather() {
 		getWidgetUrl()
 	}, [context.geoData])
 
-	console.log(widgetUrl)
-
-	const Widget = () => {
-		return (
+	return (
+		widgetUrl && (
 			<a
 				className="weatherwidget-io"
 				href={widgetUrl}
@@ -67,34 +66,6 @@ function Weather() {
 				</Stack>
 			</a>
 		)
-	}
-
-	return (
-		<Widget />
-		// <a
-		// 	className="weatherwidget-io"
-		// 	href="https://forecast7.com/en/48d1411d58/munich/"
-		// 	data-label_1="München"
-		// 	data-label_2="Deutschland"
-		// 	data-theme="dark"
-		// 	data-basecolor="#121212"
-		// 	data-icons="Climacons Animated"
-		// 	style={{
-		// 		textDecoration: "none",
-		// 		color: "white",
-		// 		pointerEvents: "none",
-		// 	}}
-		// >
-		// 	<Stack
-		// 		direction="row"
-		// 		alignItems="center"
-		// 		justifyContent="center"
-		// 		gap={1}
-		// 		sx={{ paddingTop: "2%" }}
-		// 	>
-		// 		<CircularProgress size={25} /> Loading Weather for {context.geoData.city}
-		// 	</Stack>
-		// </a>
 	)
 }
 
