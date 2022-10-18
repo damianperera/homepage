@@ -60,7 +60,7 @@ function Weather() {
 		}
 
 		getWidgetUrl()
-	}, [context.geoData])
+	}, [context])
 
 	return (
 		widgetUrl && (
