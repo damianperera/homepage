@@ -86,12 +86,18 @@ export function StyledModal({
 							<CardMedia component="img" height="200" image={featuredImageUrl} />
 							<Stack
 								direction="row"
-								alignItems="left"
-								justifyContent="left"
+								alignItems="center"
+								justifyContent="center"
 								gap={1}
-								sx={{ position: "absolute", top: 0, right: 0 }}
+								sx={{
+									position: "absolute",
+									top: 5,
+									right: 5,
+									bgcolor: "rgba(0, 0, 0, 0.2)",
+									borderRadius: 1.5,
+								}}
 							>
-								<CardActions sx={{ paddingLeft: "2%", paddingBottom: "1.5%" }}>
+								<CardActions>
 									<Tooltip title="Copy Link">
 										<IconButton size="small" onClick={handleCopyToClipboard}>
 											{actionButtonColor ? (
