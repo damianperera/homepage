@@ -41,6 +41,8 @@ function App() {
 			country: "Deutschland",
 			countryTld: ".de",
 			countryCode: "DE",
+			latitude: 48.1663,
+			longitude: 11.5683,
 		},
 		dataLoad: true,
 	})
@@ -63,6 +65,8 @@ function App() {
 					country: res["country_name"],
 					countryTld: res["country_tld"].toLowerCase(),
 					countryCode: res["country_code"],
+					latitude: res["latitude"],
+					longitude: res["longitude"],
 				}
 
 				setContext({ ...context, geoData })
