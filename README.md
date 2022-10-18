@@ -30,7 +30,7 @@ Open `Preferences > General` and update the following:
 
 ### Weather
 
-The weather widget is provided by [WeatherWidget.io](https://weatherwidget.io/) and current weather data is sourced from [Forecast7](https://forecast7.com/).
+The weather widget is provided by [WeatherWidget.io](https://weatherwidget.io/) and current weather data is sourced from [Forecast7](https://forecast7.com/). If the geolocation cannot be determined it defaults to the current weather in Munich, Germany.
 
 ### The Pragmatic Engineer
 
