@@ -1,7 +1,7 @@
 # Dev Homepage
 [![deploy](https://github.com/damianperera/homepage/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/damianperera/homepage/actions/workflows/deploy.yml)
 
-A replacement browser homepage for developers
+A replacement browser homepage for developers hosted on [GitHub Pages](https://damianperera.github.io/homepage).
 
 ## Usage
 ### Chrome (Chromium)
