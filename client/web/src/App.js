@@ -37,12 +37,10 @@ import { AppContext } from "./common"
 function App() {
 	const [context, setContext] = React.useState({
 		geoData: {
-			city: "München",
-			country: "Deutschland",
+			city: "Munich",
+			country: "Germany",
 			countryTld: ".de",
 			countryCode: "DE",
-			latitude: 48.1663,
-			longitude: 11.5683,
 		},
 		dataLoad: true,
 	})

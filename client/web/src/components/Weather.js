@@ -5,6 +5,23 @@ import { AppContext } from "../common"
 function Weather() {
 	const [context] = React.useContext(AppContext)
 	const [widgetUrl, setWidgetUrl] = React.useState()
+	const weatherScriptHTML =
+		'!(function (d, s, id) {\n  var js,\n    fjs = d.getElementsByTagName(s)[0]\n  if (!d.getElementById(id)) {\n    js = d.createElement(s)\n    js.id = id\n    js.src = "https://weatherwidget.io/js/widget.min.js"\n    fjs.parentNode.insertBefore(js, fjs)\n  }\n})(document, "script", "weatherwidget-io-js")'
+
+	const widgetScript = (() => {
+		const weatherWidgetScript = document.createElement("script")
+		weatherWidgetScript.type = "text/javascript"
+		weatherWidgetScript.id = "weather-widget-script"
+		weatherWidgetScript.async = true
+		weatherWidgetScript.innerHTML = weatherScriptHTML
+		return weatherWidgetScript
+	})()
+
+	const loadWidgetScript = () => {
+		const existingScript = document.getElementById("weather-widget-script")
+		existingScript && document.body.removeChild(existingScript)
+		document.body.appendChild(widgetScript)
+	}
 
 	React.useEffect(() => {
 		const getWidgetUrl = async () => {
@@ -27,8 +44,9 @@ function Weather() {
 					return `${lat}${lng}`
 				})()
 
-				const formattedUrl = `https://forecast7.com/en/${formattedPath}/${context.geoData.city.toLowerCase()}`
+				const formattedUrl = `https://forecast7.com/en/${formattedPath}/${context.geoData.city.toLowerCase()}/`
 
+				loadWidgetScript()
 				setWidgetUrl(formattedUrl)
 			} catch (error) {
 				console.error("Error fetching weather information, hiding weather widget")
