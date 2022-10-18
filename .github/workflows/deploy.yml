@@ -2,6 +2,7 @@ name: deploy
 on:
   push:
     branches: [ "main" ]
+    paths-ignore: [ "**/README.md" ]
   workflow_dispatch:
   schedule: 
     - cron: "0 8 * * *"
