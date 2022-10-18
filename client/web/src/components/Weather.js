@@ -18,9 +18,12 @@ function Weather() {
 			return weatherWidgetScript
 		})()
 
-		const loadWidgetScript = () => {
+		const unloadWidgetScript = () => {
 			const existingScript = document.getElementById("weather-widget-script")
 			existingScript && document.body.removeChild(existingScript)
+		}
+
+		const loadWidgetScript = () => {
 			document.body.appendChild(widgetScript)
 		}
 
@@ -46,10 +49,12 @@ function Weather() {
 
 				const formattedUrl = `https://forecast7.com/en/${formattedPath}/${context.geoData.city.toLowerCase()}/`
 
+				unloadWidgetScript()
 				loadWidgetScript()
 				setWidgetUrl(formattedUrl)
 			} catch (error) {
 				console.error("Error fetching weather information, hiding weather widget")
+				unloadWidgetScript()
 				setWidgetUrl(null)
 			}
 		}
