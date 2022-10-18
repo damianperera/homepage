@@ -54,6 +54,10 @@ export function StyledModal({
 			fontStyle: "italic",
 			fontSize: 12,
 		},
+		".ng-star-inserted": {
+			fontStyle: "italic",
+			fontSize: 12,
+		},
 		figcaption: {
 			fontStyle: "italic",
 			fontSize: 12,
