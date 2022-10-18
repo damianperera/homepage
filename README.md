@@ -26,6 +26,12 @@ Open `Preferences > General` and update the following:
 - `Shift` + `G` - Switch to Google search
 - `Shift` + `R` - Reload data sources
 
+## Permissions
+### Location
+Required for the following data sources:
+- [Weather](#weather)
+- [The Local](#the-local)
+
 ## Data Sources
 
 ### Weather
