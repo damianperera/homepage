@@ -26,9 +26,10 @@ Open `Preferences > General` and update the following:
 - `Shift` + `G` - Switch to Google search
 - `Shift` + `R` - Reload data sources
 
-## Permissions
-### Location
-Required for the following data sources:
+## Data Usage
+This app does not collect or store any Personally Identifiable Information (PII) - all data required for the app to work remains on the client-side.
+### IP Geolocation
+Required for the following data sources, obtained via [IP-API](https://ip-api.com/).
 - [Weather](#weather)
 - [The Local](#the-local)
 
