@@ -86,7 +86,7 @@ function SearchEngineBar() {
 									</MenuItem>
 									<MenuItem value={stackOverflowSearchURL}>
 										<Stack direction="row" alignItems="center" gap={1}>
-											<Code /> StackOverflow
+											<Code /> Stack Overflow
 										</Stack>
 									</MenuItem>
 									<MenuItem value={duckDuckGoSearchURL}>
