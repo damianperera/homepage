@@ -21,7 +21,7 @@ Open `Preferences > General` and update the following:
 
 ## Keyboard Shortcuts
 
-- `Shift` + `S` - Switch to StackOverflow search
+- `Shift` + `S` - Switch to Stack Overflow search
 - `Shift` + `D` - Switch to DuckDuckGo search
 - `Shift` + `G` - Switch to Google search
 - `Shift` + `R` - Reload data sources
