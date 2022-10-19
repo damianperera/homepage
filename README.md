@@ -2,7 +2,7 @@
 
 [![deploy](https://github.com/damianperera/homepage/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/damianperera/homepage/actions/workflows/deploy.yml)
 
-A replacement browser homepage for developers hosted on GitHub Pages available [here](https://damianperera.github.io/homepage).
+A replacement browser homepage for developers hosted on GitHub Pages - available [here](https://damianperera.github.io/homepage).
 
 ## Usage
 
