@@ -2,7 +2,7 @@ name: deploy
 on:
   push:
     branches: ["main"]
-    paths-ignore: ["**/README.md"]
+    paths-ignore: ["**/*.md"] # Ignore changes to markdown files
   workflow_dispatch:
   schedule:
     - cron: "0 8 * * *"
