@@ -46,6 +46,7 @@ jobs:
       - name: Scrape Pragmatic Engineer
         run: |
           curl https://www.toptal.com/developers/feed2json/convert?url=https://newsletter.pragmaticengineer.com/feed > client/web/build/static/data/pragmaticEngineer.json
+          cat client/web/build/static/data/pragmaticEngineer.json
           cd client/web/build/ && ls -lR | more
 
       - name: Package
