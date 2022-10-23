@@ -27,7 +27,6 @@ jobs:
       run: |
         curl https://www.toptal.com/developers/feed2json/convert?url=https://newsletter.pragmaticengineer.com/feed?v=$(date +%s) > build/static/data/pragmaticEngineer.json
         cd build/ && ls -lR | more
-        exit 1
     
     - name: Package
       shell: bash
