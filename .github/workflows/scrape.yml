@@ -17,14 +17,17 @@ jobs:
         workflow: deploy.yml
         workflow_conclusion: success
         name: github-pages
+    
     - name: Extract Artifact
       run: |
         mkdir build
         tar -C ./build -xvf artifact.tar
+    
     - name: Scrape Pragmatic Engineer
       run: |
         curl https://www.toptal.com/developers/feed2json/convert?url=https://newsletter.pragmaticengineer.com/feed?v=$(date +%s) > build/static/data/pragmaticEngineer.json
         cd build/ && ls -lR | more
+    
     - name: Package
       shell: bash
       run: |
@@ -35,7 +38,6 @@ jobs:
           --exclude=.git \
           --exclude=.github \
           .
-
     - name: Upload artifact
       uses: actions/upload-artifact@main
       with:
@@ -62,3 +64,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+
+  failure:
+    needs: scrape
+    if: ${{ failure() }}
+    uses: damianperera/homepage/.github/workflows/deploy.yml@main
+    secrets: inherit
