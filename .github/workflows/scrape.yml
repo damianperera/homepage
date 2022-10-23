@@ -23,5 +23,7 @@ jobs:
       run: |
         mkdir build
         tar -C ./build -xvf artifact.tar
-        ls -l
-        cd build && ls
+    - name: Scrape Pragmatic Engineer
+      run: |
+        curl https://www.toptal.com/developers/feed2json/convert?url=https://newsletter.pragmaticengineer.com/feed?v=$(date +%s) > build/static/data/pragmaticEngineer.json
+        cd build/ && ls -lR | more
