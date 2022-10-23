@@ -24,3 +24,4 @@ jobs:
         mkdir build
         tar -C ./build -xvf artifact.tar
         ls -l
+        cd build && ls
