@@ -22,5 +22,5 @@ jobs:
     - name: Extract Artifact
       run: |
         mkdir build
-        tar -C $RUNNER_HOME/build -xvf artifact.tar
+        tar -C ./build -xvf artifact.tar
         ls -l
