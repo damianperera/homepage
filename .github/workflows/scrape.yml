@@ -67,6 +67,7 @@ jobs:
         uses: actions/deploy-pages@v1
 
   failure:
-    if: ${{ failure() }}
+    needs: [scrape, deploy]
+    if: failure()
     uses: damianperera/homepage/.github/workflows/deploy.yml@main
     secrets: inherit
