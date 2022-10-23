@@ -21,5 +21,5 @@ jobs:
         name: github-pages
     - name: Extract Artifact
       run: |
-        tar -xvzf artifact.tar
+        tar -xvf artifact.tar
         ls -l
