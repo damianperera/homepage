@@ -1,6 +1,6 @@
 # Dev Homepage
 
-[![deploy](https://github.com/damianperera/homepage/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/damianperera/homepage/actions/workflows/deploy.yml)
+[![deploy](https://github.com/damianperera/homepage/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/damianperera/homepage/actions/workflows/deploy.yml) [![scrape](https://github.com/damianperera/homepage/actions/workflows/scrape.yml/badge.svg?branch=main)](https://github.com/damianperera/homepage/actions/workflows/scrape.yml)
 
 A replacement browser homepage for developers hosted on GitHub Pages - available [here](https://damianperera.github.io/homepage).
 
