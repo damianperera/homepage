@@ -29,7 +29,6 @@ jobs:
         cd build/ && ls -lR | more
     - name: Package
       shell: bash
-      working-directory: client/web/
       run: |
         tar \
           --dereference --hard-dereference \
