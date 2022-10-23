@@ -2,7 +2,7 @@ name: deploy
 on:
   push:
     branches: ["main"]
-    paths-ignore: ["**/*.md"] # Ignore changes to markdown files
+    paths-ignore: ["**/*.md", "**/scrape.yml"] # Ignore changes to markdown files
   workflow_dispatch:
   schedule:
     - cron: "0 8 * * *"
