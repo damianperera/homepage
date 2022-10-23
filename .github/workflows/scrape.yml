@@ -12,10 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/download-artifact@v3
+    - name: Download artifact
+      id: download-artifact
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        workflow: deploy.yml
+        workflow_conclusion: success
+        name: github-pages
     - name: Extract Artifact
       run: |
         pwd
-        cd /etc/usr/artifacts
         ls -l
-      
