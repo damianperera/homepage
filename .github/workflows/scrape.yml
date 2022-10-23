@@ -27,3 +27,41 @@ jobs:
       run: |
         curl https://www.toptal.com/developers/feed2json/convert?url=https://newsletter.pragmaticengineer.com/feed?v=$(date +%s) > build/static/data/pragmaticEngineer.json
         cd build/ && ls -lR | more
+    - name: Package
+      shell: bash
+      working-directory: client/web/
+      run: |
+        tar \
+          --dereference --hard-dereference \
+          --directory build/ \
+          -cvf "$RUNNER_TEMP/artifact.tar" \
+          --exclude=.git \
+          --exclude=.github \
+          .
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@main
+      with:
+        name: github-pages
+        path: ${{ runner.temp }}/artifact.tar
+        retention-days: ${{ inputs.retention-days }}
+
+  # Deploy job
+  deploy:
+    needs: scrape
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
