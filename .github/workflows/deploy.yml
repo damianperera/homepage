@@ -2,7 +2,7 @@ name: build
 on:
   push:
     branches: ["main"]
-    paths-ignore: ["**/*.md", "**/scrape.yml", "**/pr.yml"] # Ignore changes to markdown and other workflow files
+    paths-ignore: ["**/*.md", "**/*.yml"] # Ignore changes to markdown and workflow files
   workflow_call:
   workflow_dispatch:
 
