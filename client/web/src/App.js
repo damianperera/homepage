@@ -43,6 +43,7 @@ function App() {
 			countryCode: "DE",
 		},
 		dataLoad: true,
+		siteUrl: "https://damianperera.github.io/homepage",
 	})
 
 	const darkTheme = createTheme({

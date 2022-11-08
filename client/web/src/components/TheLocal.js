@@ -75,6 +75,7 @@ function LocalNews() {
 	const handlePostClick = async (record) => {
 		const mediaUrl = record.row["_links"]["wp:attachment"][0].href
 		const media = await (await fetch(mediaUrl)).json()
+		const modalLink = `${context.siteUrl}?source=TheLocal&post=${record.row.id}`
 
 		if (Array.isArray(media) && media.length > 0) {
 			const imageUrl = media[0].guid.rendered
@@ -85,7 +86,7 @@ function LocalNews() {
 
 		setModalTitle(record.row.gridRow.title)
 		setModalDescription(record.row.description)
-		setModalLink(record.row.guid.rendered)
+		setModalLink(modalLink)
 
 		setModalOpen(true)
 	}
