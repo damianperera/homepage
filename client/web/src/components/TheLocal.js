@@ -17,22 +17,23 @@ function LocalNews() {
 	const [modalImage, setModalImage] = React.useState()
 	const [context] = React.useContext(AppContext)
 	const [country, setCountry] = React.useState(defaultCountry)
+	const [countryTld, setCountryTld] = React.useState(defaultCountryTld)
 
 	React.useEffect(() => {
 		const supportedCountryTlds = [".de", ".at", ".dk", ".fr", ".it", ".no", ".es", ".se", ".ch"]
 
+		if (supportedCountryTlds.includes(context.geoData.countryTld)) {
+			setCountryTld(context.geoData.countryTld)
+			setCountry(context.geoData.country)
+		} else {
+			setCountry(defaultCountry)
+		}
+	}, [context])
+
+	React.useEffect(() => {
 		setLatestPostsGridLoading(true)
 
 		const fetchData = async () => {
-			var countryTld = defaultCountryTld
-
-			if (supportedCountryTlds.includes(context.geoData.countryTld)) {
-				countryTld = context.geoData.countryTld
-				setCountry(context.geoData.country)
-			} else {
-				setCountry(defaultCountry)
-			}
-
 			try {
 				const response = await (await fetch(getStoriesUrl(countryTld))).json()
 				const formattedResponse = response.map((record) => {
@@ -53,7 +54,7 @@ function LocalNews() {
 		}
 
 		fetchData()
-	}, [context])
+	}, [countryTld])
 
 	const getStoriesUrl = (countryTld) => {
 		return `https://www.thelocal${countryTld}/wp-json/wp/v2/posts?per_page=50&orderby=date&order=desc`
