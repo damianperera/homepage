@@ -15,7 +15,7 @@ function MainMenuDrawer({ isOpen, onChange }) {
 	const licenseURL = "https://github.com/damianperera/homepage/blob/main/LICENSE"
 	const repositoryURL = "https://github.com/damianperera/homepage"
 	const deployStatus =
-		"https://img.shields.io/github/workflow/status/damianperera/homepage/deploy?style=flat-square"
+		"https://img.shields.io/github/actions/workflow/status/damianperera/homepage/deploy.yml?branch=main"
 
 	const handleLicenseClick = () => {
 		window.open(licenseURL, "_blank", "noopener,noreferrer")
