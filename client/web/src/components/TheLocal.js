@@ -20,7 +20,7 @@ function LocalNews() {
 	const [countryTld, setCountryTld] = React.useState(defaultCountryTld)
 
 	React.useEffect(() => {
-		const supportedCountryTlds = [".de", ".at", ".dk", ".fr", ".it", ".no", ".es", ".se", ".ch"]
+		const supportedCountryTlds = [".at", ".dk", ".fr", ".it", ".no", ".es", ".se", ".ch"]
 
 		if (supportedCountryTlds.includes(context.geoData.countryTld)) {
 			setCountryTld(context.geoData.countryTld)
