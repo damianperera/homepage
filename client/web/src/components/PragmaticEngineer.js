@@ -16,6 +16,8 @@ function PragmaticEngineer() {
 	React.useEffect(() => {
 		const topStoriesURL =
 			"https://damianperera.github.io/homepage/static/data/pragmaticEngineer.json"
+		const isFreeText = "free issue of the Pragmatic Engineer Newsletter"
+		const freeText = "(FREE) "
 
 		setLatestPostsGridLoading(true)
 
@@ -25,14 +27,19 @@ function PragmaticEngineer() {
 				const formattedResponse = response.items.map((record) => {
 					record.id = crypto.randomUUID()
 					record.content = parse(record.content_html)
-					record.gridRow = { title: parse(record.title), summary: parse(record.summary) }
+					record.gridRow = {
+						title: `${record.content_html.includes(isFreeText) ? freeText : ""} ${parse(
+							record.title
+						)}`,
+						summary: parse(record.summary),
+					}
 					return record
 				})
 				setLatestPostsGridLoading(false)
 				setLatestPosts(formattedResponse)
 			} catch (error) {
 				console.error(
-					"Network error trying to load Local News - please refresh the page to try again"
+					"Network error trying to load Local News - please refresh the page to try again" + error
 				)
 			}
 		}
