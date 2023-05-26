@@ -37,6 +37,7 @@ function LocalNews() {
 			try {
 				const response = await (await fetch(getStoriesUrl(countryTld))).json()
 				const formattedResponse = response.map((record) => {
+					record.id = crypto.randomUUID()
 					record.description = parse(record.content.rendered)
 					record.gridRow = {
 						title: parse(record.title.rendered),
@@ -46,6 +47,14 @@ function LocalNews() {
 				})
 				setLatestPostsGridLoading(false)
 				setLatestPosts(formattedResponse)
+
+				const queryParams = new URLSearchParams(window.location.search)
+				const deeplinkTarget = queryParams.get("t") ?? ""
+
+				if (deeplinkTarget) {
+					const targetRecord = formattedResponse.find((record) => (record.id = deeplinkTarget))
+					targetRecord && handlePostClick({ row: targetRecord })
+				}
 			} catch (error) {
 				console.error(
 					"Network error trying to load Local News - please refresh the page to try again"
@@ -86,7 +95,7 @@ function LocalNews() {
 
 		setModalTitle(record.row.gridRow.title)
 		setModalDescription(record.row.description)
-		setModalLink(record.row.guid.rendered)
+		setModalLink(`https://localhost:3000/homepage?t=${record.row.id}`)
 
 		setModalOpen(true)
 	}
