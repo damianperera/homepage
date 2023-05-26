@@ -1,6 +1,6 @@
 import * as React from "react"
-import { Engineering } from "@mui/icons-material"
-import { Box, Stack, Tooltip } from "@mui/material"
+import { Engineering, Redeem } from "@mui/icons-material"
+import { Box, Stack, Tooltip, Chip } from "@mui/material"
 import { Item, DataGrid, Modal, AppContext } from "../common"
 import parse from "html-react-parser"
 
@@ -12,12 +12,12 @@ function PragmaticEngineer() {
 	const [modalDescription, setModalDescription] = React.useState()
 	const [modalLink, setModalLink] = React.useState()
 	const [context] = React.useContext(AppContext)
+	const freeIcon = <Chip icon={<Redeem />} label="Free" size="small" />
 
 	React.useEffect(() => {
 		const topStoriesURL =
 			"https://damianperera.github.io/homepage/static/data/pragmaticEngineer.json"
 		const isFreeText = "free issue of the Pragmatic Engineer Newsletter"
-		const freeText = "(FREE) "
 
 		setLatestPostsGridLoading(true)
 
@@ -28,10 +28,9 @@ function PragmaticEngineer() {
 					record.id = crypto.randomUUID()
 					record.content = parse(record.content_html)
 					record.gridRow = {
-						title: `${record.content_html.includes(isFreeText) ? freeText : ""} ${parse(
-							record.title
-						)}`,
+						title: parse(record.title),
 						summary: parse(record.summary),
+						isFree: record.content_html.includes(isFreeText),
 					}
 					return record
 				})
@@ -54,7 +53,9 @@ function PragmaticEngineer() {
 			editable: false,
 			renderCell: (params) => (
 				<Tooltip title={params.row.gridRow.summary}>
-					<div className="MuiDataGrid-cellContent">{params.row.gridRow.title}</div>
+					<div className="MuiDataGrid-cellContent">
+						{params.row.gridRow.isFree && freeIcon} {params.row.gridRow.title}
+					</div>
 				</Tooltip>
 			),
 		},
