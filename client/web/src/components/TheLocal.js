@@ -66,6 +66,23 @@ function LocalNews() {
 			}
 		}
 
+		const handleDeeplink = async (record) => {
+			const mediaUrl = record["_links"]["wp:attachment"][0].href
+			const media = await (await fetch(mediaUrl)).json()
+			var imageUrl = null
+
+			if (Array.isArray(media) && media.length > 0) {
+				imageUrl = media[0].guid.rendered
+			}
+
+			setDocumentMeta({
+				title: record.gridRow.title,
+				description: record.description,
+				image: imageUrl,
+			})
+			handlePostClick({ row: record })
+		}
+
 		fetchData()
 	}, [countryTld])
 
@@ -85,23 +102,6 @@ function LocalNews() {
 			),
 		},
 	]
-
-	const handleDeeplink = async (record) => {
-		const mediaUrl = record["_links"]["wp:attachment"][0].href
-		const media = await (await fetch(mediaUrl)).json()
-		var imageUrl = null
-
-		if (Array.isArray(media) && media.length > 0) {
-			imageUrl = media[0].guid.rendered
-		}
-
-		setDocumentMeta({
-			title: record.gridRow.title,
-			description: record.description,
-			image: imageUrl,
-		})
-		handlePostClick({ row: record })
-	}
 
 	const handlePostClick = async (record) => {
 		const mediaUrl = record.row["_links"]["wp:attachment"][0].href
