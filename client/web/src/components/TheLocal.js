@@ -53,7 +53,9 @@ function LocalNews() {
 
 				if (deeplinkTarget) {
 					const targetRecord = formattedResponse.find((record) => (record.id = deeplinkTarget))
-					targetRecord && handlePostClick({ row: targetRecord })
+					targetRecord
+						? handlePostClick({ row: targetRecord })
+						: console.error("Could not locate deeplink target")
 				}
 			} catch (error) {
 				console.error(
