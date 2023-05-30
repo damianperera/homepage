@@ -77,7 +77,7 @@ function LocalNews() {
 
 			setDocumentMeta({
 				title: record.gridRow.title,
-				description: record.description,
+				description: record.gridRow.summary,
 				image: imageUrl,
 			})
 			handlePostClick({ row: record })
