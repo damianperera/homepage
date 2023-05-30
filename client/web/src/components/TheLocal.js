@@ -77,21 +77,6 @@ function LocalNews() {
 			handlePostClick({ row: record })
 		}
 
-		function findDuplicates(arr) {
-			const set = new Set()
-			const duplicates = []
-
-			for (const item of arr) {
-				if (set.has(item)) {
-					duplicates.push(item)
-				} else {
-					set.add(item)
-				}
-			}
-
-			return duplicates
-		}
-
 		fetchData()
 	}, [countryTld])
 
