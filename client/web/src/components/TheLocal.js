@@ -3,6 +3,7 @@ import { Newspaper } from "@mui/icons-material"
 import { Box, Stack, Tooltip } from "@mui/material"
 import { Item, DataGrid, Modal, AppContext } from "../common"
 import parse from "html-react-parser"
+import { Helmet } from "react-helmet"
 
 function LocalNews() {
 	const defaultCountry = "Europe"
@@ -19,6 +20,7 @@ function LocalNews() {
 	const [context] = React.useContext(AppContext)
 	const [country, setCountry] = React.useState(defaultCountry)
 	const [countryTld, setCountryTld] = React.useState(defaultCountryTld)
+	const [documentMeta, setDocumentMeta] = React.useState()
 
 	React.useEffect(() => {
 		const supportedCountryTlds = [".at", ".dk", ".fr", ".it", ".no", ".es", ".se", ".ch"]
@@ -54,7 +56,7 @@ function LocalNews() {
 				if (deeplinkTarget) {
 					const targetRecord = formattedResponse.find((record) => (record.id = deeplinkTarget))
 					targetRecord
-						? handlePostClick({ row: targetRecord })
+						? handleDeeplink(targetRecord)
 						: console.error("Could not locate deeplink target")
 				}
 			} catch (error) {
@@ -84,6 +86,23 @@ function LocalNews() {
 		},
 	]
 
+	const handleDeeplink = async (record) => {
+		const mediaUrl = record["_links"]["wp:attachment"][0].href
+		const media = await (await fetch(mediaUrl)).json()
+		var imageUrl = null
+
+		if (Array.isArray(media) && media.length > 0) {
+			imageUrl = media[0].guid.rendered
+		}
+
+		setDocumentMeta({
+			title: record.gridRow.title,
+			description: record.description,
+			image: imageUrl,
+		})
+		handlePostClick({ row: record })
+	}
+
 	const handlePostClick = async (record) => {
 		const mediaUrl = record.row["_links"]["wp:attachment"][0].href
 		const media = await (await fetch(mediaUrl)).json()
@@ -110,6 +129,15 @@ function LocalNews() {
 				<h3>The Local - {country}</h3>
 			</Stack>
 			<Box sx={{ height: 670, width: "100%", flex: 1, display: "flex" }}>
+				{documentMeta && (
+					<Helmet>
+						<title>{documentMeta.title}</title>
+						<meta property="og:type" content="article" />
+						<meta name="description" content={documentMeta.description} />
+						<meta name="og:image" content={documentMeta.imageUrl} />
+						<link rel="canonical" href={modalDeeplinkUrl} />
+					</Helmet>
+				)}
 				<Modal
 					open={modalOpen}
 					setOpen={setModalOpen}

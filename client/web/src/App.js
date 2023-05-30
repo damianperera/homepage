@@ -33,6 +33,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles"
 import { Box, CssBaseline, Grid } from "@mui/material"
 import { Header, Weather, PragmaticEngineer, HackerNewsTopStories, TheLocal } from "./components"
 import { AppContext } from "./common"
+import { Helmet } from "react-helmet"
 
 function App() {
 	const [context, setContext] = React.useState({
@@ -82,6 +83,12 @@ function App() {
 
 	return (
 		<AppContext.Provider value={[context, setContext]}>
+			<Helmet>
+				<meta charSet="utf-8" />
+				<title>Dev Homepage</title>
+				<link rel="canonical" href="https://damianperera.github.io/homepage" />
+				<meta name="description" content="A replacement browser homepage for developers" />
+			</Helmet>
 			<ThemeProvider theme={darkTheme}>
 				<CssBaseline />
 				<Header />
