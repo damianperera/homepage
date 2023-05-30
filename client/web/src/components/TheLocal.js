@@ -95,7 +95,7 @@ function LocalNews() {
 
 		setModalTitle(record.row.gridRow.title)
 		setModalDescription(record.row.description)
-		setModalLink(`https://localhost:3000/homepage?t=${record.row.id}`)
+		setModalLink(`https://damianperera.github.io/homepage?t=${record.row.id}`)
 
 		setModalOpen(true)
 	}
