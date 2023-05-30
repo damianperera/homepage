@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet"
 function LocalNews() {
 	const defaultCountry = "Europe"
 	const defaultCountryTld = ".com"
+	const deeplinkUrl = "https://damianperera.github.io/homepage?t="
 
 	const [latestPosts, setLatestPosts] = React.useState([])
 	const [latestPostsGridLoading, setLatestPostsGridLoading] = React.useState(true)
@@ -51,10 +52,12 @@ function LocalNews() {
 				setLatestPosts(formattedResponse)
 
 				const queryParams = new URLSearchParams(window.location.search)
-				const deeplinkTarget = queryParams.get("t") ?? ""
+				var deeplinkTarget = queryParams.get("t") ?? null
 
 				if (deeplinkTarget) {
-					const targetRecord = formattedResponse.find((record) => (record.id = deeplinkTarget))
+					deeplinkTarget = parseInt(deeplinkTarget)
+
+					const targetRecord = formattedResponse.find((record) => record.id === deeplinkTarget)
 					targetRecord
 						? handleDeeplink(targetRecord)
 						: console.error("Could not locate deeplink target")
@@ -67,20 +70,26 @@ function LocalNews() {
 		}
 
 		const handleDeeplink = async (record) => {
-			const mediaUrl = record["_links"]["wp:attachment"][0].href
-			const media = await (await fetch(mediaUrl)).json()
-			var imageUrl = null
-
-			if (Array.isArray(media) && media.length > 0) {
-				imageUrl = media[0].guid.rendered
-			}
-
 			setDocumentMeta({
 				title: record.gridRow.title,
 				description: record.gridRow.summary,
-				image: imageUrl,
 			})
 			handlePostClick({ row: record })
+		}
+
+		function findDuplicates(arr) {
+			const set = new Set()
+			const duplicates = []
+
+			for (const item of arr) {
+				if (set.has(item)) {
+					duplicates.push(item)
+				} else {
+					set.add(item)
+				}
+			}
+
+			return duplicates
 		}
 
 		fetchData()
@@ -117,7 +126,7 @@ function LocalNews() {
 		setModalTitle(record.row.gridRow.title)
 		setModalDescription(record.row.description)
 		setModalSourceUrl(record.row.guid.rendered)
-		setModalDeeplinkUrl(`https://damianperera.github.io/homepage?t=${record.row.id}`)
+		setModalDeeplinkUrl(`${deeplinkUrl}${record.row.id}`)
 
 		setModalOpen(true)
 	}
@@ -133,8 +142,7 @@ function LocalNews() {
 					<Helmet>
 						<title>{documentMeta.title}</title>
 						<meta property="og:type" content="article" />
-						<meta name="description" content={documentMeta.description} />
-						<meta name="og:image" content={documentMeta.imageUrl} />
+						<meta name="og:description" content={documentMeta.description} />
 						<link rel="canonical" href={modalDeeplinkUrl} />
 					</Helmet>
 				)}
