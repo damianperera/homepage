@@ -13,7 +13,8 @@ function LocalNews() {
 	const [modalOpen, setModalOpen] = React.useState(false)
 	const [modalTitle, setModalTitle] = React.useState()
 	const [modalDescription, setModalDescription] = React.useState()
-	const [modalLink, setModalLink] = React.useState()
+	const [modalSourceUrl, setModalSourceUrl] = React.useState()
+	const [modalDeeplinkUrl, setModalDeeplinkUrl] = React.useState()
 	const [modalImage, setModalImage] = React.useState()
 	const [context] = React.useContext(AppContext)
 	const [country, setCountry] = React.useState(defaultCountry)
@@ -37,7 +38,6 @@ function LocalNews() {
 			try {
 				const response = await (await fetch(getStoriesUrl(countryTld))).json()
 				const formattedResponse = response.map((record) => {
-					record.id = crypto.randomUUID()
 					record.description = parse(record.content.rendered)
 					record.gridRow = {
 						title: parse(record.title.rendered),
@@ -95,7 +95,8 @@ function LocalNews() {
 
 		setModalTitle(record.row.gridRow.title)
 		setModalDescription(record.row.description)
-		setModalLink(`https://damianperera.github.io/homepage?t=${record.row.id}`)
+		setModalSourceUrl(record.row.guid.rendered)
+		setModalDeeplinkUrl(`https://damianperera.github.io/homepage?t=${record.row.id}`)
 
 		setModalOpen(true)
 	}
@@ -112,7 +113,8 @@ function LocalNews() {
 					setOpen={setModalOpen}
 					title={modalTitle}
 					description={modalDescription}
-					sourceUrl={modalLink}
+					sourceUrl={modalSourceUrl}
+					deeplinkUrl={modalDeeplinkUrl}
 					featuredImageUrl={modalImage}
 				/>
 				<DataGrid

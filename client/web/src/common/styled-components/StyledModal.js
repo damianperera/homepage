@@ -17,6 +17,7 @@ export function StyledModal({
 	description,
 	open,
 	setOpen,
+	deeplinkUrl,
 	sourceUrl,
 	featuredImageUrl,
 	actionButtonColor,
@@ -74,7 +75,7 @@ export function StyledModal({
 	}
 
 	const handleCopyToClipboard = () => {
-		navigator.clipboard.writeText(sourceUrl)
+		navigator.clipboard.writeText(deeplinkUrl ?? sourceUrl)
 	}
 
 	const handleOpenLink = () => {
