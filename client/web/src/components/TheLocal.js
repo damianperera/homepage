@@ -7,7 +7,7 @@ import parse from "html-react-parser"
 function LocalNews() {
 	const defaultCountry = "Europe"
 	const defaultCountryTld = ".com"
-	const deeplinkUrl = `${window.location.url}?t=`
+	const deeplinkUrl = "https://damianperera.github.io/homepage?t="
 
 	const [latestPosts, setLatestPosts] = React.useState([])
 	const [latestPostsGridLoading, setLatestPostsGridLoading] = React.useState(true)
