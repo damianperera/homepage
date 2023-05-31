@@ -19,10 +19,11 @@ export const StyledDataGridLoader = () => (
 	<Box
 		sx={{
 			height: "max-content",
+			marginTop: -7,
 		}}
 	>
 		{[...Array(25)].map((_) => (
-			<Skeleton variant="rectangular" animation="wave" sx={{ my: 1, mx: 0.5, height: 45 }} />
+			<Skeleton variant="rectangular" animation="wave" sx={{ my: 0.5, mx: 0.6, height: 45 }} />
 		))}
 	</Box>
 )
