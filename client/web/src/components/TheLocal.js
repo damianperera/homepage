@@ -69,12 +69,6 @@ function LocalNews() {
 		}
 
 		const handleDeeplink = async (record) => {
-			setDocumentMeta({
-				title: record.gridRow.title,
-				description: record.gridRow.summary,
-				type: "article",
-				link: `${deeplinkUrl}${record.id}`,
-			})
 			handlePostClick({ row: record })
 		}
 
@@ -114,6 +108,13 @@ function LocalNews() {
 		setModalSourceUrl(record.row.guid.rendered)
 		setModalDeeplinkUrl(`${deeplinkUrl}${record.row.id}`)
 
+		setDocumentMeta({
+			title: record.row.gridRow.title,
+			description: record.row.gridRow.summary,
+			type: "article",
+			link: `${deeplinkUrl}${record.row.id}`,
+		})
+
 		setModalOpen(true)
 	}
 
@@ -124,7 +125,11 @@ function LocalNews() {
 				<h3>The Local - {country}</h3>
 			</Stack>
 			<Box sx={{ height: 670, width: "100%", flex: 1, display: "flex" }}>
-				{documentMeta && (modalOpen ? <OpenGraphMeta {...documentMeta} /> : <OpenGraphMeta />)}
+				{documentMeta && modalOpen ? (
+					<OpenGraphMeta title={documentMeta.title} />
+				) : (
+					<OpenGraphMeta />
+				)}
 				<Modal
 					open={modalOpen}
 					setOpen={setModalOpen}

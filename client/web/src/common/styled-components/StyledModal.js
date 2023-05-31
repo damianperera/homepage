@@ -12,7 +12,7 @@ import {
 } from "@mui/material"
 import { Stack } from "@mui/system"
 
-export function StyledModal({
+export const StyledModal = ({
 	title,
 	description,
 	open,
@@ -21,7 +21,7 @@ export function StyledModal({
 	sourceUrl,
 	featuredImageUrl,
 	actionButtonColor,
-}) {
+}) => {
 	const cardHeight = featuredImageUrl ? { maxHeight: "90%" } : { maxHeight: 900 }
 	const contentHeight = featuredImageUrl ? { maxHeight: 600 } : { maxHeight: 770 }
 
