@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Newspaper } from "@mui/icons-material"
 import { Box, Stack, Tooltip } from "@mui/material"
-import { Item, DataGrid, Modal, AppContext, OpenGraphMeta, Alert } from "../common"
+import { Item, DataGrid, Modal, AppContext, OpenGraphMeta, Alert, DataGridLoader } from "../common"
 import parse from "html-react-parser"
 
 function LocalNews() {
@@ -161,6 +161,9 @@ function LocalNews() {
 					hideFooter
 					loading={latestPostsGridLoading}
 					disableColumnSelector
+					components={{
+						LoadingOverlay: DataGridLoader,
+					}}
 				/>
 			</Box>
 		</Item>

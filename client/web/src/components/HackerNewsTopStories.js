@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Public } from "@mui/icons-material"
 import { Box, Stack } from "@mui/material"
-import { Item, DataGrid, AppContext, Alert } from "../common"
+import { Item, DataGrid, AppContext, Alert, DataGridLoader } from "../common"
 
 function HackerNewsTopStories() {
 	const [topStories, setTopStories] = React.useState([])
@@ -78,6 +78,9 @@ function HackerNewsTopStories() {
 					hideFooter
 					loading={topStoriesGridLoading}
 					disableColumnSelector
+					components={{
+						LoadingOverlay: DataGridLoader,
+					}}
 				/>
 			</Box>
 		</Item>

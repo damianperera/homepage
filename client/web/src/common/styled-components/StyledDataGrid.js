@@ -1,4 +1,5 @@
 import { styled } from "@mui/material/styles"
+import { Box, Skeleton } from "@mui/material"
 import { DataGrid } from "@mui/x-data-grid"
 
 export const StyledDataGrid = styled(DataGrid)(() => ({
@@ -13,3 +14,15 @@ export const StyledDataGrid = styled(DataGrid)(() => ({
 	"& .MuiDataGrid-virtualScroller::-webkit-scrollbar": { display: "none" },
 	"& .MuiDataGrid-cell:focus": { outline: "unset !important" },
 }))
+
+export const StyledDataGridLoader = () => (
+	<Box
+		sx={{
+			height: "max-content",
+		}}
+	>
+		{[...Array(25)].map((_) => (
+			<Skeleton variant="rectangular" animation="wave" sx={{ my: 1, mx: 0.5, height: 45 }} />
+		))}
+	</Box>
+)

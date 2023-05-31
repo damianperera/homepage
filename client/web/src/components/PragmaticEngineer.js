@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Engineering, Redeem } from "@mui/icons-material"
 import { Box, Stack, Tooltip, Chip } from "@mui/material"
-import { Item, DataGrid, Modal, AppContext, Alert } from "../common"
+import { Item, DataGrid, Modal, AppContext, Alert, DataGridLoader } from "../common"
 import parse from "html-react-parser"
 
 function PragmaticEngineer() {
@@ -106,6 +106,9 @@ function PragmaticEngineer() {
 					hideFooter
 					loading={latestPostsGridLoading}
 					disableColumnSelector
+					components={{
+						LoadingOverlay: DataGridLoader,
+					}}
 				/>
 			</Box>
 		</Item>
