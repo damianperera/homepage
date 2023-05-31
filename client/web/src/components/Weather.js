@@ -1,10 +1,16 @@
 import * as React from "react"
 import { Stack, CircularProgress } from "@mui/material"
-import { AppContext } from "../common"
+import { AppContext, Alert } from "../common"
 
 function Weather() {
 	const [context] = React.useContext(AppContext)
 	const [widgetUrl, setWidgetUrl] = React.useState()
+	const [alertOpen, setAlertOpen] = React.useState(false)
+	const [alertProps, setAlertProps] = React.useState({
+		message: null,
+		severity: "error",
+	})
+
 	const weatherScriptHTML =
 		'!(function (d, s, id) {\n  var js,\n    fjs = d.getElementsByTagName(s)[0]\n  if (!d.getElementById(id)) {\n    js = d.createElement(s)\n    js.id = id\n    js.src = "https://weatherwidget.io/js/widget.min.js"\n    fjs.parentNode.insertBefore(js, fjs)\n  }\n})(document, "script", "weatherwidget-io-js")'
 
@@ -53,13 +59,21 @@ function Weather() {
 				loadWidgetScript()
 				setWidgetUrl(formattedUrl)
 			} catch (error) {
-				console.error("Error fetching weather information, hiding weather widget")
-				unloadWidgetScript()
-				setWidgetUrl(null)
+				handleError("Could not fetch weather information")
 			}
 		}
 
+		const handleError = async (message) => {
+			console.error(message)
+			setAlertProps({ ...alertProps, message })
+			setAlertOpen(true)
+			unloadWidgetScript()
+			setWidgetUrl(null)
+		}
+
 		getWidgetUrl()
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [context])
 
 	return (
@@ -78,6 +92,7 @@ function Weather() {
 					pointerEvents: "none",
 				}}
 			>
+				<Alert {...alertProps} open={alertOpen} onClose={() => setAlertOpen(false)} />
 				<Stack
 					direction="row"
 					alignItems="center"

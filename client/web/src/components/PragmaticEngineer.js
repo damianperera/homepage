@@ -43,16 +43,18 @@ function PragmaticEngineer() {
 				setLatestPosts(formattedResponse)
 			} catch (error) {
 				handleError(
-					"Could not fetch data for the Pragmatic Engineer - refresh the page to try again"
+					"Could not fetch data for the Pragmatic Engineer - refresh the page to try again",
+					error
 				)
 			}
 		}
 
-		const handleError = async (message) => {
-			console.error(message)
+		const handleError = async (message, error) => {
+			console.error(message, error)
 			setAlertProps({ ...alertProps, message })
 			setAlertOpen(true)
 		}
+
 		fetchData()
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps

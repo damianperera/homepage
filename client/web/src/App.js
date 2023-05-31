@@ -32,7 +32,7 @@ import * as React from "react"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
 import { Box, CssBaseline, Grid } from "@mui/material"
 import { Header, Weather, PragmaticEngineer, HackerNewsTopStories, TheLocal } from "./components"
-import { AppContext, OpenGraphMeta } from "./common"
+import { AppContext, OpenGraphMeta, Alert } from "./common"
 
 function App() {
 	const [context, setContext] = React.useState({
@@ -43,6 +43,11 @@ function App() {
 			countryCode: "DE",
 		},
 		dataLoad: true,
+	})
+	const [alertOpen, setAlertOpen] = React.useState(false)
+	const [alertProps, setAlertProps] = React.useState({
+		message: null,
+		severity: "error",
 	})
 
 	const darkTheme = createTheme({
@@ -69,14 +74,21 @@ function App() {
 
 				setContext({ ...context, geoData })
 			} catch (error) {
-				console.error(
-					`Network error trying to fetch GeoIP - defaulting to ${context.geoData.country}`,
+				handleError(
+					`Could not fetch location data - defaulting to ${context.geoData.country}`,
 					error
 				)
 			}
 		}
 
+		const handleError = async (message, error) => {
+			console.error(message, error)
+			setAlertProps({ ...alertProps, message })
+			setAlertOpen(true)
+		}
+
 		fetchData()
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
@@ -86,6 +98,7 @@ function App() {
 			<ThemeProvider theme={darkTheme}>
 				<CssBaseline />
 				<Header />
+				<Alert {...alertProps} open={alertOpen} onClose={() => setAlertOpen(false)} />
 				<Box sx={{ flexGrow: 1, padding: 2 }}>
 					<Grid container spacing={2} columns={12}>
 						<Grid item xs={12}>

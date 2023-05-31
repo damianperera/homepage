@@ -64,10 +64,13 @@ function LocalNews() {
 					const targetRecord = formattedResponse.find((record) => record.id === deeplinkTarget)
 					targetRecord
 						? handleDeeplink(targetRecord)
-						: handleError("Could not find the requested article")
+						: handleError("Could not find the requested article", targetRecord)
 				}
 			} catch (error) {
-				handleError("Could not fetch data for the The Local news - refresh the page to try again")
+				handleError(
+					"Could not fetch data for the The Local news - refresh the page to try again",
+					error
+				)
 			}
 		}
 
@@ -75,8 +78,8 @@ function LocalNews() {
 			handlePostClick({ row: record })
 		}
 
-		const handleError = async (message) => {
-			console.error(message)
+		const handleError = async (message, error) => {
+			console.error(message, error)
 			setAlertProps({ ...alertProps, message })
 			setAlertOpen(true)
 		}

@@ -32,14 +32,15 @@ function HackerNewsTopStories() {
 				setTopStoriesGridLoading(false)
 				setTopStories(updatedStories)
 			} catch (error) {
-				console.error(
-					handleError("Could not fetch data for the Hacker News - refresh the page to try again")
+				handleError(
+					"Could not fetch data for the Hacker News - refresh the page to try again",
+					error
 				)
 			}
 		}
 
-		const handleError = async (message) => {
-			console.error(message)
+		const handleError = async (message, error) => {
+			console.error(message, error)
 			setAlertProps({ ...alertProps, message })
 			setAlertOpen(true)
 		}
