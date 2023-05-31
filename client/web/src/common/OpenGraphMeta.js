@@ -2,9 +2,9 @@ import { Helmet } from "react-helmet"
 
 export const OpenGraphMeta = ({
 	title = "Home",
-	type = "website",
-	link = "https://damianperera.github.io/homepage",
 	description = "A replacement browser homepage for developers",
+	type = "website",
+	link = window.location.href,
 }) => (
 	<Helmet>
 		<meta charSet="utf-8" />
