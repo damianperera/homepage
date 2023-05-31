@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Newspaper } from "@mui/icons-material"
 import { Box, Stack, Tooltip } from "@mui/material"
-import { Item, DataGrid, Modal, AppContext, OpenGraphMeta } from "../common"
+import { Item, DataGrid, Modal, AppContext, OpenGraphMeta, Alert } from "../common"
 import parse from "html-react-parser"
 
 function LocalNews() {
@@ -21,6 +21,11 @@ function LocalNews() {
 	const [country, setCountry] = React.useState(defaultCountry)
 	const [countryTld, setCountryTld] = React.useState(defaultCountryTld)
 	const [documentMeta, setDocumentMeta] = React.useState()
+	const [alertOpen, setAlertOpen] = React.useState(false)
+	const [alertProps, setAlertProps] = React.useState({
+		message: null,
+		severity: "error",
+	})
 
 	React.useEffect(() => {
 		const supportedCountryTlds = [".at", ".dk", ".fr", ".it", ".no", ".es", ".se", ".ch"]
@@ -59,12 +64,10 @@ function LocalNews() {
 					const targetRecord = formattedResponse.find((record) => record.id === deeplinkTarget)
 					targetRecord
 						? handleDeeplink(targetRecord)
-						: console.error("Could not locate deeplink target")
+						: handleError("Could not find the requested article")
 				}
 			} catch (error) {
-				console.error(
-					"Network error trying to load Local News - please refresh the page to try again"
-				)
+				handleError("Could not fetch data for the The Local news - refresh the page to try again")
 			}
 		}
 
@@ -72,7 +75,15 @@ function LocalNews() {
 			handlePostClick({ row: record })
 		}
 
+		const handleError = async (message) => {
+			console.error(message)
+			setAlertProps({ ...alertProps, message })
+			setAlertOpen(true)
+		}
+
 		fetchData()
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [countryTld])
 
 	const getStoriesUrl = (countryTld) => {
@@ -139,6 +150,7 @@ function LocalNews() {
 					deeplinkUrl={modalDeeplinkUrl}
 					featuredImageUrl={modalImage}
 				/>
+				<Alert {...alertProps} open={alertOpen} onClose={() => setAlertOpen(false)} />
 				<DataGrid
 					rows={latestPosts}
 					columns={topStoriesColumns}

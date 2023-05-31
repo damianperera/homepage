@@ -1,12 +1,17 @@
 import * as React from "react"
 import { Public } from "@mui/icons-material"
 import { Box, Stack } from "@mui/material"
-import { Item, DataGrid, AppContext } from "../common"
+import { Item, DataGrid, AppContext, Alert } from "../common"
 
 function HackerNewsTopStories() {
 	const [topStories, setTopStories] = React.useState([])
 	const [topStoriesGridLoading, setTopStoriesGridLoading] = React.useState(true)
 	const [context] = React.useContext(AppContext)
+	const [alertOpen, setAlertOpen] = React.useState(false)
+	const [alertProps, setAlertProps] = React.useState({
+		message: null,
+		severity: "error",
+	})
 
 	React.useEffect(() => {
 		const topStoriesURL = "https://hacker-news.firebaseio.com/v0/topstories.json"
@@ -28,12 +33,20 @@ function HackerNewsTopStories() {
 				setTopStories(updatedStories)
 			} catch (error) {
 				console.error(
-					"Network error trying to load Hacker News - please refresh the page to try again"
+					handleError("Could not fetch data for the Hacker News - refresh the page to try again")
 				)
 			}
 		}
 
+		const handleError = async (message) => {
+			console.error(message)
+			setAlertProps({ ...alertProps, message })
+			setAlertOpen(true)
+		}
+
 		fetchData()
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [context.dataLoad])
 
 	const topStoriesColumns = [
@@ -56,6 +69,7 @@ function HackerNewsTopStories() {
 				<h3>Hacker News</h3>
 			</Stack>
 			<Box sx={{ height: 670, width: "100%", flex: 1, display: "flex" }}>
+				<Alert {...alertProps} open={alertOpen} onClose={() => setAlertOpen(false)} />
 				<DataGrid
 					rows={topStories}
 					columns={topStoriesColumns}

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Engineering, Redeem } from "@mui/icons-material"
 import { Box, Stack, Tooltip, Chip } from "@mui/material"
-import { Item, DataGrid, Modal, AppContext } from "../common"
+import { Item, DataGrid, Modal, AppContext, Alert } from "../common"
 import parse from "html-react-parser"
 
 function PragmaticEngineer() {
@@ -12,6 +12,11 @@ function PragmaticEngineer() {
 	const [modalDescription, setModalDescription] = React.useState()
 	const [modalLink, setModalLink] = React.useState()
 	const [context] = React.useContext(AppContext)
+	const [alertOpen, setAlertOpen] = React.useState(false)
+	const [alertProps, setAlertProps] = React.useState({
+		message: null,
+		severity: "error",
+	})
 	const freeIcon = <Chip icon={<Redeem />} label="Free" size="small" />
 
 	React.useEffect(() => {
@@ -37,13 +42,20 @@ function PragmaticEngineer() {
 				setLatestPostsGridLoading(false)
 				setLatestPosts(formattedResponse)
 			} catch (error) {
-				console.error(
-					"Network error trying to load Local News - please refresh the page to try again" + error
+				handleError(
+					"Could not fetch data for the Pragmatic Engineer - refresh the page to try again"
 				)
 			}
 		}
 
+		const handleError = async (message) => {
+			console.error(message)
+			setAlertProps({ ...alertProps, message })
+			setAlertOpen(true)
+		}
 		fetchData()
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [context.dataLoad])
 
 	const topStoriesColumns = [
@@ -84,6 +96,7 @@ function PragmaticEngineer() {
 					sourceUrl={modalLink}
 					featuredImageUrl={null}
 				/>
+				<Alert {...alertProps} open={alertOpen} onClose={() => setAlertOpen(false)} />
 				<DataGrid
 					rows={latestPosts}
 					columns={topStoriesColumns}
