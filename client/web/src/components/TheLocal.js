@@ -1,9 +1,8 @@
 import * as React from "react"
 import { Newspaper } from "@mui/icons-material"
 import { Box, Stack, Tooltip } from "@mui/material"
-import { Item, DataGrid, Modal, AppContext } from "../common"
+import { Item, DataGrid, Modal, AppContext, OpenGraphMeta } from "../common"
 import parse from "html-react-parser"
-import { Helmet } from "react-helmet"
 
 function LocalNews() {
 	const defaultCountry = "Europe"
@@ -73,6 +72,8 @@ function LocalNews() {
 			setDocumentMeta({
 				title: record.gridRow.title,
 				description: record.gridRow.summary,
+				type: "article",
+				link: `${deeplinkUrl}${record.id}`,
 			})
 			handlePostClick({ row: record })
 		}
@@ -123,14 +124,7 @@ function LocalNews() {
 				<h3>The Local - {country}</h3>
 			</Stack>
 			<Box sx={{ height: 670, width: "100%", flex: 1, display: "flex" }}>
-				{documentMeta && (
-					<Helmet>
-						<title>{documentMeta.title}</title>
-						<meta property="og:type" content="article" />
-						<meta name="og:description" content={documentMeta.description} />
-						<link rel="canonical" href={modalDeeplinkUrl} />
-					</Helmet>
-				)}
+				{documentMeta && (modalOpen ? <OpenGraphMeta {...documentMeta} /> : <OpenGraphMeta />)}
 				<Modal
 					open={modalOpen}
 					setOpen={setModalOpen}
