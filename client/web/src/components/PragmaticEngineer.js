@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Engineering, Redeem } from "@mui/icons-material"
 import { Box, Stack, Tooltip, Chip } from "@mui/material"
-import { Item, DataGrid, Modal, AppContext, Alert, DataGridLoader } from "../common"
+import { Item, DataGrid, Modal, AppContext, Alert, DataGridLoader, OpenGraphMeta } from "../common"
 import parse from "html-react-parser"
 
 function PragmaticEngineer() {
@@ -12,6 +12,7 @@ function PragmaticEngineer() {
 	const [modalDescription, setModalDescription] = React.useState()
 	const [modalLink, setModalLink] = React.useState()
 	const [context] = React.useContext(AppContext)
+	const [documentMeta, setDocumentMeta] = React.useState()
 	const [alertOpen, setAlertOpen] = React.useState(false)
 	const [alertProps, setAlertProps] = React.useState({
 		message: null,
@@ -39,6 +40,7 @@ function PragmaticEngineer() {
 					}
 					return record
 				})
+
 				setLatestPostsGridLoading(false)
 				setLatestPosts(formattedResponse)
 			} catch (error) {
@@ -80,6 +82,12 @@ function PragmaticEngineer() {
 		setModalDescription(record.row.content)
 		setModalLink(record.row.url)
 
+		setDocumentMeta({
+			title: record.row.title,
+			description: record.row.gridRow.summary,
+			type: "article",
+		})
+
 		setModalOpen(true)
 	}
 
@@ -90,6 +98,7 @@ function PragmaticEngineer() {
 				<h3>The Pragmatic Engineer</h3>
 			</Stack>
 			<Box sx={{ height: 670, width: "100%", flex: 1, display: "flex" }}>
+				{documentMeta && modalOpen && <OpenGraphMeta {...documentMeta} />}
 				<Modal
 					open={modalOpen}
 					setOpen={setModalOpen}

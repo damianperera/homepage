@@ -4,13 +4,12 @@ export const OpenGraphMeta = ({
 	title = "Home",
 	description = "A replacement browser homepage for developers",
 	type = "website",
-	link = window.location.href,
+	link = "https://damianperera.github.io/homepage",
 }) => (
 	<Helmet>
-		<meta charSet="utf-8" />
 		<title>{title}</title>
-		<meta property="og:type" content={type} />
-		<link rel="canonical" href={link} />
-		<meta name="og:description" content={description} />
+		<meta name="og:description" content={description} data-react-helmet="true" />
+		<meta property="og:type" content={type} data-react-helmet="true" />
+		<link rel="canonical" href={link} data-react-helmet="true" />
 	</Helmet>
 )

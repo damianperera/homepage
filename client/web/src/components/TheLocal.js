@@ -139,11 +139,7 @@ function LocalNews() {
 				<h3>The Local - {country}</h3>
 			</Stack>
 			<Box sx={{ height: 670, width: "100%", flex: 1, display: "flex" }}>
-				{documentMeta && modalOpen ? (
-					<OpenGraphMeta title={documentMeta.title} />
-				) : (
-					<OpenGraphMeta />
-				)}
+				{documentMeta && modalOpen && <OpenGraphMeta {...documentMeta} />}
 				<Modal
 					open={modalOpen}
 					setOpen={setModalOpen}
